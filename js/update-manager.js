@@ -79,3 +79,53 @@ window.FRIENDUpdateManager =
 /*==========================================================
   End update-manager.js
 ==========================================================*/
+/*==========================================================
+  update-manager.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Apply Update
+==========================================================*/
+
+function applyUpdate(){
+
+    if(!STATE.updateAvailable){
+
+        return {
+
+            success:false,
+
+            message:"No update available"
+
+        };
+
+    }
+
+    STATE.version = STATE.latestVersion;
+
+    STATE.updateAvailable = false;
+
+    return {
+
+        success:true,
+
+        version:STATE.version,
+
+        timestamp:new Date()
+
+    };
+
+}
+
+/*==========================================================
+  Force Version Set (Dev Mode)
+==========================================================*/
+
+function setVersion(version){
+
+    STATE.version = version;
+
+    return STATE.version;
+
+}
