@@ -75,3 +75,53 @@ window.FRIENDRouter =
 /*==========================================================
   End dashboard-router.js
 ==========================================================*/
+/*==========================================================
+  dashboard-router.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Active Route Tracker
+==========================================================*/
+
+let activeRoute = "executive";
+
+function getActiveRoute(){
+
+    return activeRoute;
+
+}
+
+/*==========================================================
+  Safe Navigate
+==========================================================*/
+
+function safeNavigate(route){
+
+    const result = navigate(route);
+
+    if(result){
+
+        activeRoute = route;
+
+    }
+
+    return {
+
+        success: !!result,
+
+        route: activeRoute
+
+    };
+
+}
+
+/*==========================================================
+  Refresh Route
+==========================================================*/
+
+function refresh(){
+
+    return safeNavigate(activeRoute);
+
+}
