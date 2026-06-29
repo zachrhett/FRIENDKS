@@ -73,11 +73,6 @@ const APP = {
 
 },
 
-    },
-
-    loadAssociate() {
-
-        Navigation.go("associate");
 
     },
 
@@ -95,7 +90,10 @@ const APP = {
 
     loadStoreLeader() {
 
-        Navigation.go("storeLeader");
+    document.getElementById("content").innerHTML =
+        StoreLeader.render();
+
+},
 
     },
 
