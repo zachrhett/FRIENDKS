@@ -304,3 +304,51 @@ FRIENDAnalytics.openMetric = function (
     });
 
 };
+/*==========================================================
+  analytics.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDAnalytics.refresh = function () {
+
+    this.DASHBOARD.lastUpdated = new Date();
+
+    const root =
+        document.querySelector("#analyticsScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#analyticsScreen");
+
+    if (root) {
+
+        FRIENDAnalytics.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDAnalytics = FRIENDAnalytics;
+
+/*==========================================================
+  End analytics.js
+==========================================================*/
