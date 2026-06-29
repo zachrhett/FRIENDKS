@@ -24,6 +24,10 @@ case "training":
         case "home":
             location.reload();
             break;
+        case "alerts":
+    document.getElementById("app").innerHTML =
+        FRIEND_ALERTS.render();
+    break;
 
         case "associate":
             document.getElementById("app").innerHTML =
