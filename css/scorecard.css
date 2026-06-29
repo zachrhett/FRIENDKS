@@ -1,1 +1,180 @@
+/*==========================================================
+  scorecard.css
+  PART 1 OF N
+==========================================================*/
 
+:root{
+
+    --friend-blue:#0057B8;
+    --friend-dark:#0F2747;
+    --friend-red:#C8102E;
+    --friend-green:#2E9D49;
+    --friend-yellow:#F5B400;
+
+    --friend-bg:#F4F7FB;
+    --friend-panel:#FFFFFF;
+    --friend-border:#DCE4EE;
+
+    --friend-text:#182433;
+    --friend-muted:#6B7785;
+
+    --friend-radius:18px;
+
+    --shadow-soft:
+        0 10px 28px rgba(15,39,71,.08);
+
+    --shadow-card:
+        0 4px 12px rgba(15,39,71,.10);
+
+    --transition:
+        .22s ease;
+
+}
+
+.tc52-scorecard{
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    width:100%;
+    height:100%;
+
+    padding:18px;
+
+    background:var(--friend-bg);
+
+    overflow-y:auto;
+
+    font-family:
+        "SF Pro Display",
+        "Segoe UI",
+        sans-serif;
+
+}
+
+.friend-scorecard,
+.metric-grid-panel,
+.department-health-panel,
+.leader-focus,
+.guided-actions{
+
+    background:var(--friend-panel);
+
+    border:1px solid var(--friend-border);
+
+    border-radius:var(--friend-radius);
+
+    box-shadow:var(--shadow-soft);
+
+}
+
+.friend-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px;
+
+}
+
+.friend-title-main{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--friend-text);
+
+}
+
+.friend-title-sub{
+
+    margin-top:4px;
+
+    font-size:15px;
+
+    color:var(--friend-muted);
+
+}
+
+.friend-health-ring{
+
+    position:relative;
+
+    width:120px;
+
+    height:120px;
+
+}
+
+.friend-health-ring svg{
+
+    width:120px;
+
+    height:120px;
+
+    transform:rotate(-90deg);
+
+}
+
+.ring-bg{
+
+    fill:none;
+
+    stroke:#E6EDF5;
+
+    stroke-width:10;
+
+}
+
+.ring-progress{
+
+    fill:none;
+
+    stroke:var(--friend-green);
+
+    stroke-width:10;
+
+    stroke-linecap:round;
+
+    transition:stroke-dashoffset .6s ease;
+
+}
+
+.ring-center{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.ring-score{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:var(--friend-text);
+
+}
+
+.ring-label{
+
+    font-size:13px;
+
+    color:var(--friend-muted);
+
+}
