@@ -178,3 +178,221 @@
     color:var(--friend-muted);
 
 }
+/*==========================================================
+  scorecard.css
+  PART 2 OF N
+==========================================================*/
+
+.scorecard-kpis{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+
+    padding:0 22px 22px;
+
+}
+
+.friend-kpi{
+
+    border-radius:16px;
+
+    padding:16px;
+
+    color:#FFF;
+
+    box-shadow:var(--shadow-card);
+
+    transition:var(--transition);
+
+}
+
+.friend-kpi:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.friend-kpi.blue{
+
+    background:linear-gradient(
+        135deg,
+        #0057B8,
+        #0F78E5
+    );
+
+}
+
+.friend-kpi.green{
+
+    background:linear-gradient(
+        135deg,
+        #2E9D49,
+        #44C767
+    );
+
+}
+
+.friend-kpi.red{
+
+    background:linear-gradient(
+        135deg,
+        #C8102E,
+        #E53A58
+    );
+
+}
+
+.friend-kpi-title{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    opacity:.95;
+
+}
+
+.friend-kpi-value{
+
+    margin-top:10px;
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.panel-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:18px 22px;
+
+    border-bottom:1px solid var(--friend-border);
+
+}
+
+.panel-icon{
+
+    font-size:20px;
+
+}
+
+.panel-title{
+
+    font-size:19px;
+
+    font-weight:700;
+
+    color:var(--friend-text);
+
+}
+
+.metric-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+    padding:20px;
+
+}
+
+.metric-card{
+
+    background:#FFF;
+
+    border:1px solid var(--friend-border);
+
+    border-radius:16px;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.metric-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.metric-card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.metric-title{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--friend-text);
+
+}
+
+.metric-trend{
+
+    font-size:13px;
+
+    color:var(--friend-muted);
+
+}
+
+.metric-value{
+
+    margin:12px 0;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:var(--friend-text);
+
+}
+
+.metric-bar{
+
+    height:8px;
+
+    background:#E7EEF7;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.metric-fill{
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        #0057B8,
+        #25A3FF
+    );
+
+    border-radius:999px;
+
+}
