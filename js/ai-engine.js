@@ -172,3 +172,37 @@ function evaluate(){
     return executiveSummary();
 
 }
+/*==========================================================
+  ai-engine.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Public API
+==========================================================*/
+
+return {
+
+    STATE,
+
+    getTopRecommendation,
+    getRecommendations,
+    getRecommendation,
+    getRecommendationsByCategory,
+
+    executiveSummary,
+    evaluate
+
+};
+
+})();
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDAIEngine = FRIENDAIEngine;
+
+/*==========================================================
+  End ai-engine.js
+==========================================================*/
