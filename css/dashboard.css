@@ -136,3 +136,93 @@
     color:var(--critical);
 
 }
+/*==========================================================
+  dashboard.css
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Priority Panel
+==========================================================*/
+
+.priority-panel{
+
+    margin-top:18px;
+
+    padding:16px;
+
+    background:var(--card);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.priority-title{
+
+    font-size:14px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+    color:var(--text);
+
+}
+
+.priority-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #EEF2F7;
+
+    font-size:13px;
+
+}
+
+.priority-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.priority-badge{
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+.priority-badge.high{
+
+    background:rgba(200,16,46,.1);
+
+    color:var(--critical);
+
+}
+
+.priority-badge.medium{
+
+    background:rgba(245,180,0,.15);
+
+    color:var(--warning);
+
+}
+
+.priority-badge.low{
+
+    background:rgba(46,157,73,.12);
+
+    color:var(--success);
+
+}
