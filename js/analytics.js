@@ -143,3 +143,164 @@ return {
 };
 
 })();
+/*==========================================================
+  analytics.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDAnalytics.mount = function (
+    target = "#analyticsScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.render();
+
+    this.bindEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDAnalytics.bindEvents = function (
+    root
+) {
+
+    root.querySelectorAll("[data-analytics-id]")
+        .forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                const id =
+                    card.dataset.analyticsId;
+
+                const metric =
+                    this.DASHBOARD.metrics.find(
+                        item => item.id === id
+                    );
+
+                if (metric) {
+
+                    this.openMetric(metric);
+
+                }
+
+            });
+
+        });
+
+};
+
+/*==========================================================
+  Metric Detail
+==========================================================*/
+
+FRIENDAnalytics.openMetric = function (
+    metric
+) {
+
+    const existing =
+        document.querySelector(".analytics-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "analytics-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="analytics-modal">
+
+            <div class="analytics-modal-header">
+
+                <div>
+
+                    <h2>${metric.title}</h2>
+
+                    <p>Operational Analytics</p>
+
+                </div>
+
+                <button class="analytics-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="analytics-modal-body">
+
+                <div class="analytics-big-value">
+
+                    ${metric.value}${metric.unit}
+
+                </div>
+
+                <div class="analytics-status">
+
+                    ${metric.status.toUpperCase()}
+
+                </div>
+
+                <div class="analytics-trend-detail">
+
+                    Trend: ${metric.trend}
+
+                </div>
+
+                <div class="analytics-description">
+
+                    This KPI contributes to Store Health,
+                    Executive Dashboard reporting,
+                    Guided Actions,
+                    and AI leadership recommendations.
+
+                </div>
+
+            </div>
+
+            <div class="analytics-modal-footer">
+
+                <button>
+                    View History
+                </button>
+
+                <button>
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".analytics-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay
+        .querySelectorAll(".analytics-modal-footer button")[1]
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", event => {
+
+        if (event.target === overlay) {
+
+            overlay.remove();
+
+        }
+
+    });
+
+};
