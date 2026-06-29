@@ -1,0 +1,145 @@
+/*==========================================================
+  voice-assistant.css
+  PART 1 OF N
+==========================================================*/
+
+#friendVoiceButton{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:96px;
+
+    width:68px;
+
+    height:68px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #0057B8,
+        #0F78E5
+    );
+
+    color:#FFFFFF;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 16px 34px rgba(0,87,184,.30);
+
+    transition:.25s ease;
+
+    z-index:9500;
+
+}
+
+#friendVoiceButton:hover{
+
+    transform:translateY(-3px) scale(1.04);
+
+    box-shadow:
+        0 20px 40px rgba(0,87,184,.38);
+
+}
+
+#friendVoiceButton:active{
+
+    transform:scale(.96);
+
+}
+
+#friendVoiceButton.listening{
+
+    animation:friendPulse 1.2s infinite;
+
+    background:linear-gradient(
+        135deg,
+        #C8102E,
+        #E74C63
+    );
+
+}
+
+@keyframes friendPulse{
+
+    0%{
+
+        box-shadow:
+            0 0 0 0 rgba(200,16,46,.45);
+
+    }
+
+    70%{
+
+        box-shadow:
+            0 0 0 18px rgba(200,16,46,0);
+
+    }
+
+    100%{
+
+        box-shadow:
+            0 0 0 0 rgba(200,16,46,0);
+
+    }
+
+}
+
+.friend-voice-status{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:176px;
+
+    padding:10px 16px;
+
+    border-radius:999px;
+
+    background:#182433;
+
+    color:#FFFFFF;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s ease;
+
+    z-index:9500;
+
+}
+
+.friend-voice-status.active{
+
+    opacity:1;
+
+}
+
+@media (max-width:720px){
+
+    #friendVoiceButton{
+
+        width:62px;
+
+        height:62px;
+
+        right:16px;
+
+        bottom:92px;
+
+    }
+
+}
