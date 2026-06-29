@@ -78,3 +78,55 @@ window.FRIENDPerformance =
 /*==========================================================
   End performance.js
 ==========================================================*/
+/*==========================================================
+  performance.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Benchmark Test
+==========================================================*/
+
+function benchmark(){
+
+    const start = performance.now();
+
+    let sum = 0;
+
+    for(let i = 0; i < 100000; i++){
+
+        sum += i;
+
+    }
+
+    const end = performance.now();
+
+    return {
+
+        computationTime: end - start,
+
+        result: sum,
+
+        status: "OK"
+
+    };
+
+}
+
+/*==========================================================
+  Health Check
+==========================================================*/
+
+function health(){
+
+    return {
+
+        stable: SNAPSHOT.cpuLoad < 80,
+
+        memoryOK: SNAPSHOT.memoryUsage < 80,
+
+        fpsOK: SNAPSHOT.fps >= 30
+
+    };
+
+}
