@@ -1,0 +1,181 @@
+/*==========================================================
+  executive-dashboard.css
+  PART 1 OF N
+==========================================================*/
+
+.executive-dashboard{
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:20px;
+
+    background:#F4F7FB;
+
+    font-family:
+        "SF Pro Display",
+        "Segoe UI",
+        sans-serif;
+
+}
+
+.executive-header{
+
+    background:linear-gradient(
+        135deg,
+        #0057B8,
+        #083E78
+    );
+
+    border-radius:22px;
+
+    padding:24px;
+
+    color:#FFFFFF;
+
+    box-shadow:
+        0 14px 34px rgba(8,62,120,.24);
+
+}
+
+.executive-header h1{
+
+    margin:0;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    letter-spacing:-.02em;
+
+}
+
+.executive-subtitle{
+
+    margin-top:8px;
+
+    font-size:15px;
+
+    opacity:.9;
+
+}
+
+.executive-kpi-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+.executive-tile{
+
+    min-height:112px;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    background:#FFFFFF;
+
+    border:1px solid #DCE4EE;
+
+    box-shadow:
+        0 8px 20px rgba(15,39,71,.08);
+
+    cursor:pointer;
+
+    transition:.22s ease;
+
+}
+
+.executive-tile:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(15,39,71,.12);
+
+}
+
+.executive-value{
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#182433;
+
+}
+
+.executive-label{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#6B7785;
+
+}
+
+.executive-tile.excellent{
+
+    border-left:6px solid #2E9D49;
+
+}
+
+.executive-tile.good{
+
+    border-left:6px solid #0057B8;
+
+}
+
+.executive-tile.critical{
+
+    border-left:6px solid #C8102E;
+
+}
+
+.executive-priority{
+
+    background:#FFFFFF;
+
+    border:1px solid #DCE4EE;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:
+        0 8px 20px rgba(15,39,71,.08);
+
+}
+
+.executive-priority h2{
+
+    margin:0 0 10px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#182433;
+
+}
+
+.executive-priority p{
+
+    margin:0;
+
+    line-height:1.8;
+
+    color:#44505F;
+
+    font-size:15px;
+
+}
