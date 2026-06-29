@@ -1,1 +1,21 @@
+const FRIEND_STATE = {
+  user: {
+    name: "Alex",
+    role: "Associate"
+  },
 
+  store: {
+    number: "129",
+    district: "2",
+    division: "620"
+  },
+
+  currentModule: "home",
+  currentMission: null,
+
+  metrics: {
+    storeHealth: 94,
+    alerts: 7,
+    maximo: 5
+  }
+};
