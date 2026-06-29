@@ -95,3 +95,60 @@ window.FRIENDReports =
 /*==========================================================
   End reports.js
 ==========================================================*/
+/*==========================================================
+  reports.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Generate Report
+==========================================================*/
+
+function generateReport(type){
+
+    const report = {
+
+        id: "RPT-" + Math.floor(Math.random()*9000),
+
+        title: type + " Report",
+
+        type,
+
+        generated: new Date(),
+
+        status: "Ready"
+
+    };
+
+    REPORTS.push(report);
+
+    return report;
+
+}
+
+/*==========================================================
+  Filter Reports
+==========================================================*/
+
+function getByType(type){
+
+    return REPORTS.filter(r => r.type === type);
+
+}
+
+/*==========================================================
+  Delete Report
+==========================================================*/
+
+function deleteReport(id){
+
+    const index =
+        REPORTS.findIndex(r => r.id === id);
+
+    if(index === -1) return false;
+
+    REPORTS.splice(index,1);
+
+    return true;
+
+}
