@@ -72,3 +72,70 @@ window.FRIENDDiagnosticsUI =
 /*==========================================================
   End diagnostics-ui.js
 ==========================================================*/
+/*==========================================================
+  diagnostics-ui.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Mount UI
+==========================================================*/
+
+function mount(target = "#diagnosticsScreen"){
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if(!root) return;
+
+    root.innerHTML = render();
+
+    bindEvents(root);
+
+}
+
+/*==========================================================
+  Events
+==========================================================*/
+
+function bindEvents(root){
+
+    const refreshBtn =
+        root.querySelector(".diag-refresh");
+
+    if(refreshBtn){
+
+        refreshBtn.addEventListener("click", () => {
+
+            FRIENDDiagnostics.runSelfCheck();
+
+            mount(root);
+
+        });
+
+    }
+
+}
+
+/*==========================================================
+  Auto Refresh
+==========================================================*/
+
+function autoRefresh(interval = 5000){
+
+    setInterval(() => {
+
+        const root =
+            document.querySelector("#diagnosticsScreen");
+
+        if(root){
+
+            mount(root);
+
+        }
+
+    }, interval);
+
+}
