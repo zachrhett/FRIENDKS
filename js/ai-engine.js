@@ -96,3 +96,79 @@ function getTopRecommendation(){
     return INSIGHTS[0];
 
 }
+/*==========================================================
+  ai-engine.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Recommendation Queries
+==========================================================*/
+
+function getRecommendations(){
+
+    sortInsights();
+
+    return [...INSIGHTS];
+
+}
+
+function getRecommendation(id){
+
+    return INSIGHTS.find(
+
+        item => item.id === id
+
+    );
+
+}
+
+function getRecommendationsByCategory(category){
+
+    return INSIGHTS.filter(item =>
+
+        item.category === category
+
+    );
+
+}
+
+/*==========================================================
+  Executive Summary
+==========================================================*/
+
+function executiveSummary(){
+
+    const top = getTopRecommendation();
+
+    return {
+
+        confidence: STATE.confidence,
+
+        mode: STATE.mode,
+
+        recommendation: top.title,
+
+        impact: top.impact,
+
+        priority: top.priority,
+
+        evaluated: STATE.lastEvaluation
+
+    };
+
+}
+
+/*==========================================================
+  Refresh Evaluation
+==========================================================*/
+
+function evaluate(){
+
+    STATE.lastEvaluation = new Date();
+
+    sortInsights();
+
+    return executiveSummary();
+
+}
