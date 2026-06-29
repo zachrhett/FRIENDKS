@@ -5,125 +5,73 @@
 
 "use strict";
 
+/*==========================================================
+  F.R.I.E.N.D.
+  Dashboard Router
+  Version 1.0
+==========================================================*/
+
 const FRIENDRouter = (() => {
 
 const ROUTES = {
 
-    executive: "#executiveDashboardScreen",
-    analytics: "#analyticsScreen",
-    scorecard: "#storeScorecardScreen",
-    leader: "#leaderFocusScreen",
-    guided: "#guidedActionsScreen",
-    maximo: "#maximoScreen",
-    ai: "#executiveAIScreen"
+    executive: "executiveDashboardScreen",
+    analytics: "analyticsScreen",
+    scorecard: "storeScorecardScreen",
+    leader: "leaderFocusScreen",
+    guided: "guidedActionsScreen",
+    maximo: "maximoScreen",
+    ai: "executiveAIScreen",
+    notifications: "notificationsScreen"
 
 };
 
-let currentRoute = "executive";
-
-/*==========================================================
-  Hide All Screens
-==========================================================*/
-
-function hideAll(){
-
-    Object.values(ROUTES).forEach(selector => {
-
-        const page =
-            document.querySelector(selector);
-
-        if(page){
-
-            page.style.display = "none";
-
-        }
-
-    });
-
-}
-
-/*==========================================================
-  Navigate
-==========================================================*/
-
 function navigate(route){
 
-    hideAll();
+    const screenId = ROUTES[route];
 
-    currentRoute = route;
+    if(!screenId) return false;
 
-    const page =
-        document.querySelector(
-            ROUTES[route]
-        );
+    const screens =
+        document.querySelectorAll(".friend-screen");
 
-    if(page){
+    screens.forEach(s => s.style.display = "none");
 
-        page.style.display = "block";
+    const active =
+        document.querySelector("#" + screenId);
 
-    }
+    if(active){
 
-    switch(route){
-
-        case "executive":
-            FRIENDExecutiveDashboard.mount(
-                ROUTES.executive
-            );
-            break;
-
-        case "analytics":
-            FRIENDAnalytics.mount(
-                ROUTES.analytics
-            );
-            break;
-
-        case "scorecard":
-            FRIENDScorecard.mount(
-                ROUTES.scorecard
-            );
-            break;
-
-        case "leader":
-            FRIENDLeaderFocus.mount(
-                ROUTES.leader
-            );
-            break;
-
-        case "guided":
-            FRIENDGuidedActions.mount(
-                ROUTES.guided
-            );
-            break;
-
-        case "maximo":
-            FRIENDMaximo.mount(
-                ROUTES.maximo
-            );
-            break;
-
-        case "ai":
-            FRIENDExecutiveAI.mount(
-                ROUTES.ai
-            );
-            break;
+        active.style.display = "block";
 
     }
+
+    return route;
 
 }
 
-/*==========================================================
-  Public API
-==========================================================*/
+function getRoutes(){
 
-return{
+    return { ...ROUTES };
 
-    ROUTES,
+}
+
+return {
+
     navigate,
-
-    current(){
-        return currentRoute;
-    }
+    getRoutes
 
 };
 
 })();
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDRouter =
+    FRIENDRouter;
+
+/*==========================================================
+  End dashboard-router.js
+==========================================================*/
