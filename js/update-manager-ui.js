@@ -79,3 +79,85 @@ window.FRIENDUpdateUI =
 /*==========================================================
   End update-manager-ui.js
 ==========================================================*/
+/*==========================================================
+  update-manager-ui.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Mount UI
+==========================================================*/
+
+function mount(target = "#updateScreen"){
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if(!root) return;
+
+    root.innerHTML = render();
+
+    bindEvents(root);
+
+}
+
+/*==========================================================
+  Events
+==========================================================*/
+
+function bindEvents(root){
+
+    const checkBtn =
+        root.querySelector(".update-check");
+
+    const applyBtn =
+        root.querySelector(".update-apply");
+
+    if(checkBtn){
+
+        checkBtn.addEventListener("click", async () => {
+
+            await FRIENDUpdateManager.checkForUpdates();
+
+            mount(root);
+
+        });
+
+    }
+
+    if(applyBtn){
+
+        applyBtn.addEventListener("click", async () => {
+
+            await FRIENDUpdateManager.applyUpdate();
+
+            mount(root);
+
+        });
+
+    }
+
+}
+
+/*==========================================================
+  Auto Refresh UI
+==========================================================*/
+
+function autoRefresh(){
+
+    setInterval(() => {
+
+        const root =
+            document.querySelector("#updateScreen");
+
+        if(root){
+
+            mount(root);
+
+        }
+
+    }, 4000);
+
+}
