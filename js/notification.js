@@ -150,3 +150,49 @@ FRIENDNotifications.openNotification = function (
     });
 
 };
+/*==========================================================
+  notifications.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDNotifications.refresh = function () {
+
+    const root =
+        document.querySelector("#notificationsScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#notificationsScreen");
+
+    if (root) {
+
+        FRIENDNotifications.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDNotifications = FRIENDNotifications;
+
+/*==========================================================
+  End notifications.js
+==========================================================*/
