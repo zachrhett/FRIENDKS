@@ -173,3 +173,164 @@ render
 };
 
 })();
+/*==========================================================
+  maximo.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDMaximo.mount = function (
+    target = "#maximoScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.render();
+
+    this.bindEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDMaximo.bindEvents = function (
+    root
+) {
+
+    root.querySelectorAll("[data-maximo-id]")
+        .forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                const id =
+                    card.dataset.maximoId;
+
+                const workOrder =
+                    this.DATA.workOrders.find(
+                        item => item.id === id
+                    );
+
+                if (workOrder) {
+
+                    this.openWorkOrder(workOrder);
+
+                }
+
+            });
+
+        });
+
+};
+
+/*==========================================================
+  Work Order Detail
+==========================================================*/
+
+FRIENDMaximo.openWorkOrder = function (
+    workOrder
+) {
+
+    const existing =
+        document.querySelector(".maximo-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "maximo-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="maximo-modal">
+
+            <div class="maximo-modal-header">
+
+                <div>
+
+                    <h2>${workOrder.asset}</h2>
+
+                    <p>${workOrder.id}</p>
+
+                </div>
+
+                <button class="maximo-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="maximo-modal-body">
+
+                <div class="maximo-row">
+                    <strong>Priority</strong>
+                    <span>${workOrder.priority}</span>
+                </div>
+
+                <div class="maximo-row">
+                    <strong>Status</strong>
+                    <span>${workOrder.status}</span>
+                </div>
+
+                <div class="maximo-row">
+                    <strong>Owner</strong>
+                    <span>${workOrder.owner}</span>
+                </div>
+
+                <div class="maximo-description">
+
+                    This work order is synchronized with
+                    the F.R.I.E.N.D. operational platform.
+                    Completion automatically updates
+                    Store Health,
+                    Guided Actions,
+                    Executive Dashboard,
+                    and operational analytics.
+
+                </div>
+
+            </div>
+
+            <div class="maximo-modal-footer">
+
+                <button>
+                    Open Work Order
+                </button>
+
+                <button>
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".maximo-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay
+        .querySelectorAll(".maximo-modal-footer button")[1]
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", event => {
+
+        if (event.target === overlay) {
+
+            overlay.remove();
+
+        }
+
+    });
+
+};
