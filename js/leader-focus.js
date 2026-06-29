@@ -146,3 +146,51 @@ FRIENDLeaderFocus.openAction = function (
     });
 
 };
+/*==========================================================
+  leader-focus.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDLeaderFocus.refresh = function () {
+
+    this.STATE.updated = new Date();
+
+    const root =
+        document.querySelector("#leaderFocusScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#leaderFocusScreen");
+
+    if (root) {
+
+        FRIENDLeaderFocus.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDLeaderFocus = FRIENDLeaderFocus;
+
+/*==========================================================
+  End leader-focus.js
+==========================================================*/
