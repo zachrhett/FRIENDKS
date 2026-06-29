@@ -108,3 +108,71 @@ function summary(){
     };
 
 }
+/*==========================================================
+  shrink.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Guided Shrink Missions
+==========================================================*/
+
+function guidedMissions(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Review Deli Over Production",
+            status:"Overdue"
+        },
+
+        {
+            priority:2,
+            mission:"Complete ESW Action Items",
+            status:"Due Today"
+        },
+
+        {
+            priority:3,
+            mission:"Verify Markdown Effectiveness",
+            status:"Due Today"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
