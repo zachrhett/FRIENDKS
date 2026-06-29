@@ -100,3 +100,61 @@ window.FRIENDSearch =
 /*==========================================================
   End search.js
 ==========================================================*/
+/*==========================================================
+  search.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Advanced Search
+==========================================================*/
+
+function advancedSearch(query){
+
+    const q = normalize(query);
+
+    return INDEX.map(item => {
+
+        let score = 0;
+
+        if(item.includes(q)) score += 50;
+
+        if(q.includes(item)) score += 25;
+
+        if(item.split(" ").some(w => q.includes(w))) score += 10;
+
+        return { item, score };
+
+    })
+
+    .filter(r => r.score > 0)
+
+    .sort((a,b) => b.score - a.score);
+
+}
+
+/*==========================================================
+  Suggestions
+==========================================================*/
+
+function suggestions(){
+
+    return INDEX.slice(0,8);
+
+}
+
+/*==========================================================
+  Refresh Index
+==========================================================*/
+
+function refreshIndex(){
+
+    return {
+
+        total: INDEX.length,
+
+        lastQuery
+
+    };
+
+}
