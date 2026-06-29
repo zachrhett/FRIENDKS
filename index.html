@@ -1,41 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>F.R.I.E.N.D.</title>
-
-  <link rel="stylesheet" href="app.css" />
-  <link rel="manifest" href="app_manifest.json" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F.R.I.E.N.D.</title>
+<link rel="manifest" href="app_manifest.json">
+<link rel="stylesheet" href="app.css">
 </head>
-
 <body>
-  <main id="app">
-    <section class="screen active" id="home-screen">
-      <h1>F.R.I.E.N.D.</h1>
-      <p>Full Retail Integration Engaged Network Dynamics</p>
+<div id="app">
+<header class="topbar">
+  <h1>F.R.I.E.N.D.</h1>
+  <div class="subtitle">Full Retail Integration Engaged Network Dynamics</div>
+</header>
 
-      <div class="home-grid">
-        <button onclick="FRIEND_NAVIGATION.goTo('associate')">Associate Mode</button>
-        <button onclick="FRIEND_NAVIGATION.goTo('departmentLeader')">Department Leader</button>
-        <button onclick="FRIEND_NAVIGATION.goTo('storeLeader')">Store Leader</button>
-        <button onclick="FRIEND_NAVIGATION.goTo('executive')">Executive</button>
-        <button onclick="FRIEND_NAVIGATION.goTo('scorecard')">Store Scorecard</button>
-        <button onclick="FRIEND_NAVIGATION.goTo('maximo')">Maximo</button>
-      </div>
-    </section>
-  </main>
+<main id="content">
 
-  <script src="js/config.js"></script>
-<script src="js/state.js"></script>
-<script src="js/app.js"></script>
-<script src="js/associate.js"></script>
-  <script src="js/freshStart.js"></script>
-  <script src="js/temperature.js"></script>
-  <script src="js/training.js"></script>
-  <script src="js/alerts.js"></script>
-  <script src="js/maximo.js"></script>
-  <script src="js/scorecard.js"></script>
-  <script src="js/composite.js"></script>
-<script src="js/navigation.js"></script>
-<script src="main.js"></script>
+<section id="home" class="view active">
+  <h2>Home</h2>
+  <div class="grid">
+    <button data-view="associate">Associate</button>
+    <button data-view="departmentLeader">Department Leader</button>
+    <button data-view="storeLeader">Store Leader</button>
+    <button data-view="executive">Executive</button>
+    <button data-view="scorecard">Store Scorecard</button>
+    <button data-view="composite">Composite Scorecard</button>
+    <button data-view="alerts">Alerts</button>
+    <button data-view="maximo">Maximo</button>
+  </div>
+</section>
+
+<section id="associate" class="view">
+<h2>Associate Mode</h2>
+<p>Welcome Alex. Complete Fresh Start and your guided mission.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="departmentLeader" class="view">
+<h2>Department Leader</h2>
+<p>Department metrics and guided missions.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="storeLeader" class="view">
+<h2>Store Leader</h2>
+<p>Store health dashboard.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="executive" class="view">
+<h2>Executive Dashboard</h2>
+<p>Division, district, ROI and analytics.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="scorecard" class="view">
+<h2>Store Scorecard</h2>
+<p>Overall operational health.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="composite" class="view">
+<h2>Composite Scorecard</h2>
+<p>Operational drill-down metrics.</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="alerts" class="view">
+<h2>Alerts</h2>
+<p>7 Active Alerts</p>
+<button data-view="home">Home</button>
+</section>
+
+<section id="maximo" class="view">
+<h2>Maximo</h2>
+<p>5 Open Work Orders</p>
+<button data-view="home">Home</button>
+</section>
+
+</main>
+</div>
+
+<script>
+document.querySelectorAll("[data-view]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    document.getElementById(btn.dataset.view).classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>
+
