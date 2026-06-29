@@ -90,3 +90,62 @@ function recordTemperature(value){
     return mission;
 
 }
+/*==========================================================
+  temperature-engine.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Validate Temperature
+==========================================================*/
+
+function validateTemperature(){
+
+    const mission = currentMission();
+
+    return {
+
+        passed:
+            mission.actual >= mission.target,
+
+        target:
+            mission.target,
+
+        actual:
+            mission.actual,
+
+        difference:
+            mission.actual - mission.target
+
+    };
+
+}
+
+/*==========================================================
+  Complete Mission
+==========================================================*/
+
+function completeMission(){
+
+    const mission = currentMission();
+
+    mission.completed = true;
+
+    return {
+
+        success: true,
+
+        associate: mission.associate,
+
+        leader: mission.leader,
+
+        compliance: "100%",
+
+        completionTime: "3:42",
+
+        message:
+            "Mission complete. Dashboard updated."
+
+    };
+
+}
