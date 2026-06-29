@@ -865,3 +865,143 @@
     }
 
 }
+/*==========================================================
+  scorecard.css
+  PART 5 OF N
+==========================================================*/
+
+/*==========================================================
+  TC-52 Responsive Layout
+==========================================================*/
+
+@media (max-width:720px){
+
+    .tc52-scorecard{
+
+        padding:14px;
+
+        gap:14px;
+
+    }
+
+    .friend-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+    .friend-health-ring{
+
+        align-self:center;
+
+    }
+
+    .scorecard-kpis{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .metric-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .department-row{
+
+        grid-template-columns:92px 1fr 48px;
+
+        gap:10px;
+
+    }
+
+    .guided-action{
+
+        grid-template-columns:42px 1fr;
+
+    }
+
+    .guided-status{
+
+        grid-column:2;
+
+        justify-self:start;
+
+        margin-top:6px;
+
+    }
+
+    .detail-actions{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@media (max-width:420px){
+
+    .friend-title-main{
+
+        font-size:24px;
+
+    }
+
+    .friend-kpi-value{
+
+        font-size:28px;
+
+    }
+
+    .metric-value{
+
+        font-size:28px;
+
+    }
+
+    .detail-value{
+
+        font-size:48px;
+
+    }
+
+}
+
+/*==========================================================
+  Premium Scrollbar
+==========================================================*/
+
+.tc52-scorecard::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.tc52-scorecard::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.tc52-scorecard::-webkit-scrollbar-thumb{
+
+    background:#C8D5E5;
+
+    border-radius:999px;
+
+}
+
+.tc52-scorecard::-webkit-scrollbar-thumb:hover{
+
+    background:#AFC2D9;
+
+}
+
+/*==========================================================
+  End scorecard.css
+==========================================================*/
