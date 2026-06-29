@@ -90,3 +90,71 @@ function summary(){
     };
 
 }
+/*==========================================================
+  production.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Guided Production Missions
+==========================================================*/
+
+function guidedMissions(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Review Murray's Cheese Over Production",
+            status:"High"
+        },
+
+        {
+            priority:2,
+            mission:"Verify Starbucks Case To PAR",
+            status:"Ready"
+        },
+
+        {
+            priority:3,
+            mission:"Confirm Seafood Case Presentation",
+            status:"Ready"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
