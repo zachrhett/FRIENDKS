@@ -6,136 +6,62 @@
 "use strict";
 
 /*==========================================================
-  F.R.I.E.N.D. Version 1.0
-  Application Bootstrap
+  F.R.I.E.N.D.
+  Core App Controller
+  Version 1.0
 ==========================================================*/
 
 const FRIENDApp = (() => {
 
-const VERSION = "1.0";
-
-const CONFIG = {
-
-    store: 129,
-
-    district: 2,
-
-    division: 620,
-
-    application: "F.R.I.E.N.D.",
-
-    device: "TC-52"
-
-};
-
 let initialized = false;
 
-/*==========================================================
-  Initialize Modules
-==========================================================*/
+let currentScreen = "executive";
 
 function initialize(){
 
     if(initialized) return;
 
-    initialized = true;
+    FRIENDIntegration.initAll();
 
-    if(window.FRIENDRouter){
-
-        FRIENDRouter.initialize();
-
-    }
-
-    console.log(
-        `${CONFIG.application} v${VERSION} initialized`
+    FRIENDPermissions.setRole(
+        FRIENDPermissions.ROLES.ASSOCIATE
     );
 
-}
+    FRIENDLogger.info("App initialized");
 
-/*==========================================================
-  Refresh Entire Application
-==========================================================*/
+    initialized = true;
 
-function refresh(){
-
-    if(window.FRIENDScorecard){
-
-        FRIENDScorecard.refresh();
-
-    }
-
-    if(window.FRIENDAnalytics){
-
-        FRIENDAnalytics.refresh();
-
-    }
-
-    if(window.FRIENDLeaderFocus){
-
-        FRIENDLeaderFocus.refresh();
-
-    }
-
-    if(window.FRIENDGuidedActions){
-
-        FRIENDGuidedActions.refresh();
-
-    }
-
-    if(window.FRIENDMaximo){
-
-        FRIENDMaximo.refresh();
-
-    }
-
-    if(window.FRIENDExecutiveDashboard){
-
-        FRIENDExecutiveDashboard.refresh();
-
-    }
-
-    if(window.FRIENDExecutiveAI){
-
-        FRIENDExecutiveAI.refresh();
-
-    }
+    return true;
 
 }
 
-/*==========================================================
-  Public API
-==========================================================*/
+function getState(){
 
-return{
+    return {
 
-    VERSION,
-    CONFIG,
+        initialized,
+
+        currentScreen
+
+    };
+
+}
+
+return {
+
     initialize,
-    refresh
+    getState
 
 };
 
 })();
-/*==========================================================
-  app.js
-  PART 2 OF N
-==========================================================*/
-
-/*==========================================================
-  Application Ready
-==========================================================*/
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    FRIENDApp.initialize();
-
-});
 
 /*==========================================================
   Global Access
 ==========================================================*/
 
-window.FRIENDApp = FRIENDApp;
+window.FRIENDApp =
+    FRIENDApp;
 
 /*==========================================================
   End app.js
