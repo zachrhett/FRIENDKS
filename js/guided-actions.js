@@ -322,3 +322,49 @@ FRIENDGuidedActions.openMission = function (
     });
 
 };
+/*==========================================================
+  guided-actions.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDGuidedActions.refresh = function () {
+
+    const root =
+        document.querySelector("#guidedActionsScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#guidedActionsScreen");
+
+    if (root) {
+
+        FRIENDGuidedActions.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDGuidedActions = FRIENDGuidedActions;
+
+/*==========================================================
+  End guided-actions.js
+==========================================================*/
