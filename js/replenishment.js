@@ -106,3 +106,71 @@ function summary(){
     };
 
 }
+/*==========================================================
+  replenishment.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Mission Recommendations
+==========================================================*/
+
+function recommendations(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Observe OSA During ESW",
+            status:"Open"
+        },
+
+        {
+            priority:2,
+            mission:"Verify Presentation Standards",
+            status:"Trending Up"
+        },
+
+        {
+            priority:3,
+            mission:"Confirm Schematics",
+            status:"Needs Improvement"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
