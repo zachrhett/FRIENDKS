@@ -93,3 +93,66 @@ window.FRIENDPermissionsUI =
 /*==========================================================
   End permissions-ui.js
 ==========================================================*/
+/*==========================================================
+  permissions-ui.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Mount UI
+==========================================================*/
+
+function mount(target = "#permissionsScreen"){
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if(!root) return;
+
+    root.innerHTML = render();
+
+    bindEvents(root);
+
+}
+
+/*==========================================================
+  Role Upgrade Button
+==========================================================*/
+
+function bindEvents(root){
+
+    const btn =
+        root.querySelector(".upgrade-role");
+
+    if(btn){
+
+        btn.addEventListener("click", () => {
+
+            FRIENDPermissions.upgradeRole();
+
+            mount(root);
+
+        });
+
+    }
+
+}
+
+/*==========================================================
+  Refresh UI
+==========================================================*/
+
+function refresh(){
+
+    const root =
+        document.querySelector("#permissionsScreen");
+
+    if(root){
+
+        mount(root);
+
+    }
+
+}
