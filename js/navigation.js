@@ -28,6 +28,10 @@ case "training":
     document.getElementById("app").innerHTML =
         FRIEND_ALERTS.render();
     break;
+        case "maximo":
+    document.getElementById("app").innerHTML =
+        FRIEND_MAXIMO.render();
+    break;
 
         case "associate":
             document.getElementById("app").innerHTML =
