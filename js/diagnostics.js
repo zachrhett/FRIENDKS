@@ -93,3 +93,49 @@ window.FRIENDDiagnostics =
 /*==========================================================
   End diagnostics.js
 ==========================================================*/
+/*==========================================================
+  diagnostics.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  System Report
+==========================================================*/
+
+function systemReport(){
+
+    return {
+
+        health: STATE.health,
+
+        uptimeMs: Date.now() - STATE.uptimeStart.getTime(),
+
+        uptimeHours: (
+            (Date.now() - STATE.uptimeStart.getTime()) / 3600000
+        ).toFixed(2),
+
+        errors: STATE.errors,
+
+        warnings: STATE.warnings,
+
+        lastCheck: STATE.lastCheck
+
+    };
+
+}
+
+/*==========================================================
+  Reset Diagnostics
+==========================================================*/
+
+function reset(){
+
+    STATE.errors = 0;
+
+    STATE.warnings = 0;
+
+    STATE.lastCheck = new Date();
+
+    return runSelfCheck();
+
+}
