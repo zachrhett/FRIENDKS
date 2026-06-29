@@ -106,3 +106,71 @@ function summary(){
     };
 
 }
+/*==========================================================
+  ordering.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Guided Ordering Missions
+==========================================================*/
+
+function guidedMissions(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Review Open CAO Orders",
+            status:"Open"
+        },
+
+        {
+            priority:2,
+            mission:"Resolve Vendor Gaps",
+            status:"Due Today"
+        },
+
+        {
+            priority:3,
+            mission:"Verify Department Orders",
+            status:"Ready"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
