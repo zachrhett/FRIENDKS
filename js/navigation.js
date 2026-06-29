@@ -32,6 +32,10 @@ case "training":
     document.getElementById("app").innerHTML =
         FRIEND_MAXIMO.render();
     break;
+        case "scorecard":
+    document.getElementById("app").innerHTML =
+        FRIEND_SCORECARD.render();
+    break;
 
         case "associate":
             document.getElementById("app").innerHTML =
