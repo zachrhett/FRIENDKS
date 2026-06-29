@@ -81,3 +81,45 @@ window.FRIENDExport =
 /*==========================================================
   End export.js
 ==========================================================*/
+/*==========================================================
+  export.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Export Helpers
+==========================================================*/
+
+function exportMissions(missions){
+
+    return toJSON(missions);
+
+}
+
+function exportAlerts(alerts){
+
+    return toJSON(alerts);
+
+}
+
+function exportAnalytics(metrics){
+
+    return toJSON(metrics);
+
+}
+
+/*==========================================================
+  Export Bundle
+==========================================================*/
+
+function exportBundle(payload){
+
+    return {
+
+        timestamp: new Date(),
+
+        data: toJSON(payload)
+
+    };
+
+}
