@@ -109,3 +109,53 @@ window.FRIENDCamera =
 /*==========================================================
   End camera.js
 ==========================================================*/
+/*==========================================================
+  camera.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Frame Analysis (Placeholder AI Hook)
+==========================================================*/
+
+function analyzeFrame(dataUrl){
+
+    if(!dataUrl) return null;
+
+    return {
+
+        detected:true,
+
+        confidence: 0.87,
+
+        objects:[
+            "product",
+            "shelf",
+            "associate"
+        ],
+
+        riskLevel:"Low",
+
+        recommendation:"No issues detected"
+
+    };
+
+}
+
+/*==========================================================
+  Device Info
+==========================================================*/
+
+function deviceInfo(){
+
+    return {
+
+        hasCamera: !!navigator.mediaDevices,
+
+        userAgent: navigator.userAgent,
+
+        platform: navigator.platform
+
+    };
+
+}
