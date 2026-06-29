@@ -186,3 +186,182 @@ function startMission(id){
     return mission;
 
 }
+/*==========================================================
+  mission-engine.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Complete Mission
+==========================================================*/
+
+function completeMission(id){
+
+    const mission =
+        MISSIONS.find(
+            m => m.id === id
+        );
+
+    if(!mission) return null;
+
+    mission.status = STATUS.COMPLETE;
+
+    currentMission = null;
+
+    return mission;
+
+}
+
+/*==========================================================
+  Pause Mission
+==========================================================*/
+
+function pauseMission(id){
+
+    const mission =
+        MISSIONS.find(
+            m => m.id === id
+        );
+
+    if(!mission) return null;
+
+    mission.status = STATUS.PAUSED;
+
+    currentMission = mission;
+
+    return mission;
+
+}
+
+/*==========================================================
+  Resume Mission
+==========================================================*/
+
+function resumeMission(id){
+
+    const mission =
+        MISSIONS.find(
+            m => m.id === id
+        );
+
+    if(!mission) return null;
+
+    mission.status = STATUS.ACTIVE;
+
+    currentMission = mission;
+
+    return mission;
+
+}
+
+/*==========================================================
+  Mission Queries
+==========================================================*/
+
+function getMission(id){
+
+    return MISSIONS.find(
+        m => m.id === id
+    );
+
+}
+
+function getAllMissions(){
+
+    sortMissions();
+
+    return [...MISSIONS];
+
+}
+
+function getActiveMission(){
+
+    return currentMission;
+
+}
+
+function getReadyMissions(){
+
+    return MISSIONS.filter(
+        m => m.status === STATUS.READY
+    );
+
+}
+
+function getCompletedMissions(){
+
+    return MISSIONS.filter(
+        m => m.status === STATUS.COMPLETE
+    );
+
+}
+  /*==========================================================
+  mission-engine.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Mission Statistics
+==========================================================*/
+
+function statistics(){
+
+    return{
+
+        total:MISSIONS.length,
+
+        ready:getReadyMissions().length,
+
+        active:
+            MISSIONS.filter(
+                m=>m.status===STATUS.ACTIVE
+            ).length,
+
+        paused:
+            MISSIONS.filter(
+                m=>m.status===STATUS.PAUSED
+            ).length,
+
+        completed:getCompletedMissions().length
+
+    };
+
+}
+
+/*==========================================================
+  Public API
+==========================================================*/
+
+return{
+
+    PRIORITY,
+    STATUS,
+
+    startMission,
+    completeMission,
+    pauseMission,
+    resumeMission,
+
+    getMission,
+    getNextMission,
+    getAllMissions,
+    getReadyMissions,
+    getCompletedMissions,
+    getActiveMission,
+
+    statistics
+
+};
+
+})();
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDMissionEngine =
+    FRIENDMissionEngine;
+
+/*==========================================================
+  End mission-engine.js
+==========================================================*/
