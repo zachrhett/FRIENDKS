@@ -83,3 +83,65 @@ function summary(){
     };
 
 }
+/*==========================================================
+  fresh-start.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Assignment Queries
+==========================================================*/
+
+function getAssignments(){
+
+    return [...ASSIGNMENTS];
+
+}
+
+function getAssignment(id){
+
+    return ASSIGNMENTS.find(
+
+        a => a.id === id
+
+    );
+
+}
+
+/*==========================================================
+  Compliance Engine
+==========================================================*/
+
+function complianceStatus(){
+
+    return {
+
+        total:ASSIGNMENTS.length,
+
+        overdue:ASSIGNMENTS.filter(
+            a => a.status === "Overdue"
+        ).length,
+
+        open:ASSIGNMENTS.filter(
+            a => a.status === "Open"
+        ).length,
+
+        completed:ASSIGNMENTS.filter(
+            a => a.status === "Complete"
+        ).length
+
+    };
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
