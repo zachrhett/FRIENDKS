@@ -186,3 +186,242 @@
     font-weight:700;
 
 }
+/*==========================================================
+  executive-ai.css
+  PART 2 OF N
+==========================================================*/
+
+.executive-ai-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(8,20,35,.58);
+
+    backdrop-filter:blur(6px);
+
+    z-index:99999;
+
+    animation:executiveAIFade .2s ease;
+
+}
+
+.executive-ai-modal{
+
+    width:min(92vw,560px);
+
+    background:#FFFFFF;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 72px rgba(0,0,0,.24);
+
+}
+
+.executive-ai-modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    padding:24px;
+
+    border-bottom:1px solid #DCE4EE;
+
+}
+
+.executive-ai-modal-header h2{
+
+    margin:0;
+
+    font-size:26px;
+
+    font-weight:900;
+
+    color:#182433;
+
+}
+
+.executive-ai-modal-header p{
+
+    margin:6px 0 0;
+
+    font-size:14px;
+
+    color:#6B7785;
+
+}
+
+.executive-ai-close{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#EDF3FA;
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    transition:.2s ease;
+
+}
+
+.executive-ai-close:hover{
+
+    background:#DCE7F4;
+
+}
+
+.executive-ai-modal-body{
+
+    padding:28px 24px;
+
+}
+
+.executive-ai-priority{
+
+    display:inline-flex;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#EAF3FF;
+
+    color:#0057B8;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:.05em;
+
+}
+
+.executive-ai-impact-detail{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#182433;
+
+}
+
+.executive-ai-description{
+
+    margin-top:22px;
+
+    padding:18px;
+
+    border:1px solid #E5ECF4;
+
+    border-radius:16px;
+
+    background:#F7FAFD;
+
+    color:#44505F;
+
+    line-height:1.8;
+
+}
+
+.executive-ai-modal-footer{
+
+    display:flex;
+
+    gap:12px;
+
+    padding:24px;
+
+    border-top:1px solid #DCE4EE;
+
+}
+
+.executive-ai-modal-footer button{
+
+    flex:1;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0057B8;
+
+    color:#FFFFFF;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+.executive-ai-modal-footer button:hover{
+
+    transform:translateY(-2px);
+
+    filter:brightness(1.05);
+
+}
+
+@media (max-width:720px){
+
+    .executive-ai-screen{
+
+        padding:16px;
+
+    }
+
+    .executive-ai-modal-footer{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@keyframes executiveAIFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/*==========================================================
+  End executive-ai.css
+==========================================================*/
