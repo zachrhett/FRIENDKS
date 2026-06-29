@@ -66,11 +66,12 @@ const APP = {
 
         });
 
-    },
-
     showHome() {
 
-        Navigation.go("home");
+    document.getElementById("content").innerHTML =
+        Home.render();
+
+},
 
     },
 
