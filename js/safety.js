@@ -104,3 +104,69 @@ function summary(){
     };
 
 }
+/*==========================================================
+  safety.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Mission Queries
+==========================================================*/
+
+function getMissions(){
+
+    return [...MISSIONS];
+
+}
+
+function getMission(id){
+
+    return MISSIONS.find(
+
+        m => m.id === id
+
+    );
+
+}
+
+/*==========================================================
+  Guided Safety Actions
+==========================================================*/
+
+function guidedMissions(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Review PM Inspections",
+            status:"Due Today"
+        },
+
+        {
+            priority:2,
+            mission:"Complete Shoes For Crews Audit",
+            status:"Overdue"
+        },
+
+        {
+            priority:3,
+            mission:"Verify Training Compliance",
+            status:"Open"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
