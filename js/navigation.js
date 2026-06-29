@@ -13,26 +13,34 @@ const FRIEND_NAVIGATION = {
     scorecard: "Store Scorecard",
     composite: "Composite Scorecard"
   },
-
-  goTo(routeName) {
+goTo(routeName) {
     FRIEND_STATE.currentModule = routeName;
 
-    if (routeName === "associate") {
-      document.getElementById("app").innerHTML = FRIEND_ASSOCIATE.render();
-      return;
-    }
+    switch (routeName) {
 
-    if (routeName === "home") {
-      location.reload();
-      return;
-    }
+        case "home":
+            location.reload();
+            break;
 
-    document.getElementById("app").innerHTML = `
-      <section class="screen">
-        <h1>${this.routes[routeName] || "Coming Soon"}</h1>
-        <p>This module is ready for construction.</p>
-        <button onclick="FRIEND_NAVIGATION.goTo('home')">Home</button>
-      </section>
-    `;
-  }
-};
+        case "associate":
+            document.getElementById("app").innerHTML =
+                FRIEND_ASSOCIATE.render();
+            break;
+
+        case "freshStart":
+            document.getElementById("app").innerHTML =
+                FRIEND_FRESH_START.render();
+            break;
+
+        default:
+            document.getElementById("app").innerHTML = `
+                <section class="screen">
+                    <h1>${this.routes[routeName] || "Coming Soon"}</h1>
+                    <p>This module is under construction.</p>
+                    <button onclick="FRIEND_NAVIGATION.goTo('home')">
+                        Home
+                    </button>
+                </section>
+            `;
+    }
+}
