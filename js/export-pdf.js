@@ -119,3 +119,49 @@ function exportBatch(reports){
     return reports.map(exportReport);
 
 }
+/*==========================================================
+  export-pdf.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Download Helper
+==========================================================*/
+
+function download(dataUrl, filename = "report.png"){
+
+    const link = document.createElement("a");
+
+    link.href = dataUrl;
+
+    link.download = filename;
+
+    link.click();
+
+}
+
+/*==========================================================
+  Public API
+==========================================================*/
+
+return {
+
+    exportSimplePDF,
+    exportReport,
+    exportBatch,
+    download
+
+};
+
+})();
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDPDFExport =
+    FRIENDPDFExport;
+
+/*==========================================================
+  End export-pdf.js
+==========================================================*/
