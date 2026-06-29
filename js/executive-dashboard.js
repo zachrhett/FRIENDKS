@@ -313,3 +313,49 @@ FRIENDExecutiveDashboard.openTile = function (
     });
 
 };
+/*==========================================================
+  executive-dashboard.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDExecutiveDashboard.refresh = function () {
+
+    const root =
+        document.querySelector("#executiveDashboardScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#executiveDashboardScreen");
+
+    if (root) {
+
+        FRIENDExecutiveDashboard.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDExecutiveDashboard = FRIENDExecutiveDashboard;
+
+/*==========================================================
+  End executive-dashboard.js
+==========================================================*/
