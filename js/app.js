@@ -95,12 +95,12 @@ const APP = {
 
 },
 
-    },
-
     loadExecutive() {
 
-        Navigation.go("executive");
+    document.getElementById("content").innerHTML =
+        Executive.render();
 
+},
     },
 
     loadScorecard() {
