@@ -1,65 +1,78 @@
-const FRIEND_NAVIGATION = {
-  routes: {
-    home: "Home",
-    associate: "Associate Mode",
-    freshStart: "Fresh Start",
-    temperature: "Temperature Mission",
-    training: "Training",
-    departmentLeader: "Department Leader",
-    storeLeader: "Store Leader",
-    executive: "Executive Dashboard",
-    maximo: "Maximo",
-    alerts: "Alerts",
-    scorecard: "Store Scorecard",
-    composite: "Composite Scorecard"
-  },
-goTo(routeName) {
-    FRIEND_STATE.currentModule = routeName;
+/*==========================================================
+ F.R.I.E.N.D.
+ Navigation Engine
+==========================================================*/
 
-    switch (routeName) {
-case "training":
-    document.getElementById("app").innerHTML =
-        FRIEND_TRAINING.render();
-    break;
-        case "home":
-            location.reload();
-            break;
-        case "alerts":
-    document.getElementById("app").innerHTML =
-        FRIEND_ALERTS.render();
-    break;
-        case "maximo":
-    document.getElementById("app").innerHTML =
-        FRIEND_MAXIMO.render();
-    break;
-        case "scorecard":
-    document.getElementById("app").innerHTML =
-        FRIEND_SCORECARD.render();
-    break;
-        case "composite":
-    document.getElementById("app").innerHTML =
-        FRIEND_COMPOSITE.render();
-    break;
+const Navigation = {
 
-        case "associate":
-            document.getElementById("app").innerHTML =
-                FRIEND_ASSOCIATE.render();
-            break;
+    routes: {
 
-        case "freshStart":
-            document.getElementById("app").innerHTML =
-                FRIEND_FRESH_START.render();
-            break;
+        home: "home",
 
-        default:
-            document.getElementById("app").innerHTML = `
-                <section class="screen">
-                    <h1>${this.routes[routeName] || "Coming Soon"}</h1>
-                    <p>This module is under construction.</p>
-                    <button onclick="FRIEND_NAVIGATION.goTo('home')">
-                        Home
-                    </button>
-                </section>
-            `;
+        associate: "associate",
+        freshStart: "freshStart",
+        temperature: "temperature",
+        training: "training",
+
+        departmentLeader: "departmentLeader",
+        production: "production",
+        inventory: "inventory",
+        replenishment: "replenishment",
+        foodSafety: "foodSafety",
+        labor: "labor",
+        ordering: "ordering",
+        shrink: "shrink",
+
+        storeLeader: "storeLeader",
+        scorecard: "scorecard",
+        composite: "composite",
+        analytics: "analytics",
+
+        executive: "executive",
+        district: "district",
+        division: "division",
+        roi: "roi",
+
+        alerts: "alerts",
+        maximo: "maximo"
+
+    },
+
+    go(route){
+
+        if(!this.routes[route]){
+
+            console.warn("Unknown Route:",route);
+            return;
+
+        }
+
+        FRIEND.show(route);
+
+    },
+
+    home(){
+
+        this.go("home");
+
+    },
+
+    back(){
+
+        window.history.back();
+
     }
-}
+
+};
+
+document.addEventListener("click",(event)=>{
+
+    const button = event.target.closest("[data-view]");
+
+    if(!button) return;
+
+    event.preventDefault();
+
+    Navigation.go(button.dataset.view);
+
+});
