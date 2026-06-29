@@ -634,3 +634,234 @@
     white-space:nowrap;
 
 }
+/*==========================================================
+  scorecard.css
+  PART 4 OF N
+==========================================================*/
+
+.scorecard-detail-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(10,20,35,.55);
+
+    backdrop-filter:blur(6px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+    animation:friendFade .20s ease;
+
+}
+
+.scorecard-detail-card{
+
+    width:min(92vw,520px);
+
+    background:#FFF;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.22);
+
+}
+
+.detail-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    padding:24px;
+
+    border-bottom:1px solid var(--friend-border);
+
+}
+
+.detail-title{
+
+    font-size:26px;
+
+    font-weight:800;
+
+    color:var(--friend-text);
+
+}
+
+.detail-subtitle{
+
+    margin-top:6px;
+
+    color:var(--friend-muted);
+
+    font-size:14px;
+
+}
+
+.detail-close{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#EDF3FA;
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    transition:var(--transition);
+
+}
+
+.detail-close:hover{
+
+    background:#DCE7F4;
+
+}
+
+.detail-value{
+
+    padding:28px 24px 10px;
+
+    font-size:56px;
+
+    font-weight:900;
+
+    color:var(--friend-blue);
+
+}
+
+.detail-status{
+
+    margin:0 24px;
+
+    display:inline-flex;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:.08em;
+
+}
+
+.detail-status.excellent{
+
+    background:#EAF8EF;
+
+    color:var(--friend-green);
+
+}
+
+.detail-status.good{
+
+    background:#EAF3FF;
+
+    color:var(--friend-blue);
+
+}
+
+.detail-status.warning{
+
+    background:#FFF6DA;
+
+    color:#A06B00;
+
+}
+
+.detail-status.critical{
+
+    background:#FFE9ED;
+
+    color:var(--friend-red);
+
+}
+
+.detail-copy{
+
+    padding:24px;
+
+    color:var(--friend-text);
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+.detail-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    padding:0 24px 24px;
+
+}
+
+.detail-actions button{
+
+    flex:1;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--friend-blue);
+
+    color:#FFF;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.detail-actions button:hover{
+
+    transform:translateY(-2px);
+
+    filter:brightness(1.06);
+
+}
+
+@keyframes friendFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
