@@ -1,17 +1,147 @@
-const FRIEND_ASSOCIATE = {
-  render() {
-    return `
-      <section class="screen">
-        <h1>Associate Mode</h1>
-        <p>Welcome Alex. Please complete your Fresh Start and move to your next mission.</p>
+/*==========================================================
+  F.R.I.E.N.D.
+  Application Core
+==========================================================*/
 
-        <div class="home-grid">
-          <button onclick="FRIEND_NAVIGATION.goTo('freshStart')">Fresh Start</button>
-          <button onclick="FRIEND_NAVIGATION.goTo('temperature')">Temperature Mission</button>
-          <button onclick="FRIEND_NAVIGATION.goTo('training')">Training</button>
-          <button onclick="FRIEND_NAVIGATION.goTo('home')">Home</button>
-        </div>
-      </section>
-    `;
-  }
+const APP = {
+
+    initialized: false,
+
+    currentUser: null,
+
+    init() {
+
+        console.log("================================");
+        console.log("F.R.I.E.N.D. Initializing");
+        console.log("Version:", CONFIG.app.version);
+        console.log("================================");
+
+        this.loadConfiguration();
+
+        this.loadState();
+
+        this.bindEvents();
+
+        this.showHome();
+
+        this.initialized = true;
+
+        console.log("Initialization Complete");
+
+    },
+
+    loadConfiguration() {
+
+        this.config = CONFIG;
+
+        console.log("Configuration Loaded");
+
+    },
+
+    loadState() {
+
+        this.state = State;
+
+        this.currentUser = State.user;
+
+        console.log("State Loaded");
+
+    },
+
+    bindEvents() {
+
+        window.addEventListener("online", () => {
+
+            State.app.online = true;
+
+            console.log("Application Online");
+
+        });
+
+        window.addEventListener("offline", () => {
+
+            State.app.online = false;
+
+            console.log("Application Offline");
+
+        });
+
+    },
+
+    showHome() {
+
+        Navigation.go("home");
+
+    },
+
+    loadAssociate() {
+
+        Navigation.go("associate");
+
+    },
+
+    loadDepartmentLeader() {
+
+        Navigation.go("departmentLeader");
+
+    },
+
+    loadStoreLeader() {
+
+        Navigation.go("storeLeader");
+
+    },
+
+    loadExecutive() {
+
+        Navigation.go("executive");
+
+    },
+
+    loadScorecard() {
+
+        Navigation.go("scorecard");
+
+    },
+
+    loadComposite() {
+
+        Navigation.go("composite");
+
+    },
+
+    loadAlerts() {
+
+        Navigation.go("alerts");
+
+    },
+
+    loadMaximo() {
+
+        Navigation.go("maximo");
+
+    },
+
+    refreshDashboard() {
+
+        console.log("Refreshing Dashboard");
+
+    },
+
+    logout() {
+
+        console.log("User Logged Out");
+
+        Navigation.go("home");
+
+    }
+
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    APP.init();
+
+});
+
+window.APP = APP;
