@@ -81,7 +81,13 @@ const APP = {
 
     },
 
-    loadDepartmentLeader() {
+  loadDepartmentLeader() {
+
+    document.getElementById("content").innerHTML =
+        DepartmentLeader.render();
+
+},  
+  loadDepartmentLeader() {
 
         Navigation.go("departmentLeader");
 
