@@ -288,3 +288,49 @@ FRIENDExecutiveAI.openRecommendation = function (
     });
 
 };
+/*==========================================================
+  executive-ai.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDExecutiveAI.refresh = function () {
+
+    const root =
+        document.querySelector("#executiveAIScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#executiveAIScreen");
+
+    if (root) {
+
+        FRIENDExecutiveAI.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDExecutiveAI = FRIENDExecutiveAI;
+
+/*==========================================================
+  End executive-ai.js
+==========================================================*/
