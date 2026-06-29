@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F.R.I.E.N.D.</title>
 
+  <link rel="stylesheet" href="app.css" />
+  <link rel="manifest" href="app_manifest.json" />
+</head>
+
+<body>
+  <main id="app">
+    <section class="screen active" id="home-screen">
+      <h1>F.R.I.E.N.D.</h1>
+      <p>Full Retail Integration Engaged Network Dynamics</p>
+
+      <div class="home-grid">
+        <button onclick="FRIEND_NAVIGATION.goTo('associate')">Associate Mode</button>
+        <button onclick="FRIEND_NAVIGATION.goTo('departmentLeader')">Department Leader</button>
+        <button onclick="FRIEND_NAVIGATION.goTo('storeLeader')">Store Leader</button>
+        <button onclick="FRIEND_NAVIGATION.goTo('executive')">Executive</button>
+        <button onclick="FRIEND_NAVIGATION.goTo('scorecard')">Store Scorecard</button>
+        <button onclick="FRIEND_NAVIGATION.goTo('maximo')">Maximo</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
