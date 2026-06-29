@@ -226,3 +226,49 @@
     color:var(--success);
 
 }
+/*==========================================================
+  dashboard.css
+  PART 4 OF N
+==========================================================*/
+
+/*==========================================================
+  Responsive (TC-52 + Mobile)
+==========================================================*/
+
+@media (max-width: 720px){
+
+    .kpi-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .friend-dashboard-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+
+    }
+
+    .store-health{
+
+        font-size:24px;
+
+    }
+
+}
+
+/*==========================================================
+  Status Colors
+==========================================================*/
+
+.status-good{ color: var(--success); }
+.status-warning{ color: var(--warning); }
+.status-critical{ color: var(--critical); }
+
+/*==========================================================
+  End dashboard.css
+==========================================================*/
