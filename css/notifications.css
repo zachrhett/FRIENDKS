@@ -1,0 +1,167 @@
+/*==========================================================
+  notifications.css
+  PART 1 OF N
+==========================================================*/
+
+.notifications-screen{
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:20px;
+
+    background:#F4F7FB;
+
+    font-family:
+        "SF Pro Display",
+        "Segoe UI",
+        sans-serif;
+
+}
+
+.notifications-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.notifications-header h2{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:#182433;
+
+}
+
+.notification-count{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:#EAF3FF;
+
+    color:#0057B8;
+
+    font-size:12px;
+
+    font-weight:800;
+
+}
+
+.notification-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.notification-card{
+
+    display:grid;
+
+    grid-template-columns:8px 1fr;
+
+    gap:16px;
+
+    background:#FFFFFF;
+
+    border:1px solid #DCE4EE;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    cursor:pointer;
+
+    transition:.22s ease;
+
+    box-shadow:
+        0 8px 20px rgba(15,39,71,.08);
+
+}
+
+.notification-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(15,39,71,.12);
+
+}
+
+.notification-indicator{
+
+    border-radius:999px;
+
+}
+
+.notification-card.critical .notification-indicator{
+
+    background:#C8102E;
+
+}
+
+.notification-card.warning .notification-indicator{
+
+    background:#F5B400;
+
+}
+
+.notification-card.info .notification-indicator{
+
+    background:#0057B8;
+
+}
+
+.notification-card.success .notification-indicator{
+
+    background:#2E9D49;
+
+}
+
+.notification-title{
+
+    font-size:16px;
+
+    font-weight:800;
+
+    color:#182433;
+
+}
+
+.notification-message{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    color:#44505F;
+
+    line-height:1.6;
+
+}
+
+.notification-meta{
+
+    margin-top:10px;
+
+    font-size:12px;
+
+    color:#6B7785;
+
+    font-weight:700;
+
+}
