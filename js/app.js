@@ -1,152 +1,118 @@
 /*==========================================================
-  F.R.I.E.N.D.
-  Application Core
+  app.js
+  PART 1 OF N
 ==========================================================*/
 
-const APP = {
+"use strict";
 
-    initialized: false,
+/*==========================================================
+  F.R.I.E.N.D. Version 1.0
+  Application Bootstrap
+==========================================================*/
 
-    currentUser: null,
+const FRIENDApp = (() => {
 
-    init() {
+const VERSION = "1.0";
 
-        console.log("================================");
-        console.log("F.R.I.E.N.D. Initializing");
-        console.log("Version:", CONFIG.app.version);
-        console.log("================================");
+const CONFIG = {
 
-        this.loadConfiguration();
+    store: 129,
 
-        this.loadState();
+    district: 2,
 
-        this.bindEvents();
+    division: 620,
 
-        this.showHome();
+    application: "F.R.I.E.N.D.",
 
-        this.initialized = true;
-
-        console.log("Initialization Complete");
-
-    },
-
-    loadConfiguration() {
-
-        this.config = CONFIG;
-
-        console.log("Configuration Loaded");
-
-    },
-
-    loadState() {
-
-        this.state = State;
-
-        this.currentUser = State.user;
-
-        console.log("State Loaded");
-
-    },
-
-    bindEvents() {
-
-        window.addEventListener("online", () => {
-
-            State.app.online = true;
-
-            console.log("Application Online");
-
-        });
-
-        window.addEventListener("offline", () => {
-
-            State.app.online = false;
-
-            console.log("Application Offline");
-
-        });
-
-    showHome() {
-
-    document.getElementById("content").innerHTML =
-        Home.render();
-
-},
-
-
-    },
-
-  loadDepartmentLeader() {
-
-    document.getElementById("content").innerHTML =
-        DepartmentLeader.render();
-
-},  
-  loadDepartmentLeader() {
-
-        Navigation.go("departmentLeader");
-
-    },
-
-    loadStoreLeader() {
-
-    document.getElementById("content").innerHTML =
-        StoreLeader.render();
-
-},
-
-    loadExecutive() {
-
-    document.getElementById("content").innerHTML =
-        Executive.render();
-
-},
-    },
-
-    loadScorecard() {
-
-        Navigation.go("scorecard");
-
-    },
-
-    loadComposite() {
-
-        Navigation.go("composite");
-
-    },
-
-    loadAlerts() {
-
-        Navigation.go("alerts");
-
-    },
-
-    loadMaximo() {
-
-        Navigation.go("maximo");
-
-    },
-
-    refreshDashboard() {
-
-        console.log("Refreshing Dashboard");
-
-    },
-
-    logout() {
-
-        console.log("User Logged Out");
-
-        Navigation.go("home");
-
-    }
+    device: "TC-52"
 
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+let initialized = false;
 
-    APP.init();
+/*==========================================================
+  Initialize Modules
+==========================================================*/
 
-});
+function initialize(){
 
-window.APP = APP;
+    if(initialized) return;
+
+    initialized = true;
+
+    if(window.FRIENDRouter){
+
+        FRIENDRouter.initialize();
+
+    }
+
+    console.log(
+        `${CONFIG.application} v${VERSION} initialized`
+    );
+
+}
+
+/*==========================================================
+  Refresh Entire Application
+==========================================================*/
+
+function refresh(){
+
+    if(window.FRIENDScorecard){
+
+        FRIENDScorecard.refresh();
+
+    }
+
+    if(window.FRIENDAnalytics){
+
+        FRIENDAnalytics.refresh();
+
+    }
+
+    if(window.FRIENDLeaderFocus){
+
+        FRIENDLeaderFocus.refresh();
+
+    }
+
+    if(window.FRIENDGuidedActions){
+
+        FRIENDGuidedActions.refresh();
+
+    }
+
+    if(window.FRIENDMaximo){
+
+        FRIENDMaximo.refresh();
+
+    }
+
+    if(window.FRIENDExecutiveDashboard){
+
+        FRIENDExecutiveDashboard.refresh();
+
+    }
+
+    if(window.FRIENDExecutiveAI){
+
+        FRIENDExecutiveAI.refresh();
+
+    }
+
+}
+
+/*==========================================================
+  Public API
+==========================================================*/
+
+return{
+
+    VERSION,
+    CONFIG,
+    initialize,
+    refresh
+
+};
+
+})();
