@@ -96,3 +96,63 @@ function summary(){
     };
 
 }
+/*==========================================================
+  food-safety.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Compliance
+==========================================================*/
+
+function complianceStatus(){
+
+    return {
+
+        compliant:
+            DASHBOARD.compliance >= 95,
+
+        score:
+            DASHBOARD.compliance,
+
+        risk:
+            DASHBOARD.riskLevel,
+
+        auditsDue:
+            DASHBOARD.auditsDue
+
+    };
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    return summary();
+
+}
