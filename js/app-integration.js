@@ -92,3 +92,77 @@ window.FRIENDIntegration =
 /*==========================================================
   End app-integration.js
 ==========================================================*/
+/*==========================================================
+  app-integration.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Module Sync Validator
+==========================================================*/
+
+function validateModules(){
+
+    const required = [
+
+        "FRIENDStorage",
+        "FRIENDLogger",
+        "FRIENDSync",
+        "FRIENDOffline",
+        "FRIENDPermissions",
+        "FRIENDMissionEngine",
+        "FRIENDFoodSafety",
+        "FRIENDInventory",
+        "FRIENDProduction",
+        "FRIENDShrink",
+        "FRIENDLabor",
+        "FRIENDOrdering",
+        "FRIENDSafety",
+        "FRIENDFreshStart",
+        "FRIENDAlerts",
+        "FRIENDReports",
+        "FRIENDUpdateManager",
+        "FRIENDAPI",
+        "FRIENDSearch",
+        "FRIENDBarcode",
+        "FRIENDCamera"
+
+    ];
+
+    return required.map(name => ({
+
+        module: name,
+
+        loaded: !!window[name]
+
+    }));
+
+}
+
+/*==========================================================
+  Boot Sequence
+==========================================================*/
+
+function boot(){
+
+    initAll();
+
+    const status = validateModules();
+
+    const missing = status.filter(m => !m.loaded);
+
+    if(missing.length > 0){
+
+        console.warn("Missing modules:", missing);
+
+    }
+
+    return {
+
+        success: missing.length === 0,
+
+        modules: status
+
+    };
+
+}
