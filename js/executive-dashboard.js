@@ -167,3 +167,149 @@ render
 };
 
 })();
+/*==========================================================
+  executive-dashboard.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDExecutiveDashboard.mount = function (
+    target = "#executiveDashboardScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.render();
+
+    this.bindEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDExecutiveDashboard.bindEvents = function (
+    root
+) {
+
+    root.querySelectorAll(".executive-tile")
+        .forEach((tile, index) => {
+
+            tile.addEventListener("click", () => {
+
+                this.openTile(
+                    this.KPI[index]
+                );
+
+            });
+
+        });
+
+};
+
+/*==========================================================
+  KPI Detail
+==========================================================*/
+
+FRIENDExecutiveDashboard.openTile = function (
+    tile
+) {
+
+    const existing =
+        document.querySelector(".executive-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "executive-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="executive-modal">
+
+            <div class="executive-modal-header">
+
+                <div>
+
+                    <h2>${tile.title}</h2>
+
+                    <p>Executive Performance Detail</p>
+
+                </div>
+
+                <button class="executive-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="executive-modal-body">
+
+                <div class="executive-big-number">
+
+                    ${tile.value}
+
+                </div>
+
+                <div class="executive-status">
+
+                    ${tile.status.toUpperCase()}
+
+                </div>
+
+                <div class="executive-description">
+
+                    This KPI contributes directly to the
+                    F.R.I.E.N.D. Store Health calculation,
+                    executive visibility,
+                    guided leadership,
+                    and division reporting.
+
+                </div>
+
+            </div>
+
+            <div class="executive-modal-footer">
+
+                <button>
+                    View Details
+                </button>
+
+                <button>
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".executive-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay
+        .querySelectorAll(".executive-modal-footer button")[1]
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", event => {
+
+        if (event.target === overlay) {
+
+            overlay.remove();
+
+        }
+
+    });
+
+};
