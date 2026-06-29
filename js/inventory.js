@@ -108,3 +108,68 @@ function summary(){
     };
 
 }
+/*==========================================================
+  inventory.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Inventory Health
+==========================================================*/
+
+function inventoryHealth(){
+
+    return {
+
+        healthy:
+            DASHBOARD.onHandAccuracy >= 95,
+
+        onHandAccuracy:
+            DASHBOARD.onHandAccuracy,
+
+        osa:
+            DASHBOARD.osa,
+
+        outOfStocks:
+            DASHBOARD.outOfStocks,
+
+        openCounts:
+            DASHBOARD.openCounts
+
+    };
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
