@@ -104,3 +104,71 @@ function summary(){
     };
 
 }
+/*==========================================================
+  labor.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Department Queries
+==========================================================*/
+
+function getDepartments(){
+
+    return [...DEPARTMENTS];
+
+}
+
+function getDepartment(name){
+
+    return DEPARTMENTS.find(
+
+        department =>
+
+            department.name === name
+
+    );
+
+}
+
+/*==========================================================
+  Guided Labor Missions
+==========================================================*/
+
+function guidedMissions(){
+
+    return [
+
+        {
+            priority:1,
+            mission:"Review Deli Labor Exceptions",
+            status:"Due Today"
+        },
+
+        {
+            priority:2,
+            mission:"Connect With Bakery Leader",
+            status:"Needs Attention"
+        },
+
+        {
+            priority:3,
+            mission:"Review Holiday Labor Forecast",
+            status:"Overdue"
+        }
+
+    ];
+
+}
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+function refresh(){
+
+    DASHBOARD.lastUpdated = new Date();
+
+    return summary();
+
+}
