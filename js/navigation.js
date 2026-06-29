@@ -36,6 +36,10 @@ case "training":
     document.getElementById("app").innerHTML =
         FRIEND_SCORECARD.render();
     break;
+        case "composite":
+    document.getElementById("app").innerHTML =
+        FRIEND_COMPOSITE.render();
+    break;
 
         case "associate":
             document.getElementById("app").innerHTML =
