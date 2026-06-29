@@ -814,3 +814,147 @@ ${this.createGuidedActions()}
 `;
 
 };
+/*==========================================================
+  scorecard.js
+  PART 4 OF N
+==========================================================*/
+
+/*==========================================================
+  TC-52 Scorecard Mounting
+==========================================================*/
+
+FRIENDScorecard.mount = function (
+    target = "#storeScorecardScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.renderFullScorecard();
+
+    this.bindScorecardEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDScorecard.bindScorecardEvents = function (
+    root
+) {
+
+    const metricCards =
+        root.querySelectorAll("[data-scorecard-metric]");
+
+    metricCards.forEach(card => {
+
+        card.addEventListener("click", () => {
+
+            const metricId =
+                card.getAttribute("data-scorecard-metric");
+
+            this.openMetricDetail(metricId);
+
+        });
+
+    });
+
+};
+
+/*==========================================================
+  Metric Detail
+==========================================================*/
+
+FRIENDScorecard.openMetricDetail = function (
+    metricId
+) {
+
+    const metric =
+        this.METRICS.find(item => item.id === metricId);
+
+    if (!metric) return;
+
+    const existing =
+        document.querySelector(".scorecard-detail-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "scorecard-detail-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="scorecard-detail-card">
+
+            <div class="detail-header">
+
+                <div>
+
+                    <div class="detail-title">
+                        ${metric.title}
+                    </div>
+
+                    <div class="detail-subtitle">
+                        Store Scorecard Detail
+                    </div>
+
+                </div>
+
+                <button
+                    class="detail-close"
+                    type="button"
+                    aria-label="Close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="detail-value">
+                ${metric.value}
+            </div>
+
+            <div class="detail-status ${metric.status}">
+                ${metric.status.toUpperCase()}
+            </div>
+
+            <div class="detail-copy">
+                Metric performance is being monitored against store standard,
+                district expectation, and division 620 execution target.
+            </div>
+
+            <div class="detail-actions">
+
+                <button type="button">
+                    Create Guided Action
+                </button>
+
+                <button type="button">
+                    Notify Leader
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".detail-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", event => {
+
+        if (event.target === overlay) overlay.remove();
+
+    });
+
+};
