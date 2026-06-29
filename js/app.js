@@ -1,17 +1,147 @@
-const FRIEND_APP = {
-  currentView: "home",
+/*==========================================================
+  F.R.I.E.N.D.
+  Application Core
+==========================================================*/
 
-  init() {
-    console.log("F.R.I.E.N.D. app initialized");
-    this.loadView("home");
-  },
+const APP = {
 
-  loadView(viewName) {
-    this.currentView = viewName;
-    console.log("Loading view:", viewName);
-  }
+    initialized: false,
+
+    currentUser: null,
+
+    init() {
+
+        console.log("================================");
+        console.log("F.R.I.E.N.D. Initializing");
+        console.log("Version:", CONFIG.app.version);
+        console.log("================================");
+
+        this.loadConfiguration();
+
+        this.loadState();
+
+        this.bindEvents();
+
+        this.showHome();
+
+        this.initialized = true;
+
+        console.log("Initialization Complete");
+
+    },
+
+    loadConfiguration() {
+
+        this.config = CONFIG;
+
+        console.log("Configuration Loaded");
+
+    },
+
+    loadState() {
+
+        this.state = State;
+
+        this.currentUser = State.user;
+
+        console.log("State Loaded");
+
+    },
+
+    bindEvents() {
+
+        window.addEventListener("online", () => {
+
+            State.app.online = true;
+
+            console.log("Application Online");
+
+        });
+
+        window.addEventListener("offline", () => {
+
+            State.app.online = false;
+
+            console.log("Application Offline");
+
+        });
+
+    },
+
+    showHome() {
+
+        Navigation.go("home");
+
+    },
+
+    loadAssociate() {
+
+        Navigation.go("associate");
+
+    },
+
+    loadDepartmentLeader() {
+
+        Navigation.go("departmentLeader");
+
+    },
+
+    loadStoreLeader() {
+
+        Navigation.go("storeLeader");
+
+    },
+
+    loadExecutive() {
+
+        Navigation.go("executive");
+
+    },
+
+    loadScorecard() {
+
+        Navigation.go("scorecard");
+
+    },
+
+    loadComposite() {
+
+        Navigation.go("composite");
+
+    },
+
+    loadAlerts() {
+
+        Navigation.go("alerts");
+
+    },
+
+    loadMaximo() {
+
+        Navigation.go("maximo");
+
+    },
+
+    refreshDashboard() {
+
+        console.log("Refreshing Dashboard");
+
+    },
+
+    logout() {
+
+        console.log("User Logged Out");
+
+        Navigation.go("home");
+
+    }
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  FRIEND_APP.init();
+
+    APP.init();
+
 });
+
+window.APP = APP;
