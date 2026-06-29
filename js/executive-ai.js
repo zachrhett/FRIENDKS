@@ -133,3 +133,158 @@ return {
 };
 
 })();
+/*==========================================================
+  executive-ai.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDExecutiveAI.mount = function (
+    target = "#executiveAIScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.render();
+
+    this.bindEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDExecutiveAI.bindEvents = function (
+    root
+) {
+
+    root.querySelectorAll("[data-ai-priority]")
+        .forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                const priority =
+                    Number(card.dataset.aiPriority);
+
+                const recommendation =
+                    this.AI.recommendations.find(
+                        item => item.priority === priority
+                    );
+
+                if (recommendation) {
+
+                    this.openRecommendation(recommendation);
+
+                }
+
+            });
+
+        });
+
+};
+
+/*==========================================================
+  Recommendation Detail
+==========================================================*/
+
+FRIENDExecutiveAI.openRecommendation = function (
+    recommendation
+) {
+
+    const existing =
+        document.querySelector(".executive-ai-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "executive-ai-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="executive-ai-modal">
+
+            <div class="executive-ai-modal-header">
+
+                <div>
+
+                    <h2>${recommendation.title}</h2>
+
+                    <p>AI Executive Recommendation</p>
+
+                </div>
+
+                <button class="executive-ai-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="executive-ai-modal-body">
+
+                <div class="executive-ai-priority">
+
+                    Priority ${recommendation.priority}
+
+                </div>
+
+                <div class="executive-ai-impact-detail">
+
+                    ${recommendation.impact} Business Impact
+
+                </div>
+
+                <div class="executive-ai-description">
+
+                    F.R.I.E.N.D. has identified this recommendation
+                    as a high-value opportunity to improve operational
+                    execution, leadership visibility, and overall
+                    Store Health performance.
+
+                </div>
+
+            </div>
+
+            <div class="executive-ai-modal-footer">
+
+                <button>
+                    Create Mission
+                </button>
+
+                <button>
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".executive-ai-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay
+        .querySelectorAll(".executive-ai-modal-footer button")[1]
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", event => {
+
+        if (event.target === overlay) {
+
+            overlay.remove();
+
+        }
+
+    });
+
+};
