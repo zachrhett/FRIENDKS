@@ -90,3 +90,64 @@ window.FRIENDPermissions =
 /*==========================================================
   End permissions.js
 ==========================================================*/
+/*==========================================================
+  permissions.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Permission Check
+==========================================================*/
+
+function hasPermission(permission){
+
+    const perms =
+        PERMISSIONS[currentRole] || [];
+
+    return perms.includes(permission);
+
+}
+
+/*==========================================================
+  Role Summary
+==========================================================*/
+
+function roleSummary(){
+
+    return {
+
+        role: currentRole,
+
+        permissions:
+            PERMISSIONS[currentRole] || [],
+
+        totalPermissions:
+            (PERMISSIONS[currentRole] || []).length
+
+    };
+
+}
+
+/*==========================================================
+  Upgrade Role
+==========================================================*/
+
+function upgradeRole(){
+
+    if(currentRole === ROLES.ASSOCIATE){
+
+        currentRole = ROLES.DEPARTMENT_LEADER;
+
+    } else if(currentRole === ROLES.DEPARTMENT_LEADER){
+
+        currentRole = ROLES.STORE_LEADER;
+
+    } else if(currentRole === ROLES.STORE_LEADER){
+
+        currentRole = ROLES.EXECUTIVE;
+
+    }
+
+    return currentRole;
+
+}
