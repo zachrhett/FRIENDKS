@@ -78,3 +78,67 @@ window.FRIENDSync =
 /*==========================================================
   End sync.js
 ==========================================================*/
+/*==========================================================
+  sync.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Sync Processor
+==========================================================*/
+
+function process(){
+
+    if(syncing) return status();
+
+    syncing = true;
+
+    return new Promise(resolve => {
+
+        setTimeout(() => {
+
+            lastSync = new Date();
+
+            syncing = false;
+
+            clearQueue();
+
+            resolve(status());
+
+        }, 1200);
+
+    });
+
+}
+
+/*==========================================================
+  Force Sync
+==========================================================*/
+
+function forceSync(){
+
+    clearQueue();
+
+    lastSync = new Date();
+
+    return status();
+
+}
+
+/*==========================================================
+  Sync Health
+==========================================================*/
+
+function health(){
+
+    return {
+
+        healthy: queue.length < 10,
+
+        risk: queue.length > 25 ? "High" : "Low",
+
+        queued: queue.length
+
+    };
+
+}
