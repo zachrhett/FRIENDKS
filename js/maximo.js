@@ -334,3 +334,49 @@ FRIENDMaximo.openWorkOrder = function (
     });
 
 };
+/*==========================================================
+  maximo.js
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Refresh
+==========================================================*/
+
+FRIENDMaximo.refresh = function () {
+
+    const root =
+        document.querySelector("#maximoScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Auto Mount
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const root =
+        document.querySelector("#maximoScreen");
+
+    if (root) {
+
+        FRIENDMaximo.mount(root);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDMaximo = FRIENDMaximo;
+
+/*==========================================================
+  End maximo.js
+==========================================================*/
