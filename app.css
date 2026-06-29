@@ -147,3 +147,71 @@ button:hover{transform:translateY(-2px)}
     color:var(--primary);
 
 }
+/*==========================================================
+  app.css (CORE THEME)
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Cards
+==========================================================*/
+
+.card{
+
+    background:var(--card);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    padding:16px;
+
+    margin-bottom:14px;
+
+}
+
+/*==========================================================
+  Buttons
+==========================================================*/
+
+.button{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px 16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+.button:hover{
+
+    transform:translateY(-2px);
+
+    background:var(--secondary);
+
+}
+
+/*==========================================================
+  Utilities
+==========================================================*/
+
+.text-center{ text-align:center; }
+
+.mt-1{ margin-top:8px; }
+
+.mt-2{ margin-top:16px; }
+
+.mt-3{ margin-top:24px; }
+
+.hidden{ display:none; }
