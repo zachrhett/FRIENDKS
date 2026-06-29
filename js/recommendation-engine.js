@@ -82,3 +82,68 @@ function getHighest(){
     return RULES[0];
 
 }
+/*==========================================================
+  recommendation-engine.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Recommendation Queries
+==========================================================*/
+
+function getAll(){
+
+    sortRules();
+
+    return [...RULES];
+
+}
+
+function getById(id){
+
+    return RULES.find(rule =>
+
+        rule.id === id
+
+    );
+
+}
+
+function getByDepartment(department){
+
+    return RULES.filter(rule =>
+
+        rule.department === department
+
+    );
+
+}
+
+/*==========================================================
+  Recommendation Evaluation
+==========================================================*/
+
+function evaluate(storeData = {}){
+
+    sortRules();
+
+    return {
+
+        timestamp: new Date(),
+
+        recommendation: RULES[0],
+
+        totalRecommendations: RULES.length,
+
+        storeHealth:
+            storeData.storeHealth ?? 92,
+
+        alerts:
+            storeData.alerts ?? 7,
+
+        maximo:
+            storeData.maximo ?? 5
+
+    };
+
+}
