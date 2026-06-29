@@ -77,3 +77,63 @@ window.FRIENDBarcode =
 /*==========================================================
   End barcode.js
 ==========================================================*/
+/*==========================================================
+  barcode.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Scan Analysis
+==========================================================*/
+
+function analyzeLastScan(){
+
+    if(!lastScan) return null;
+
+    return {
+
+        code: lastScan.code,
+
+        valid: lastScan.valid,
+
+        riskLevel: lastScan.valid ? "Low" : "High",
+
+        recommendation: lastScan.valid
+            ? "Accept item"
+            : "Re-scan required"
+
+    };
+
+}
+
+/*==========================================================
+  Clear History
+==========================================================*/
+
+function clearHistory(){
+
+    scanHistory = [];
+
+    lastScan = null;
+
+    return true;
+
+}
+
+/*==========================================================
+  Stats
+==========================================================*/
+
+function stats(){
+
+    return {
+
+        totalScans: scanHistory.length,
+
+        validScans: scanHistory.filter(s => s.valid).length,
+
+        invalidScans: scanHistory.filter(s => !s.valid).length
+
+    };
+
+}
