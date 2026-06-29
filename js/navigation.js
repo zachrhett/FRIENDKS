@@ -17,7 +17,10 @@ goTo(routeName) {
     FRIEND_STATE.currentModule = routeName;
 
     switch (routeName) {
-
+case "training":
+    document.getElementById("app").innerHTML =
+        FRIEND_TRAINING.render();
+    break;
         case "home":
             location.reload();
             break;
