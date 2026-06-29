@@ -106,3 +106,55 @@ window.FRIENDLogger =
 /*==========================================================
   End logger.js
 ==========================================================*/
+/*==========================================================
+  logger.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Filter Logs
+==========================================================*/
+
+function filterByLevel(level){
+
+    return LOGS.filter(
+
+        log => log.level === level
+
+    );
+
+}
+
+/*==========================================================
+  Clear Logs
+==========================================================*/
+
+function clear(){
+
+    LOGS.length = 0;
+
+    return true;
+
+}
+
+/*==========================================================
+  Log Stats
+==========================================================*/
+
+function stats(){
+
+    return {
+
+        total: LOGS.length,
+
+        info: LOGS.filter(l => l.level === LEVELS.INFO).length,
+
+        warn: LOGS.filter(l => l.level === LEVELS.WARN).length,
+
+        error: LOGS.filter(l => l.level === LEVELS.ERROR).length,
+
+        debug: LOGS.filter(l => l.level === LEVELS.DEBUG).length
+
+    };
+
+}
