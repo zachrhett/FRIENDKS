@@ -117,3 +117,114 @@ return{
 };
 
 })();
+/*==========================================================
+  voice-assistant.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDVoice.startListening = function () {
+
+    const Recognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!Recognition) {
+
+        console.warn("Speech Recognition not supported.");
+
+        return;
+
+    }
+
+    const recognition =
+        new Recognition();
+
+    recognition.lang = "en-US";
+
+    recognition.interimResults = false;
+
+    recognition.maxAlternatives = 1;
+
+    this.STATE.listening = true;
+
+    recognition.onresult = event => {
+
+        const transcript =
+            event.results[0][0].transcript;
+
+        this.execute(transcript);
+
+    };
+
+    recognition.onend = () => {
+
+        this.STATE.listening = false;
+
+    };
+
+    recognition.onerror = () => {
+
+        this.STATE.listening = false;
+
+    };
+
+    recognition.start();
+
+};
+
+/*==========================================================
+  Stop Listening
+==========================================================*/
+
+FRIENDVoice.stopListening = function () {
+
+    this.STATE.listening = false;
+
+};
+
+/*==========================================================
+  Initialize Voice Button
+==========================================================*/
+
+FRIENDVoice.initialize = function () {
+
+    const button =
+        document.querySelector("#friendVoiceButton");
+
+    if (!button) return;
+
+    button.addEventListener("click", () => {
+
+        if (this.STATE.listening) {
+
+            this.stopListening();
+
+        } else {
+
+            this.startListening();
+
+        }
+
+    });
+
+};
+
+/*==========================================================
+  Auto Initialize
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    FRIENDVoice.initialize();
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDVoice = FRIENDVoice;
+
+/*==========================================================
+  End voice-assistant.js
+==========================================================*/
