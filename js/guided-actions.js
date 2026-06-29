@@ -155,3 +155,170 @@ render
 };
 
 })();
+/*==========================================================
+  guided-actions.js
+  PART 2 OF N
+==========================================================*/
+
+FRIENDGuidedActions.mount = function (
+    target = "#guidedActionsScreen"
+) {
+
+    const root =
+        typeof target === "string"
+            ? document.querySelector(target)
+            : target;
+
+    if (!root) return;
+
+    root.innerHTML = this.render();
+
+    this.bindEvents(root);
+
+};
+
+/*==========================================================
+  Event Binding
+==========================================================*/
+
+FRIENDGuidedActions.bindEvents = function (
+    root
+) {
+
+    root.querySelectorAll("[data-guided-id]")
+        .forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                const id =
+                    Number(card.dataset.guidedId);
+
+                const mission =
+                    this.MISSIONS.find(
+                        item => item.id === id
+                    );
+
+                if (mission) {
+
+                    this.openMission(mission);
+
+                }
+
+            });
+
+        });
+
+};
+
+/*==========================================================
+  Mission Detail
+==========================================================*/
+
+FRIENDGuidedActions.openMission = function (
+    mission
+) {
+
+    const existing =
+        document.querySelector(".guided-overlay");
+
+    if (existing) existing.remove();
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.className = "guided-overlay";
+
+    overlay.innerHTML = `
+
+        <div class="guided-modal">
+
+            <div class="guided-modal-header">
+
+                <div>
+
+                    <h2>${mission.title}</h2>
+
+                    <p>${mission.department}</p>
+
+                </div>
+
+                <button class="guided-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="guided-modal-body">
+
+                <div class="guided-row">
+                    <strong>Priority</strong>
+                    <span>${mission.priority}</span>
+                </div>
+
+                <div class="guided-row">
+                    <strong>Owner</strong>
+                    <span>${mission.owner}</span>
+                </div>
+
+                <div class="guided-row">
+                    <strong>Due</strong>
+                    <span>${mission.due}</span>
+                </div>
+
+                <div class="guided-row">
+                    <strong>Estimated Time</strong>
+                    <span>${mission.estimatedTime}</span>
+                </div>
+
+                <div class="guided-row">
+                    <strong>Business Impact</strong>
+                    <span>${mission.impact}</span>
+                </div>
+
+                <div class="guided-description">
+
+                    Complete this mission following
+                    standard operating procedures.
+                    Successful completion updates
+                    the Store Health Score,
+                    Leader Dashboard,
+                    Alerts,
+                    and Maximo integration.
+
+                </div>
+
+            </div>
+
+            <div class="guided-modal-footer">
+
+                <button class="guided-start">
+                    Start Mission
+                </button>
+
+                <button class="guided-complete">
+                    Complete
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay
+        .querySelector(".guided-close")
+        .addEventListener("click", () => overlay.remove());
+
+    overlay.addEventListener("click", e => {
+
+        if (e.target === overlay) {
+
+            overlay.remove();
+
+        }
+
+    });
+
+};
