@@ -957,4 +957,71 @@ FRIENDScorecard.openMetricDetail = function (
 
     });
 
+  /*==========================================================
+  scorecard.js
+  PART 5 OF N
+==========================================================*/
+
+/*==========================================================
+  Scorecard Data Refresh
+==========================================================*/
+
+FRIENDScorecard.refresh = function () {
+
+    this.STORE.lastRefresh = new Date();
+
+    const root =
+        document.querySelector("#storeScorecardScreen");
+
+    if (!root) return;
+
+    this.mount(root);
+
+};
+
+/*==========================================================
+  Scorecard Summary
+==========================================================*/
+
+FRIENDScorecard.getSummary = function () {
+
+    return {
+        storeHealth: this.STORE.storeHealth,
+        district: this.STORE.district,
+        division: this.STORE.division,
+        alerts: this.STORE.alerts,
+        maximo: this.STORE.maximo,
+        leaderFocus: this.STORE.leaderFocus,
+        guidedActions: this.STORE.guidedActions.length,
+        refreshed: this.formatTime(this.STORE.lastRefresh)
+    };
+
+};
+
+/*==========================================================
+  Scorecard Screen Starter
+==========================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const scorecardRoot =
+        document.querySelector("#storeScorecardScreen");
+
+    if (scorecardRoot) {
+
+        FRIENDScorecard.mount(scorecardRoot);
+
+    }
+
+});
+
+/*==========================================================
+  Global Access
+==========================================================*/
+
+window.FRIENDScorecard = FRIENDScorecard;
+
+/*==========================================================
+  End scorecard.js
+==========================================================*/
 };
