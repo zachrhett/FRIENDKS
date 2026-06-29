@@ -322,3 +322,495 @@ percent
 };
 
 })();
+/*==========================================================
+  scorecard.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  TC-52 Premium Store Scorecard Renderer
+==========================================================*/
+
+FRIENDScorecard.createStoreHealthCard = function () {
+
+    return `
+    <section class="friend-scorecard">
+
+        <div class="friend-header">
+
+            <div class="friend-title">
+                <div class="friend-title-main">Store Health</div>
+                <div class="friend-title-sub">
+                    Store #${this.STORE.id}
+                </div>
+            </div>
+
+            <div class="friend-health-ring">
+
+                <svg viewBox="0 0 120 120">
+
+                    <circle
+                        class="ring-bg"
+                        cx="60"
+                        cy="60"
+                        r="52">
+                    </circle>
+
+                    <circle
+                        class="ring-progress"
+                        cx="60"
+                        cy="60"
+                        r="52"
+                        stroke-dasharray="327"
+                        stroke-dashoffset="${327-(327*this.STORE.storeHealth/100)}">
+                    </circle>
+
+                </svg>
+
+                <div class="ring-center">
+                    <span class="ring-score">${this.STORE.storeHealth}</span>
+                    <span class="ring-label">Healthy</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="scorecard-kpis">
+
+            ${this.createKPI(
+                "District",
+                this.STORE.district,
+                "blue"
+            )}
+
+            ${this.createKPI(
+                "Division",
+                this.STORE.division,
+                "blue"
+            )}
+
+            ${this.createKPI(
+                "Alerts",
+                this.STORE.alerts,
+                "red"
+            )}
+
+            ${this.createKPI(
+                "Maximo",
+                this.STORE.maximo,
+                "green"
+            )}
+
+        </div>
+
+    </section>
+    `;
+
+};
+
+/*==========================================================
+  KPI Card
+==========================================================*/
+
+FRIENDScorecard.createKPI = function (
+    title,
+    value,
+    color
+){
+
+    return `
+
+    <div class="friend-kpi ${color}">
+
+        <div class="friend-kpi-title">
+            ${title}
+        </div>
+
+        <div class="friend-kpi-value">
+            ${value}
+        </div>
+
+    </div>
+
+    `;
+
+};
+
+/*==========================================================
+  Leader Focus
+==========================================================*/
+
+FRIENDScorecard.createLeaderFocus = function(){
+
+return `
+
+<section class="leader-focus">
+
+    <div class="panel-header">
+
+        <span class="panel-icon">
+            👔
+        </span>
+
+        <span class="panel-title">
+            Leader Focus
+        </span>
+
+    </div>
+
+    <div class="leader-message">
+
+        ${this.STORE.leaderFocus}
+
+    </div>
+
+</section>
+
+`;
+
+};
+
+/*==========================================================
+  Guided Actions
+==========================================================*/
+
+FRIENDScorecard.createGuidedActions = function(){
+
+let html=`
+
+<section class="guided-actions">
+
+<div class="panel-header">
+
+<span class="panel-icon">
+🎯
+</span>
+
+<span class="panel-title">
+
+Guided Actions
+
+</span>
+
+</div>
+
+`;
+
+this.STORE.guidedActions.forEach(action=>{
+
+html+=`
+
+<div class="guided-action ${action.level}">
+
+<div class="guided-number">
+
+${action.priority}
+
+</div>
+
+<div class="guided-body">
+
+<div class="guided-title">
+
+${action.title}
+
+</div>
+
+<div class="guided-owner">
+
+${action.owner}
+
+</div>
+
+</div>
+
+<div class="guided-status">
+
+${action.status}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+</section>
+
+`;
+
+return html;
+
+};
+
+/*==========================================================
+  Premium Dashboard Container
+==========================================================*/
+
+FRIENDScorecard.renderDashboard=function(){
+
+return `
+
+<div class="tc52-scorecard">
+
+${this.createStoreHealthCard()}
+
+${this.createLeaderFocus()}
+
+${this.createGuidedActions()}
+
+</div>
+
+`;
+
+};
+/*==========================================================
+  scorecard.js
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  TC-52 Premium Store Scorecard Renderer
+==========================================================*/
+
+FRIENDScorecard.createStoreHealthCard = function () {
+
+    return `
+    <section class="friend-scorecard">
+
+        <div class="friend-header">
+
+            <div class="friend-title">
+                <div class="friend-title-main">Store Health</div>
+                <div class="friend-title-sub">
+                    Store #${this.STORE.id}
+                </div>
+            </div>
+
+            <div class="friend-health-ring">
+
+                <svg viewBox="0 0 120 120">
+
+                    <circle
+                        class="ring-bg"
+                        cx="60"
+                        cy="60"
+                        r="52">
+                    </circle>
+
+                    <circle
+                        class="ring-progress"
+                        cx="60"
+                        cy="60"
+                        r="52"
+                        stroke-dasharray="327"
+                        stroke-dashoffset="${327-(327*this.STORE.storeHealth/100)}">
+                    </circle>
+
+                </svg>
+
+                <div class="ring-center">
+                    <span class="ring-score">${this.STORE.storeHealth}</span>
+                    <span class="ring-label">Healthy</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="scorecard-kpis">
+
+            ${this.createKPI(
+                "District",
+                this.STORE.district,
+                "blue"
+            )}
+
+            ${this.createKPI(
+                "Division",
+                this.STORE.division,
+                "blue"
+            )}
+
+            ${this.createKPI(
+                "Alerts",
+                this.STORE.alerts,
+                "red"
+            )}
+
+            ${this.createKPI(
+                "Maximo",
+                this.STORE.maximo,
+                "green"
+            )}
+
+        </div>
+
+    </section>
+    `;
+
+};
+
+/*==========================================================
+  KPI Card
+==========================================================*/
+
+FRIENDScorecard.createKPI = function (
+    title,
+    value,
+    color
+){
+
+    return `
+
+    <div class="friend-kpi ${color}">
+
+        <div class="friend-kpi-title">
+            ${title}
+        </div>
+
+        <div class="friend-kpi-value">
+            ${value}
+        </div>
+
+    </div>
+
+    `;
+
+};
+
+/*==========================================================
+  Leader Focus
+==========================================================*/
+
+FRIENDScorecard.createLeaderFocus = function(){
+
+return `
+
+<section class="leader-focus">
+
+    <div class="panel-header">
+
+        <span class="panel-icon">
+            👔
+        </span>
+
+        <span class="panel-title">
+            Leader Focus
+        </span>
+
+    </div>
+
+    <div class="leader-message">
+
+        ${this.STORE.leaderFocus}
+
+    </div>
+
+</section>
+
+`;
+
+};
+
+/*==========================================================
+  Guided Actions
+==========================================================*/
+
+FRIENDScorecard.createGuidedActions = function(){
+
+let html=`
+
+<section class="guided-actions">
+
+<div class="panel-header">
+
+<span class="panel-icon">
+🎯
+</span>
+
+<span class="panel-title">
+
+Guided Actions
+
+</span>
+
+</div>
+
+`;
+
+this.STORE.guidedActions.forEach(action=>{
+
+html+=`
+
+<div class="guided-action ${action.level}">
+
+<div class="guided-number">
+
+${action.priority}
+
+</div>
+
+<div class="guided-body">
+
+<div class="guided-title">
+
+${action.title}
+
+</div>
+
+<div class="guided-owner">
+
+${action.owner}
+
+</div>
+
+</div>
+
+<div class="guided-status">
+
+${action.status}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+</section>
+
+`;
+
+return html;
+
+};
+
+/*==========================================================
+  Premium Dashboard Container
+==========================================================*/
+
+FRIENDScorecard.renderDashboard=function(){
+
+return `
+
+<div class="tc52-scorecard">
+
+${this.createStoreHealthCard()}
+
+${this.createLeaderFocus()}
+
+${this.createGuidedActions()}
+
+</div>
+
+`;
+
+};
