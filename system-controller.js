@@ -113,3 +113,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 })();
+document.body.innerHTML = "<h1 style='color:black'>UI TEST WORKING</h1>";
