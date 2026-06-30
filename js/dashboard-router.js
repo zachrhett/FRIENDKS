@@ -1,158 +1,136 @@
 /*==========================================================
   dashboard-router.js
-  PART 1 OF N
+  FULL REPLACEMENT FILE
 ==========================================================*/
 
 "use strict";
 
-/*==========================================================
-  F.R.I.E.N.D.
-  Dashboard Router
-  Version 1.0
-==========================================================*/
+(function () {
 
-const FRIENDRouter = (() => {
+    const ROUTES = {
+        executive: "executiveDashboardScreen",
+        analytics: "analyticsScreen",
+        scorecard: "storeScorecardScreen",
+        leader: "leaderFocusScreen",
+        guided: "guidedActionsScreen",
+        maximo: "maximoScreen",
+        ai: "executiveAIScreen",
+        notifications: "notificationsScreen"
+    };
 
-const ROUTES = {
+    let activeRoute = "executive";
 
-    executive: "executiveDashboardScreen",
-    analytics: "analyticsScreen",
-    scorecard: "storeScorecardScreen",
-    leader: "leaderFocusScreen",
-    guided: "guidedActionsScreen",
-    maximo: "maximoScreen",
-    ai: "executiveAIScreen",
-    notifications: "notificationsScreen"
+    function hideAllScreens() {
 
-};
+        document
+            .querySelectorAll(".friend-screen")
+            .forEach(screen => {
 
-function navigate(route){
+                screen.style.display = "none";
 
-    const screenId = ROUTES[route];
-
-    if(!screenId) return false;
-
-    const screens =
-        document.querySelectorAll(".friend-screen");
-
-    screens.forEach(s => s.style.display = "none");
-
-    const active =
-        document.querySelector("#" + screenId);
-
-    if(active){
-
-        active.style.display = "block";
+            });
 
     }
 
-    return route;
+    function navigate(route) {
 
-}
+        if (!ROUTES[route]) {
 
-function getRoutes(){
+            console.warn("[Router] Unknown route:", route);
 
-    return { ...ROUTES };
+            return false;
 
-}
+        }
 
-return {
+        hideAllScreens();
 
-    navigate,
-    getRoutes
+        const target = document.getElementById(ROUTES[route]);
 
-};
+        if (!target) {
 
-})();
+            console.error("[Router] Screen missing:", ROUTES[route]);
 
-/*==========================================================
-  Global Access
-==========================================================*/
+            return false;
 
-window.FRIENDRouter =
-    FRIENDRouter;
+        }
 
-/*==========================================================
-  End dashboard-router.js
-==========================================================*/
-/*==========================================================
-  dashboard-router.js
-  PART 2 OF N
-==========================================================*/
-
-/*==========================================================
-  Active Route Tracker
-==========================================================*/
-
-let activeRoute = "executive";
-
-function getActiveRoute(){
-
-    return activeRoute;
-
-}
-
-/*==========================================================
-  Safe Navigate
-==========================================================*/
-
-function safeNavigate(route){
-
-    const result = navigate(route);
-
-    if(result){
+        target.style.display = "block";
 
         activeRoute = route;
 
+        if (window.FRIENDStateStore) {
+
+            window.FRIENDStateStore.set("activeScreen", route);
+
+        }
+
+        if (window.FRIENDEventBus) {
+
+            window.FRIENDEventBus.emit("route:changed", {
+                route,
+                screenId: ROUTES[route]
+            });
+
+        }
+
+        console.log("[Router] Navigated:", route);
+
+        return true;
+
     }
 
-    return {
+    function refresh() {
 
-        success: !!result,
+        return navigate(activeRoute);
 
-        route: activeRoute
+    }
+
+    function getActiveRoute() {
+
+        return activeRoute;
+
+    }
+
+    function getRoutes() {
+
+        return { ...ROUTES };
+
+    }
+
+    function bindNavigation() {
+
+        document
+            .querySelectorAll("[data-route]")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    navigate(button.dataset.route);
+
+                });
+
+            });
+
+    }
+
+    function init() {
+
+        bindNavigation();
+
+        navigate(activeRoute);
+
+        console.log("[Router] Initialized");
+
+    }
+
+    window.FRIENDRouter = {
+
+        init,
+        navigate,
+        refresh,
+        getActiveRoute,
+        getRoutes
 
     };
 
-}
-
-/*==========================================================
-  Refresh Route
-==========================================================*/
-
-function refresh(){
-
-    return safeNavigate(activeRoute);
-
-}
-/*==========================================================
-  dashboard-router.js
-  PART 3 OF N
-==========================================================*/
-
-/*==========================================================
-  Public API
-==========================================================*/
-
-return {
-
-    navigate,
-    getRoutes,
-    getActiveRoute,
-    safeNavigate,
-    refresh
-
-};
-
 })();
-
-/*==========================================================
-  Global Access
-==========================================================*/
-
-window.FRIENDRouter =
-    FRIENDRouter;
-
-/*==========================================================
-  End dashboard-router.js
-==========================================================*/
