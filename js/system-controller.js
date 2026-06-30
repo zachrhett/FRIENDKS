@@ -82,6 +82,13 @@ function boot(){
     FRIENDEventBus?.emit?.("system:boot:complete");
 
     console.log("[SYSTEM] SAFE BOOT COMPLETE");
+  console.log("BOOT START");
+
+setTimeout(() => {
+  console.log("STATE:", FRIENDStateStore);
+  console.log("EVENT:", FRIENDEventBus);
+  console.log("RENDER:", FRIENDScreenRenderer);
+}, 1000);
 
 }ot();
   FRIENDScreenRenderer.init();
