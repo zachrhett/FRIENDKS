@@ -1,179 +1,82 @@
-<!--=========================================================
-  index.html
-  PART 1 OF N
-==========================================================-->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>F.R.I.E.N.D. System</title>
 
-<title>
-F.R.I.E.N.D. Version 1.0
-</title>
-
-<meta
-    name="theme-color"
-    content="#0057B8">
-
-<meta
-    name="apple-mobile-web-app-capable"
-    content="yes">
-
-<meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent">
-
-<meta
-    name="apple-mobile-web-app-title"
-    content="F.R.I.E.N.D.">
-
-<link
-    rel="manifest"
-    href="manifest.json">
-
-<link
-    rel="apple-touch-icon"
-    href="images/icon-192.png">
-
-<link
-    rel="stylesheet"
-    href="dashboard.css">
-
-<link
-    rel="stylesheet"
-    href="scorecard.css">
-
-<link
-    rel="stylesheet"
-    href="leader-focus.css">
-
-<link
-    rel="stylesheet"
-    href="guided-actions.css">
-
-<link
-    rel="stylesheet"
-    href="analytics.css">
-
-<link
-    rel="stylesheet"
-    href="maximo.css">
-
-<link
-    rel="stylesheet"
-    href="executive-dashboard.css">
-
-<link
-    rel="stylesheet"
-    href="executive-ai.css">
-
-<link
-    rel="stylesheet"
-    href="notifications.css">
-
-<link
-    rel="stylesheet"
-    href="voice-assistant.css">
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="scorecard.css">
+<link rel="stylesheet" href="leader-focus.css">
+<link rel="stylesheet" href="guided-actions.css">
+<link rel="stylesheet" href="analytics.css">
+<link rel="stylesheet" href="maximo.css">
+<link rel="stylesheet" href="executive-dashboard.css">
+<link rel="stylesheet" href="executive-ai.css">
+<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="voice-assistant.css">
 
 </head>
 
 <body>
 
 <div id="app">
-<!--=========================================================
-  index.html
-  PART 2 OF N
-==========================================================-->
+
+    <!-- ================= SCREENS ================= -->
 
     <div id="executiveDashboardScreen" class="friend-screen"></div>
 
-    <div id="analyticsScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="analyticsScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="storeScorecardScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="storeScorecardScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="leaderFocusScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="leaderFocusScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="guidedActionsScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="guidedActionsScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="maximoScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="maximoScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="executiveAIScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="executiveAIScreen" class="friend-screen" style="display:none;"></div>
 
-    <div id="notificationsScreen"
-         class="friend-screen"
-         style="display:none;"></div>
+    <div id="notificationsScreen" class="friend-screen" style="display:none;"></div>
 
-    <button
-        id="friendVoiceButton"
-        aria-label="F.R.I.E.N.D. Voice Assistant">
+    <!-- ================= VOICE ================= -->
 
-        🎤
+    <button id="friendVoiceButton">🎤</button>
 
-    </button>
+    <div id="friendVoiceStatus">Listening...</div>
 
-    <div
-        id="friendVoiceStatus"
-        class="friend-voice-status">
-
-        Listening...
-
-    </div>
+    <!-- ================= NAV ================= -->
 
     <nav class="friend-dashboard-nav">
 
-        <button class="friend-nav-button active" data-route="executive">
-            Executive
-        </button>
-
-        <button class="friend-nav-button" data-route="analytics">
-            Analytics
-        </button>
-
-        <button class="friend-nav-button" data-route="scorecard: "storeScorecardScreen">
-            Scorecard
-        </button>
-
-        <button class="friend-nav-button" data-route="leader">
-            Leader
-        </button>
-
-        <button class="friend-nav-button" data-route="guided">
-            Guided
-        </button>
-
-        <button class="friend-nav-button" data-route="maximo">
-            Maximo
-        </button>
-
-        <button class="friend-nav-button" data-route="ai">
-            AI
-        </button>
+        <button class="friend-nav-button" data-route="executive">Executive</button>
+        <button class="friend-nav-button" data-route="analytics">Analytics</button>
+        <button class="friend-nav-button" data-route="scorecard">Scorecard</button>
+        <button class="friend-nav-button" data-route="leader">Leader</button>
+        <button class="friend-nav-button" data-route="guided">Guided</button>
+        <button class="friend-nav-button" data-route="maximo">Maximo</button>
+        <button class="friend-nav-button" data-route="ai">AI</button>
 
     </nav>
 
 </div>
-  <!-- =========================================================
-  FIXED SCRIPT LOADING ORDER (CLEAN ARCHITECTURE)
-========================================================== -->
+
+<!-- ================= CORE SYSTEM LAYERS ================= -->
+
+<script src="event-bus.js"></script>
+<script src="state-store.js"></script>
+<script src="module-sync.js"></script>
+<script src="realtime-engine.js"></script>
+
+<script src="ui-bindings.js"></script>
+<script src="screen-renderer.js"></script>
+<script src="dashboard-router.js"></script>
+
+<!-- ================= FEATURE MODULES ================= -->
 
 <script src="scorecard.js"></script>
 <script src="leader-focus.js"></script>
@@ -185,43 +88,9 @@ F.R.I.E.N.D. Version 1.0
 <script src="notifications.js"></script>
 <script src="voice-assistant.js"></script>
 
-<!-- =========================================================
-  CORE SYSTEM LAYERS (NEW CLEAN ORDER)
-========================================================== -->
-
-<script src="event-bus.js"></script>
-<script src="state-store.js"></script>
-<script src="module-sync.js"></script>
-<script src="realtime-engine.js"></script>
-
-<script src="ui-bindings.js"></script>
-<script src="screen-renderer.js"></script>
-<script src="dashboard-router.js"></script>
-
-<!-- =========================================================
-  SINGLE ENTRY POINT (ONLY BOOT SYSTEM)
-========================================================== -->
+<!-- ================= SINGLE BOOT CONTROLLER ================= -->
 
 <script src="system-controller.js"></script>
 
-if("serviceWorker" in navigator){
-
-    window.addEventListener("load",()=>{
-
-        navigator.serviceWorker.register("sw.js");
-
-    });
-
-}
-
-</script>
-
 </body>
 </html>
-
-<!--=========================================================
-  END index.html
-
-  F.R.I.E.N.D. Version 1.0
-  COMPLETE APPLICATION SOURCE
-==========================================================-->
