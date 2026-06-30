@@ -1,215 +1,122 @@
 /*==========================================================
   event-bus.js
-  PART 1 OF N
+  FULL REPLACEMENT FILE
 ==========================================================*/
 
 "use strict";
 
-/*==========================================================
-  F.R.I.E.N.D.
-  Event Bus Core
-  Phase 2 - System Integration Layer
-==========================================================*/
+(function () {
 
-const FRIENDEventBus = (() => {
+    const listeners = new Map();
+    const history = [];
 
-const EVENTS = {};
+    function on(eventName, callback) {
+        if (!eventName || typeof callback !== "function") return false;
 
-function on(event, callback){
-
-    if(!EVENTS[event]){
-
-        EVENTS[event] = [];
-
-    }
-
-    EVENTS[event].push(callback);
-
-}
-
-function off(event, callback){
-
-    if(!EVENTS[event]) return;
-
-    EVENTS[event] = EVENTS[event].filter(
-
-        cb => cb !== callback
-
-    );
-
-}
-
-function emit(event, data = {}){
-
-    if(!EVENTS[event]) return;
-
-    EVENTS[event].forEach(callback => {
-
-        try{
-
-            callback(data);
-
-        } catch(err){
-
-            console.error("EventBus error:", err);
-
+        if (!listeners.has(eventName)) {
+            listeners.set(eventName, new Set());
         }
 
-    });
-
-}
-
-function once(event, callback){
-
-    const wrapper = (data) => {
-
-        callback(data);
-
-        off(event, wrapper);
-
-    };
-
-    on(event, wrapper);
-
-}
-
-function clear(event){
-
-    if(event){
-
-        delete EVENTS[event];
-
-    } else {
-
-        Object.keys(EVENTS).forEach(k => delete EVENTS[k]);
-
+        listeners.get(eventName).add(callback);
+        return true;
     }
 
-}
+    function off(eventName, callback) {
+        if (!listeners.has(eventName)) return false;
 
-return {
+        listeners.get(eventName).delete(callback);
 
-    on,
-    off,
-    emit,
-    once,
-    clear
-
-};
-
-})();
-
-/*==========================================================
-  Global Access
-==========================================================*/
-
-window.FRIENDEventBus =
-    FRIENDEventBus;
-
-/*==========================================================
-  End event-bus.js
-==========================================================*/
-/*==========================================================
-  event-bus.js
-  PART 2 OF N
-==========================================================*/
-
-/*==========================================================
-  Debug + Inspection Tools
-==========================================================*/
-
-function getEvents(){
-
-    return Object.keys(EVENTS).map(event => ({
-
-        event,
-
-        listeners: EVENTS[event].length
-
-    }));
-
-}
-
-/*==========================================================
-  Logging Wrapper
-==========================================================*/
-
-function emitWithLog(event, data = {}){
-
-    console.log(`[EVENT] ${event}`, data);
-
-    emit(event, data);
-
-}
-
-/*==========================================================
-  Safe Emit (Non-blocking hardened)
-==========================================================*/
-
-function safeEmit(event, data = {}){
-
-    try{
-
-        emit(event, data);
+        if (listeners.get(eventName).size === 0) {
+            listeners.delete(eventName);
+        }
 
         return true;
-
-    } catch(err){
-
-        console.error("SafeEmit failure:", err);
-
-        return false;
-
     }
 
-}
+    function once(eventName, callback) {
+        if (!eventName || typeof callback !== "function") return false;
 
-/*==========================================================
-  Batch Emit
-==========================================================*/
+        const wrapper = function (payload) {
+            off(eventName, wrapper);
+            callback(payload);
+        };
 
-function emitBatch(events = []){
+        return on(eventName, wrapper);
+    }
 
-    events.forEach(e => {
+    function emit(eventName, payload = {}) {
+        if (!eventName) return false;
 
-        emit(e.name, e.data);
+        const eventRecord = {
+            eventName,
+            payload,
+            timestamp: new Date().toISOString()
+        };
 
-    });
+        history.push(eventRecord);
 
-}
-/*==========================================================
-  event-bus.js
-  PART 3 OF N
-==========================================================*/
+        if (!listeners.has(eventName)) return true;
 
-/*==========================================================
-  Public API
-==========================================================*/
+        listeners.get(eventName).forEach(callback => {
+            try {
+                callback(payload, eventRecord);
+            } catch (error) {
+                console.error("[FRIEND EventBus] listener error:", eventName, error);
+            }
+        });
 
-return {
+        return true;
+    }
 
-    on,
-    off,
-    once,
-    emit,
-    clear,
+    function clear(eventName) {
+        if (eventName) {
+            listeners.delete(eventName);
+            return true;
+        }
 
-    getEvents,
-    emitWithLog,
-    safeEmit,
-    emitBatch
+        listeners.clear();
+        return true;
+    }
 
-};
+    function listenerCount(eventName) {
+        if (eventName) {
+            return listeners.has(eventName) ? listeners.get(eventName).size : 0;
+        }
+
+        let total = 0;
+
+        listeners.forEach(set => {
+            total += set.size;
+        });
+
+        return total;
+    }
+
+    function getEvents() {
+        return Array.from(listeners.keys());
+    }
+
+    function getHistory() {
+        return history.slice();
+    }
+
+    function resetHistory() {
+        history.length = 0;
+        return true;
+    }
+
+    window.FRIENDEventBus = {
+        on,
+        off,
+        once,
+        emit,
+        clear,
+        listenerCount,
+        getEvents,
+        getHistory,
+        resetHistory
+    };
+
+    console.log("[FRIEND] event-bus.js loaded");
 
 })();
-
-/*==========================================================
-  Global Access
-==========================================================*/
-
-window.FRIENDEventBus =
-    FRIENDEventBus;
-
-/*==========================================================
-  End event-bus.js
-==========================================================*/
