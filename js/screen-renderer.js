@@ -1,185 +1,246 @@
 /*==========================================================
   screen-renderer.js
-  PART 1 OF N
+  FULL REPLACEMENT FILE
 ==========================================================*/
 
 "use strict";
 
-/*==========================================================
-  F.R.I.E.N.D.
-  SCREEN RENDERER LAYER
-  Connects State → Visible UI
-==========================================================*/
+(function () {
 
-const FRIENDScreenRenderer = (() => {
+    function state() {
+        return window.FRIENDStateStore
+            ? window.FRIENDStateStore.getState()
+            : {};
+    }
 
-function getState(){
+    function renderExecutive() {
 
-    return FRIENDStateStore?.getState?.() || {};
+        const s = state();
 
-}
+        const root = document.getElementById("executiveDashboardScreen");
 
-/*==========================================================
-  EXECUTIVE DASHBOARD
-==========================================================*/
+        if (!root) return;
 
-function renderExecutive(){
+        root.innerHTML = `
+            <div class="friend-page">
 
-    const state = getState();
+                <h1>Executive Dashboard</h1>
 
-    const root =
-        document.getElementById("executiveDashboardScreen");
+                <div class="card">
+                    <h2>Store Health</h2>
+                    <h1>${s.storeHealth}</h1>
+                </div>
 
-    if(!root) return;
+                <div class="card">
+                    <h2>Open Alerts</h2>
+                    <h1>${s.alerts}</h1>
+                </div>
 
-    root.innerHTML = `
+                <div class="card">
+                    <h2>Maximo</h2>
+                    <h1>${s.maximo}</h1>
+                </div>
 
-        <div class="card">
-            <h2>Store Health</h2>
-            <div class="store-health">${state.storeHealth ?? "--"}</div>
-        </div>
+            </div>
+        `;
 
-        <div class="card">
-            <h2>Alerts</h2>
-            <div>${state.alerts ?? "--"}</div>
-        </div>
+    }
 
-        <div class="card">
-            <h2>Maximo Status</h2>
-            <div>${state.maximo ?? "--"}</div>
-        </div>
+    function renderAnalytics() {
 
-    `;
+        const s = state();
 
-}
-  /*==========================================================
-  STORE SCORECARD
-==========================================================*/
+        const root = document.getElementById("analyticsScreen");
 
-function renderScorecard(){
+        if (!root) return;
 
-    const state = getState();
+        root.innerHTML = `
+            <div class="friend-page">
 
-    const root =
-        document.getElementById("storeScorecardScreen");
+                <h1>Analytics</h1>
 
-    if(!root) return;
+                <div class="card">
+                    <p>Store Health: ${s.storeHealth}</p>
+                    <p>Alerts: ${s.alerts}</p>
+                    <p>Division: ${s.division}</p>
+                    <p>District: ${s.district}</p>
+                </div>
 
-    root.innerHTML = `
+            </div>
+        `;
 
-        <div class="card">
-            <h2>District</h2>
-            <div>${state.district ?? "--"}</div>
-        </div>
+    }
 
-        <div class="card">
-            <h2>Division</h2>
-            <div>${state.division ?? "--"}</div>
-        </div>
+    function renderScorecard() {
 
-    `;
+        const s = state();
 
-}
+        const root = document.getElementById("storeScorecardScreen");
 
-/*==========================================================
-  ANALYTICS
-==========================================================*/
+        if (!root) return;
 
-function renderAnalytics(){
+        root.innerHTML = `
+            <div class="friend-page">
 
-    const state = getState();
+                <h1>Store Scorecard</h1>
 
-    const root =
-        document.getElementById("analyticsScreen");
+                <div class="card">
 
-    if(!root) return;
+                    <p>Division ${s.division}</p>
 
-    root.innerHTML = `
+                    <p>District ${s.district}</p>
 
-        <div class="card">
-            <h2>Performance Overview</h2>
-            <div>Health: ${state.storeHealth ?? "--"}</div>
-            <div>Alerts: ${state.alerts ?? "--"}</div>
-        </div>
+                    <p>Store Health ${s.storeHealth}%</p>
 
-    `;
+                </div>
 
-}
-  /*==========================================================
-  ALERTS SCREEN
-==========================================================*/
+            </div>
+        `;
 
-function renderAlerts(){
+    }
 
-    const state = getState();
+    function renderLeader() {
 
-    const root =
-        document.getElementById("notificationsScreen");
+        const root = document.getElementById("leaderFocusScreen");
 
-    if(!root) return;
+        if (!root) return;
 
-    const alerts =
-        FRIENDAlerts?.getAlerts?.() || [];
+        root.innerHTML = `
+            <div class="friend-page">
 
-    root.innerHTML = alerts.map(a => `
+                <h1>Leader Focus</h1>
 
-        <div class="card ${a.type}">
-            <h3>${a.title}</h3>
-            <p>${a.message}</p>
-        </div>
+                <div class="card">
 
-    `).join("");
+                    Guided leadership missions will appear here.
 
-}
+                </div>
 
-/*==========================================================
-  MASTER RENDER
-==========================================================*/
+            </div>
+        `;
 
-function renderAll(){
+    }
 
-    renderExecutive();
+    function renderGuided() {
 
-    renderScorecard();
+        const root = document.getElementById("guidedActionsScreen");
 
-    renderAnalytics();
+        if (!root) return;
 
-    renderAlerts();
+        root.innerHTML = `
+            <div class="friend-page">
 
-}
+                <h1>Guided Actions</h1>
 
-/*==========================================================
-  LIVE BINDING
-==========================================================*/
+                <div class="card">
 
-function init(){
+                    Associate guided missions.
 
-    renderAll();
+                </div>
 
-    FRIENDStateStore?.subscribe?.("state", renderAll);
+            </div>
+        `;
 
-    FRIENDEventBus?.on?.("state:updated", renderAll);
+    }
 
-    console.log("[UI] Screen renderer active");
+    function renderMaximo() {
 
-}
+        const root = document.getElementById("maximoScreen");
 
-/*==========================================================
-  PUBLIC API
-==========================================================*/
+        if (!root) return;
 
-return {
+        root.innerHTML = `
+            <div class="friend-page">
 
-    init,
-    renderAll
+                <h1>Maximo</h1>
 
-};
+                <div class="card">
+
+                    Work Orders: 5
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+    function renderAI() {
+
+        const root = document.getElementById("executiveAIScreen");
+
+        if (!root) return;
+
+        root.innerHTML = `
+            <div class="friend-page">
+
+                <h1>Executive AI</h1>
+
+                <div class="card">
+
+                    AI recommendations will populate here.
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+    function renderNotifications() {
+
+        const root = document.getElementById("notificationsScreen");
+
+        if (!root) return;
+
+        root.innerHTML = `
+            <div class="friend-page">
+
+                <h1>Notifications</h1>
+
+                <div class="card">
+
+                    No active notifications.
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+    function renderAll() {
+
+        renderExecutive();
+        renderAnalytics();
+        renderScorecard();
+        renderLeader();
+        renderGuided();
+        renderMaximo();
+        renderAI();
+        renderNotifications();
+
+    }
+
+    function init() {
+
+        renderAll();
+
+        if (window.FRIENDEventBus) {
+
+            window.FRIENDEventBus.on("state:updated", renderAll);
+
+        }
+
+        console.log("[Renderer] Ready");
+
+    }
+
+    window.FRIENDScreenRenderer = {
+
+        init,
+        renderAll
+
+    };
 
 })();
-
-/*==========================================================
-  GLOBAL
-==========================================================*/
-
-window.FRIENDScreenRenderer =
-    FRIENDScreenRenderer;
