@@ -86,4 +86,5 @@ window.FRIENDSystemController = FRIENDSystemController;
 /* AUTO START (ONLY HERE) */
 document.addEventListener("DOMContentLoaded", () => {
     FRIENDSystemController.boot();
+  FRIENDScreenRenderer.init();
 });
