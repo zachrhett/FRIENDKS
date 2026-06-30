@@ -95,7 +95,7 @@ function boot() {
     });
 
 }
-
+document.body.innerHTML = "<h1 style='color:black'>SYSTEM RUNNING</h1>";
 /* =========================================================
    GLOBAL ACCESS
 ========================================================= */
