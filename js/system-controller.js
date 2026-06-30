@@ -1,6 +1,6 @@
 /*==========================================================
   system-controller.js
-  FINAL CONTROL LAYER
+  CLEAN SINGLE ENTRY POINT
 ==========================================================*/
 
 "use strict";
@@ -9,89 +9,61 @@ const FRIENDSystemController = (() => {
 
 let initialized = false;
 
-/*==========================================================
-  BOOT SEQUENCE (ORDER IS EVERYTHING)
-==========================================================*/
-
 function boot(){
 
     if(initialized) return;
 
-    console.log("[SYSTEM] Boot sequence starting...");
+    console.log("[SYSTEM] CLEAN BOOT START");
 
-    // 1. Core infrastructure first
+    // 1. Core systems first
     FRIENDModuleSync?.autoBind?.();
-
     FRIENDStateStore?.bindToEventBus?.();
 
     // 2. Event system
     FRIENDEventBus?.emit?.("system:boot:start");
 
-    // 3. UI renderer
+    // 3. UI
     FRIENDScreenRenderer?.init?.();
 
-    // 4. Router
+    // 4. Router default screen
     FRIENDRouter?.safeNavigate?.("executive");
 
-    // 5. Realtime engine
+    // 5. Realtime systems
     FRIENDRealtimeEngine?.start?.();
-
-    // 6. Performance monitor
     FRIENDPerformanceMonitor?.start?.();
 
     initialized = true;
 
     FRIENDEventBus?.emit?.("system:boot:complete");
 
-    console.log("[SYSTEM] Boot complete");
+    console.log("[SYSTEM] CLEAN BOOT COMPLETE");
 
 }
-
-/*==========================================================
-  SHUTDOWN
-==========================================================*/
 
 function shutdown(){
 
     FRIENDRealtimeEngine?.stop?.();
-
     FRIENDPerformanceMonitor?.stop?.();
-
     FRIENDSync?.clearQueue?.();
-
     FRIENDStateStore?.reset?.();
 
     initialized = false;
 
-    console.log("[SYSTEM] Shutdown complete");
-
 }
-
-/*==========================================================
-  RESTART
-==========================================================*/
 
 function restart(){
 
     shutdown();
-
     boot();
 
 }
-
-/*==========================================================
-  STATUS
-==========================================================*/
 
 function status(){
 
     return {
 
         initialized,
-
-        state: FRIENDStateStore?.getState?.(),
-
-        modules: FRIENDModuleSync?.status?.()
+        state: FRIENDStateStore?.getState?.()
 
     };
 
@@ -108,5 +80,10 @@ return {
 
 })();
 
-window.FRIENDSystemController =
-    FRIENDSystemController;
+/* GLOBAL */
+window.FRIENDSystemController = FRIENDSystemController;
+
+/* AUTO START (ONLY HERE) */
+document.addEventListener("DOMContentLoaded", () => {
+    FRIENDSystemController.boot();
+});
