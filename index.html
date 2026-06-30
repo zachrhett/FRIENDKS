@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>F.R.I.E.N.D. System</title>
+
+<style>
+:root{
+    --blue:#0057B8;
+    --blue2:#0F78E5;
+    --red:#C8102E;
+    --green:#2E9D49;
+    --yellow:#F5B400;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --text:#182433;
+    --muted:#6B7785;
+    --line:#DCE4EE;
+    --shadow:0 12px 28px rgba(15,39,71,.12);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#app{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.friend-screen{
+    flex:1;
+    padding:20px;
+    padding-bottom:96px;
+}
+
+.header{
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
+    color:white;
+    border-radius:22px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+}
+
+.header h1{
+    margin:0;
+    font-size:28px;
+    font-weight:900;
+}
+
+.header p{
+    margin:6px 0 0;
+    opacity:.9;
+    font-weight:700;
+}
+
+.health{
+    min-width:104px;
+    height:104px;
+    border-radius:50%;
+    background:white;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    font-weight:900;
+    box-shadow:inset 0 0 0 8px rgba(0,87,184,.12);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-top:18px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px;
+    box-shadow:var(--shadow);
+}
+
+.label{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+}
+
+.value{
+    font-size:30px;
+    font-weight:900;
+    margin-top:8px;
+}
+
+.trend{
+    margin-top:8px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.up{color:var(--green);}
+.down{color:var(--red);}
+.warn{color:var(--yellow);}
+
+.panel{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:20px;
+    margin-top:18px;
+    box-shadow:var(--shadow);
+}
+
+.panel-title{
+    font-size:18px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.action{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0;
+    border-top:1px solid #EEF2F7;
+    font-weight:700;
+}
+
+.action:first-of-type{
+    border-top:none;
+}
+
+.badge{
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:12px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.badge.high{
+    background:rgba(200,16,46,.10);
+    color:var(--red);
+}
+
+.badge.medium{
+    background:rgba(245,180,0,.16);
+    color:#9A6B00;
+}
+
+.badge.low{
+    background:rgba(46,157,73,.12);
+    color:var(--green);
+}
+
+.nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:76px;
+    background:white;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    box-shadow:0 -8px 22px rgba(0,0,0,.08);
+}
+
+.nav button{
+    border:none;
+    background:transparent;
+    font-size:12px;
+    font-weight:900;
+    color:var(--muted);
+    padding:8px;
+    cursor:pointer;
+}
+
+.nav button.active{
+    color:var(--blue);
+}
+
+.voice{
+    position:fixed;
+    right:18px;
+    bottom:92px;
+    width:56px;
+    height:56px;
+    border:none;
+    border-radius:50%;
+    background:var(--blue);
+    color:white;
+    font-size:24px;
+    box-shadow:var(--shadow);
+}
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:560px){
+    .friend-screen{
+        padding:14px;
+        padding-bottom:96px;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .health{
+        width:92px;
+        height:92px;
+        min-width:92px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div id="app">
+
+    <main id="screen" class="friend-screen"></main>
+
+    <button class="voice" aria-label="Voice Assistant">🎤</button>
+
+    <nav class="nav">
+        <button data-route="executive" class="active">Executive</button>
+        <button data-route="analytics">Analytics</button>
+        <button data-route="scorecard">Scorecard</button>
+        <button data-route="leader">Leader</button>
+        <button data-route="guided">Guided</button>
+        <button data-route="maximo">Maximo</button>
+        <button data-route="ai">AI</button>
+        <button data-route="alerts">Alerts</button>
+    </nav>
+
+</div>
+
+<script>
+"use strict";
+
+const FRIEND = {
+    storeHealth:95,
+    district:2,
+    division:620,
+    alerts:7,
+    maximo:5
+};
+
+const screen = document.getElementById("screen");
+
+function header(title, subtitle, value = FRIEND.storeHealth + "%"){
+    return `
+        <section class="header">
+            <div>
+                <h1>${title}</h1>
+                <p>${subtitle}</p>
+            </div>
+            <div class="health">${value}</div>
+        </section>
+    `;
+}
+
+function card(label,value,trend,status="up"){
+    return `
+        <div class="card">
+            <div class="label">${label}</div>
+            <div class="value">${value}</div>
+            <div class="trend ${status}">${trend}</div>
+        </div>
+    `;
+}
+
+function action(text,badge,level="medium"){
+    return `
+        <div class="action">
+            <span>${text}</span>
+            <span class="badge ${level}">${badge}</span>
+        </div>
+    `;
+}
+
+const pages = {
+    executive(){
+        return `
+            ${header("Executive Dashboard","Division 620 • District 2 • Store #129 Operational View")}
+            <section class="grid">
+                ${card("Store Health","95%","Operationally stable","up")}
+                ${card("District","2","King Soopers","up")}
+                ${card("Division","620","Active","up")}
+                ${card("Stores","155","Division footprint","up")}
+                ${card("Associates","22,000+","Connected workforce","up")}
+                ${card("Alerts","7","Needs review","down")}
+                ${card("Maximo","5","Open work orders","down")}
+                ${card("Readiness","96%","Ready","up")}
+            </section>
+            <section class="panel">
+                <div class="panel-title">Executive Priority</div>
+                ${action("Support Bakery labor optimization while protecting Food Safety and Customer Experience.","High","high")}
+                ${action("Review active alerts and Maximo work orders before evening close.","Today","medium")}
+                ${action("Confirm Store Scorecard readiness and department leader follow-up.","On Track","low")}
+            </section>
+            <section class="panel">
+                <div class="panel-title">Division Focus</div>
+                ${action("Store #129 remains operationally stable with strong readiness indicators.","Stable","low")}
+                ${action("Alert load remains manageable but should be reviewed before close.","Watch","medium")}
+                ${action("Maximo work orders require leader confirmation.","Action","high")}
+            </section>
+        `;
+    },
+
+    analytics(){
+        return `
+            ${header("Analytics","Performance trends and operational insights")}
+            <section class="grid">
+                ${card("Store Health","95%","Stable","up")}
+                ${card("Alerts","7","Needs review","down")}
+                ${card("Operational Readiness","96%","Ready","up")}
+                ${card("Labor Focus","Bakery","Optimization needed","down")}
+            </section>
+            <section class="panel">
+                <div class="panel-title">Analytics Summary</div>
+                ${action("Store health remains strong while labor optimization remains the primary opportunity.","Insight","medium")}
+            </section>
+        `;
+    },
+
+    scorecard(){
+        return `
+            ${header("Store Scorecard","Store health, accountability, and operational readiness")}
+            <section class="grid">
+                ${card("Store Health","95%","Healthy","up")}
+                ${card("District","2","Confirmed","up")}
+                ${card("Division","620","Confirmed","up")}
+                ${card("Alerts","7","Open","down")}
+                ${card("Maximo","5","Open","down")}
+                ${card("Readiness","96%","Ready","up")}
+            </section>
+            <section class="panel">
+                <div class="panel-title">Scorecard Guidance</div>
+                ${action("Confirm department leader follow-up on alerts and Maximo.","Action","high")}
+                ${action("Maintain operational standards across Food Safety, Labor, and Shrink.","Monitor","medium")}
+            </section>
+        `;
+    },
+
+    leader(){
+        return `
+            ${header("Leader Focus","Department leader missions and coaching priorities","Focus")}
+            <section class="panel">
+                <div class="panel-title">Leader Missions</div>
+                ${action("Connect with Bakery Leader on labor recovery.","High","high")}
+                ${action("Review Deli production and waste exceptions.","Today","medium")}
+                ${action("Confirm Fresh Start completion.","Open","low")}
+            </section>
+        `;
+    },
+
+    guided(){
+        return `
+            ${header("Guided Actions","Associate mission flow","Ready")}
+            <section class="panel">
+                <div class="panel-title">Next Mission</div>
+                ${action("Welcome Alex. Complete Fresh Start and move to next mission.","Ready","medium")}
+                ${action("Temperature mission prepared for validation.","Queued","low")}
+            </section>
+        `;
+    },
+
+    maximo(){
+        return `
+            ${header("Maximo","Maintenance and work order visibility","5")}
+            <section class="grid">
+                ${card("Open Work Orders","5","Needs review","down")}
+                ${card("Alert Tile","7","Open","down")}
+                ${card("Priority","Maintenance","Leader follow-up","warn")}
+                ${card("Status","Active","Operational","up")}
+            </section>
+        `;
+    },
+
+    ai(){
+        return `
+            ${header("Executive AI","System recommendations and operational insight","AI")}
+            <section class="panel">
+                <div class="panel-title">AI Recommendation</div>
+                ${action("Focus on alert reduction, Maximo closure, and department leader follow-up.","Recommended","high")}
+                ${action("Bakery labor optimization is the strongest immediate opportunity.","Insight","medium")}
+            </section>
+        `;
+    },
+
+    alerts(){
+        return `
+            ${header("Alerts","Operational exceptions requiring attention","7")}
+            <section class="panel">
+                <div class="panel-title">Active Alerts</div>
+                ${action("Review Maximo work orders.","Open","high")}
+                ${action("Confirm Bakery labor recovery plan.","Today","medium")}
+                ${action("Validate scorecard readiness before close.","Open","low")}
+            </section>
+        `;
+    }
+};
+
+function navigate(route){
+    screen.innerHTML = pages[route] ? pages[route]() : pages.executive();
+
+    document.querySelectorAll("[data-route]").forEach(btn=>{
+        btn.classList.toggle("active", btn.dataset.route === route);
+    });
+}
+
+document.querySelectorAll("[data-route]").forEach(btn=>{
+    btn.addEventListener("click",()=>navigate(btn.dataset.route));
+});
+
+navigate("executive");
+</script>
+</body>
+</html>
