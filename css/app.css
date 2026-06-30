@@ -1,0 +1,218 @@
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --ks-blue:#0054A6;
+ --ks-red:#D71920;
+ --bg:#eef3f8;
+ --card:#ffffff;
+ --text:#1f2937;
+}
+body{
+ background:var(--bg);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ min-height:100vh;
+ color:var(--text);
+}
+#app{
+ width:390px;
+ height:844px;
+ background:#fff;
+ border-radius:28px;
+ overflow:hidden;
+ box-shadow:0 20px 40px rgba(0,0,0,.18);
+ display:flex;
+ flex-direction:column;
+}
+.topbar{
+ background:linear-gradient(180deg,var(--ks-blue),#0b6bd6);
+ color:#fff;
+ padding:20px;
+ text-align:center;
+}
+.subtitle{opacity:.9;font-size:.9rem}
+#content{flex:1;padding:20px;overflow:auto}
+.view{display:none}
+.view.active{display:block}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:14px;
+ margin-top:20px;
+}
+button{
+ border:none;
+ border-radius:16px;
+ background:var(--ks-blue);
+ color:#fff;
+ padding:18px;
+ font-size:16px;
+ font-weight:600;
+ cursor:pointer;
+ transition:.2s;
+}
+button:hover{transform:translateY(-2px)}
+.card{
+ background:#fff;
+ border-radius:16px;
+ padding:16px;
+ box-shadow:0 4px 12px rgba(0,0,0,.08);
+ margin-bottom:14px;
+}
+.metric{
+ display:flex;
+ justify-content:space-between;
+ padding:10px 0;
+ border-bottom:1px solid #e5e7eb;
+}
+.metric:last-child{border-bottom:none}
+.good{color:#16a34a}
+.warn{color:#ca8a04}
+.bad{color:#dc2626}
+/*==========================================================
+  app.css (CORE THEME)
+  PART 2 OF N
+==========================================================*/
+
+/*==========================================================
+  Screens
+==========================================================*/
+
+.friend-screen{
+
+    flex:1;
+
+    display:none;
+
+    padding:20px;
+
+    overflow-y:auto;
+
+}
+
+.friend-screen.active{
+
+    display:block;
+
+}
+
+/*==========================================================
+  Navigation
+==========================================================*/
+
+.friend-dashboard-nav{
+
+    height:72px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    background:var(--card);
+
+    border-top:1px solid #E6EDF5;
+
+    box-shadow:0 -6px 18px rgba(0,0,0,.04);
+
+}
+
+.friend-nav-button{
+
+    flex:1;
+
+    text-align:center;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:var(--muted);
+
+    border:none;
+
+    background:transparent;
+
+    padding:10px;
+
+    cursor:pointer;
+
+}
+
+.friend-nav-button.active{
+
+    color:var(--primary);
+
+}
+/*==========================================================
+  app.css (CORE THEME)
+  PART 3 OF N
+==========================================================*/
+
+/*==========================================================
+  Cards
+==========================================================*/
+
+.card{
+
+    background:var(--card);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    padding:16px;
+
+    margin-bottom:14px;
+
+}
+
+/*==========================================================
+  Buttons
+==========================================================*/
+
+.button{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px 16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+.button:hover{
+
+    transform:translateY(-2px);
+
+    background:var(--secondary);
+
+}
+
+/*==========================================================
+  Utilities
+==========================================================*/
+
+.text-center{ text-align:center; }
+
+.mt-1{ margin-top:8px; }
+
+.mt-2{ margin-top:16px; }
+
+.mt-3{ margin-top:24px; }
+
+.hidden{ display:none; }
+FRIENDScreenRenderer.init();
