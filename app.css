@@ -215,3 +215,4 @@ button:hover{transform:translateY(-2px)}
 .mt-3{ margin-top:24px; }
 
 .hidden{ display:none; }
+FRIENDScreenRenderer.init();
