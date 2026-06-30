@@ -79,7 +79,7 @@ function boot(){
 
     initialized = true;
 
-    FRIENDEventBus?.emit?.("system:boot:complete");
+
 
     console.log("[SYSTEM] SAFE BOOT COMPLETE");
   console.log("BOOT START");
