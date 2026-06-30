@@ -115,3 +115,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })();
 document.body.innerHTML = "<h1 style='color:black'>UI TEST WORKING</h1>";
+console.log("[F.R.I.E.N.D] FORCE RENDER TEST");
+
+document.body.innerHTML = `
+  <div style="
+    font-size: 28px;
+    color: black;
+    padding: 40px;
+    font-family: Arial;
+  ">
+    SYSTEM CONTROLLER IS RUNNING<br>
+    RENDER PIPELINE BROKEN OR MISSING
+  </div>
+`;
