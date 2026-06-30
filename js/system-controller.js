@@ -1,95 +1,115 @@
-/*==========================================================
-  system-controller.js
-  CLEAN SINGLE ENTRY POINT
-==========================================================*/
+/* =========================================================
+   F.R.I.E.N.D. SYSTEM CONTROLLER (STABLE BUILD v2)
+   FIXES:
+   - silent failures
+   - missing dependency crashes
+   - blank screen issues
+   - unclear boot state
+========================================================= */
+
+(function () {
 
 "use strict";
 
-const FRIENDSystemController = (() => {
+console.log("[F.R.I.E.N.D] system-controller.js LOADED");
 
 let initialized = false;
 
-/*==========================================================
-  SYSTEM CONTROLLER (FIXED BOOT ORDER)
-==========================================================*/
+/* =========================================================
+   SAFE WAIT UTILITY
+========================================================= */
 
-function boot(){
+function waitForDependencies(callback, retries = 50) {
 
-    if(initialized) return;
+    const check = () => {
 
-    console.log("[SYSTEM] SAFE BOOT START");
+        const ready =
+            window.FRIENDStateStore &&
+            window.FRIENDEventBus &&
+            window.FRIENDScreenRenderer &&
+            window.FRIENDRouter;
 
-    // ======================================================
-    // 1. WAIT FOR CORE LAYERS SAFETY CHECK
-    // ======================================================
+        if (ready) {
+            callback();
+        } else {
+            if (retries <= 0) {
+                console.error("[F.R.I.E.N.D] FAILED: dependencies not loaded");
+                return;
+            }
 
-    if(!FRIENDStateStore || !FRIENDEventBus){
+            retries--;
+            setTimeout(check, 100);
+        }
+    };
 
-        console.warn("[SYSTEM] Core dependencies missing - retrying boot");
+    check();
+}
 
-        setTimeout(boot, 250);
+/* =========================================================
+   BOOT SEQUENCE
+========================================================= */
 
-        return;
+function boot() {
 
-    }
+    if (initialized) return;
 
-    // ======================================================
-    // 2. CORE INFRASTRUCTURE
-    // ======================================================
+    console.log("[F.R.I.E.N.D] BOOT START");
 
-    FRIENDModuleSync?.autoBind?.();
+    waitForDependencies(() => {
 
-    FRIENDStateStore?.bindToEventBus?.();
+        try {
 
-    // ======================================================
-    // 3. EVENT SYSTEM START
-    // ======================================================
+            // 1. INIT STATE SYSTEM
+            if (window.FRIENDStateStore?.init) {
+                window.FRIENDStateStore.init();
+            }
 
-    FRIENDEventBus?.emit?.("system:boot:start");
+            // 2. INIT EVENT BUS
+            if (window.FRIENDEventBus?.init) {
+                window.FRIENDEventBus.init();
+            }
 
-    // ======================================================
-    // 4. UI LAYER (SAFE INIT)
-    // ======================================================
+            // 3. SCREEN RENDERER
+            if (window.FRIENDScreenRenderer?.init) {
+                window.FRIENDScreenRenderer.init();
+            }
 
-    if(FRIENDScreenRenderer?.init){
+            // 4. ROUTER DEFAULT SCREEN
+            if (window.FRIENDRouter?.navigate) {
+                window.FRIENDRouter.navigate("executive");
+            }
 
-        FRIENDScreenRenderer.init();
+            // 5. SIGNAL READY STATE
+            if (window.FRIENDEventBus?.emit) {
+                window.FRIENDEventBus.emit("system:ready");
+            }
 
-    }
+            initialized = true;
 
-    if(FRIENDUIBindings?.init){
+            console.log("[F.R.I.E.N.D] BOOT COMPLETE");
 
-        FRIENDUIBindings.init();
+        } catch (err) {
+            console.error("[F.R.I.E.N.D] BOOT ERROR:", err);
+        }
 
-    }
+    });
 
-    // ======================================================
-    // 5. ROUTER (AFTER UI EXISTS)
-    // ======================================================
+}
 
-    FRIENDRouter?.safeNavigate?.("executive");
+/* =========================================================
+   GLOBAL ACCESS
+========================================================= */
 
-    // ======================================================
-    // 6. LIVE SYSTEMS
-    // ======================================================
+window.FRIENDSystemController = {
+    boot
+};
 
-    FRIENDRealtimeEngine?.start?.();
+/* =========================================================
+   AUTO START (SAFE)
+========================================================= */
 
-    FRIENDPerformanceMonitor?.start?.();
-
-    initialized = true;
-
-
-
-    console.log("[SYSTEM] SAFE BOOT COMPLETE");
-  console.log("BOOT START");
-
-setTimeout(() => {
-  console.log("STATE:", FRIENDStateStore);
-  console.log("EVENT:", FRIENDEventBus);
-  console.log("RENDER:", FRIENDScreenRenderer);
-}, 1000);
-
-}ot();
-  FRIENDScreenRenderer.init();
+document.addEventListener("DOMContentLoaded", () => {
+    boot();
 });
+
+})();
