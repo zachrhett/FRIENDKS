@@ -171,10 +171,9 @@ F.R.I.E.N.D. Version 1.0
     </nav>
 
 </div>
-<!--=========================================================
-  index.html
-  PART 3 OF N
-==========================================================-->
+  <!-- =========================================================
+  FIXED SCRIPT LOADING ORDER (CLEAN ARCHITECTURE)
+========================================================== -->
 
 <script src="scorecard.js"></script>
 <script src="leader-focus.js"></script>
@@ -185,8 +184,11 @@ F.R.I.E.N.D. Version 1.0
 <script src="executive-ai.js"></script>
 <script src="notifications.js"></script>
 <script src="voice-assistant.js"></script>
-<script src="dashboard-router.js"></script>
-<script src="system-controller.js"></script>
+
+<!-- =========================================================
+  CORE SYSTEM LAYERS (NEW CLEAN ORDER)
+========================================================== -->
+
 <script src="event-bus.js"></script>
 <script src="state-store.js"></script>
 <script src="module-sync.js"></script>
@@ -196,7 +198,11 @@ F.R.I.E.N.D. Version 1.0
 <script src="screen-renderer.js"></script>
 <script src="dashboard-router.js"></script>
 
-<script>
+<!-- =========================================================
+  SINGLE ENTRY POINT (ONLY BOOT SYSTEM)
+========================================================== -->
+
+<script src="system-controller.js"></script>
 
 if("serviceWorker" in navigator){
 
