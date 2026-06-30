@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>F.R.I.E.N.D. System</title>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="scorecard.css">
+<link rel="stylesheet" href="leader-focus.css">
+<link rel="stylesheet" href="guided-actions.css">
+<link rel="stylesheet" href="analytics.css">
+<link rel="stylesheet" href="maximo.css">
+<link rel="stylesheet" href="executive-dashboard.css">
+<link rel="stylesheet" href="executive-ai.css">
+<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="voice-assistant.css">
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <div id="executiveDashboardScreen" class="friend-screen"></div>
+
+    <div id="analyticsScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="storeScorecardScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="leaderFocusScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="guidedActionsScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="maximoScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="executiveAIScreen" class="friend-screen" style="display:none;"></div>
+
+    <div id="notificationsScreen" class="friend-screen" style="display:none;"></div>
+
+    <button id="friendVoiceButton" aria-label="F.R.I.E.N.D. Voice Assistant">
+        🎤
+    </button>
+
+    <div id="friendVoiceStatus" class="friend-voice-status">
+        Listening...
+    </div>
+
+    <nav class="friend-dashboard-nav">
+
+        <button class="friend-nav-button active" data-route="executive">
+            Executive
+        </button>
+
+        <button class="friend-nav-button" data-route="analytics">
+            Analytics
+        </button>
+
+        <button class="friend-nav-button" data-route="scorecard">
+            Scorecard
+        </button>
+
+        <button class="friend-nav-button" data-route="leader">
+            Leader
+        </button>
+
+        <button class="friend-nav-button" data-route="guided">
+            Guided
+        </button>
+
+        <button class="friend-nav-button" data-route="maximo">
+            Maximo
+        </button>
+
+        <button class="friend-nav-button" data-route="ai">
+            AI
+        </button>
+
+        <button class="friend-nav-button" data-route="notifications">
+            Alerts
+        </button>
+
+    </nav>
+
+</div>
+
+<script src="event-bus.js"></script>
+<script src="state-store.js"></script>
+<script src="dashboard-router.js"></script>
+<script src="screen-renderer.js"></script>
+<script src="ui-bindings.js"></script>
+
+<script src="scorecard.js"></script>
+<script src="leader-focus.js"></script>
+<script src="guided-actions.js"></script>
+<script src="analytics.js"></script>
+<script src="maximo.js"></script>
+<script src="executive-dashboard.js"></script>
+<script src="executive-ai.js"></script>
+<script src="notifications.js"></script>
+<script src="voice-assistant.js"></script>
+
+<script src="system-controller.js"></script>
+
+</body>
+</html>
