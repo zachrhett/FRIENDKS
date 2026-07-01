@@ -8,33 +8,44 @@ export function render() {
 
         <div>
           <h1>Maximo</h1>
-          <p>Maintenance Execution • Store ${appData.store.number}</p>
+          <p>Maintenance execution • Store ${appData.store.number}</p>
         </div>
       </header>
+
+      <section class="executive-hero-card">
+        <div>
+          <h2>Facility Support</h2>
+          <p>5 open work orders • 2 priority items • Risk level low.</p>
+        </div>
+
+        <div class="executive-score">
+          5
+        </div>
+      </section>
 
       <section class="dashboard-grid">
         <div class="metric-card">
           <h2>Open Work Orders</h2>
           <div class="metric-value">5</div>
-          <p>Current facility items</p>
+          <p>Current items</p>
         </div>
 
         <div class="metric-card">
           <h2>Priority Items</h2>
           <div class="metric-value">2</div>
-          <p>Needs leadership follow-up</p>
+          <p>Leadership follow-up</p>
         </div>
 
         <div class="metric-card">
           <h2>Completed Today</h2>
           <div class="metric-value">4</div>
-          <p>Closed maintenance actions</p>
+          <p>Closed actions</p>
         </div>
 
         <div class="metric-card">
           <h2>Risk Level</h2>
           <div class="metric-value">Low</div>
-          <p>Facility impact status</p>
+          <p>Facility impact</p>
         </div>
       </section>
 
