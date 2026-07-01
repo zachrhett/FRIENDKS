@@ -135,3 +135,13 @@
   font-weight: 800;
   color: #0047ba;
 }
+.ks-logo-badge img {
+  width: 42px;
+  max-height: 42px;
+  object-fit: contain;
+  display: block;
+}
+
+.ks-logo-badge {
+  overflow: hidden;
+}
