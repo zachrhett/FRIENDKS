@@ -67,15 +67,65 @@
   KPI Grid
 ==========================================================*/
 
-.kpi-grid{
+.kpi-card{
 
-    display:grid;
+    position:relative;
 
-    grid-template-columns:repeat(2,1fr);
+    overflow:hidden;
 
-    gap:14px;
+    background:#FFFFFF;
 
-    margin-top:16px;
+    border:none;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    box-shadow:
+        0 12px 28px rgba(7,31,77,.10);
+
+    transition:
+        transform .20s ease,
+        box-shadow .20s ease;
+
+}
+
+.kpi-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        #0057B8,
+        #0F78E5
+    );
+
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 20px 40px rgba(7,31,77,.16);
+
+}
 
 }
 
