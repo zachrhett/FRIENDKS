@@ -106,15 +106,66 @@ body{
  margin-top:20px;
 }
 button{
- border:none;
- border-radius:16px;
- background:var(--ks-blue);
- color:#fff;
- padding:18px;
- font-size:16px;
- font-weight:600;
- cursor:pointer;
- transition:.2s;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(
+180deg,
+var(--ks-blue),
+#0B6BD6
+);
+
+color:#FFFFFF;
+
+padding:18px;
+
+font-size:16px;
+
+font-weight:700;
+
+letter-spacing:.2px;
+
+cursor:pointer;
+
+transition:
+
+transform .18s,
+
+box-shadow .25s,
+
+background .25s,
+
+filter .25s;
+
+box-shadow:
+
+0 10px 22px rgba(0,84,166,.28);
+
+}
+
+button:hover{
+
+transform:
+
+translateY(-3px);
+
+box-shadow:
+
+0 16px 30px rgba(0,84,166,.35);
+
+filter:brightness(1.03);
+
+}
+
+button:active{
+
+transform:scale(.98);
+
+box-shadow:
+
+0 6px 14px rgba(0,84,166,.22);
 }
 button:hover{transform:translateY(-2px)}
 .card{
