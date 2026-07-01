@@ -1,122 +1,77 @@
 import { appData } from "../../data/app-data.js";
 
 export function render() {
+  const metrics = appData.metrics.executive;
 
-    const metrics = appData.metrics.executive;
+  return `
+    <section class="screen executive-screen">
+      <header class="page-header">
+        <button class="back-button" data-screen="home">← Home</button>
 
-    return `
+        <div>
+          <h1>Executive Dashboard</h1>
+          <p>Division ${appData.store.division} • District ${appData.store.district} • Store ${appData.store.number}</p>
+        </div>
+      </header>
 
-<section class="screen executive-screen">
+      <section class="executive-hero-card">
+        <div>
+          <h2>F.R.I.E.N.D. Store Intelligence</h2>
+          <p>Operational visibility, guided execution, and leadership support.</p>
+        </div>
 
-<header class="page-header">
+        <div class="executive-score">
+          ${metrics.storeHealth}
+        </div>
+      </section>
 
-<button class="back-button" data-screen="home">
+      <section class="dashboard-grid">
+        <div class="metric-card">
+          <h2>Store Health</h2>
+          <div class="metric-value">${metrics.storeHealth}</div>
+          <p>Overall performance</p>
+        </div>
 
-← Home
+        <div class="metric-card">
+          <h2>Mission Completion</h2>
+          <div class="metric-value">${metrics.missionCompletion}</div>
+          <p>Today’s execution</p>
+        </div>
 
-</button>
+        <div class="metric-card">
+          <h2>Open Alerts</h2>
+          <div class="metric-value">${metrics.alerts}</div>
+          <p>Priority issues</p>
+        </div>
 
-<div>
+        <div class="metric-card">
+          <h2>Maximo</h2>
+          <div class="metric-value">${metrics.maximo}</div>
+          <p>Work orders</p>
+        </div>
+      </section>
 
-<h1>Executive Dashboard</h1>
+      <section class="mission-panel">
+        <h2>Executive Priority Missions</h2>
 
-<p>
-Division ${appData.store.division}
-•
-District ${appData.store.district}
-•
-Store ${appData.store.number}
-</p>
+        ${appData.missions.map((mission) => `
+          <div class="mission-card">
+            <div>
+              <strong>${mission.title}</strong><br>
+              Owner: ${mission.owner}<br>
+              Leader: ${mission.leader}
+            </div>
 
-</div>
-
-</header>
-
-<div class="dashboard-grid">
-
-<div class="metric-card">
-
-<h2>Store Health</h2>
-
-<div class="metric-value">${metrics.storeHealth}</div>
-
-<p>Overall Store Performance</p>
-
-</div>
-
-<div class="metric-card">
-
-<h2>Mission Completion</h2>
-
-<div class="metric-value">${metrics.missionCompletion}</div>
-
-<p>Today's Completion Rate</p>
-
-</div>
-
-<div class="metric-card">
-
-<h2>Open Alerts</h2>
-
-<div class="metric-value">${metrics.alerts}</div>
-
-<p>Priority Notifications</p>
-
-</div>
-
-<div class="metric-card">
-
-<h2>Maximo</h2>
-
-<div class="metric-value">${metrics.maximo}</div>
-
-<p>Outstanding Work Orders</p>
-
-</div>
-
-</div>
-
-<section class="mission-panel">
-
-<h2>Priority Missions</h2>
-
-${appData.missions.map(mission => `
-
-<div class="mission-card">
-
-<div>
-
-<strong>${mission.title}</strong>
-
-<br>
-
-Owner: ${mission.owner}
-
-<br>
-
-Leader: ${mission.leader}
-
-</div>
-
-<div class="mission-status">
-
-${mission.status}
-
-</div>
-
-</div>
-
-`).join("")}
-
-</section>
-
-</section>
-
-`;
+            <div class="mission-status">
+              ${mission.status}
+            </div>
+          </div>
+        `).join("")}
+      </section>
+    </section>
+  `;
 }
 
-export function afterRender(){
-
-console.log("Executive Dashboard Loaded");
-
+export function afterRender() {
+  console.log("Executive Dashboard Loaded");
 }
