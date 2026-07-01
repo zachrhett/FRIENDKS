@@ -1,83 +1,70 @@
-/*==========================================================
-  js/screens/home.js
-  F.R.I.E.N.D. Home Dashboard
-==========================================================*/
+import { appData } from "../../data/app-data.js";
 
-"use strict";
+export function render() {
+  const executive = appData.metrics.executive;
 
-window.FRIENDScreens = window.FRIENDScreens || {};
+  return `
+    <section class="screen home-screen">
+      <header class="home-hero">
+        <div class="brand-row">
+          <div class="ks-logo-badge">KS</div>
+          <div>
+            <h1>F.R.I.E.N.D.</h1>
+            <p>Store ${appData.store.number} • District ${appData.store.district} • Division ${appData.store.division}</p>
+          </div>
+        </div>
 
-window.FRIENDScreens.home = function homeScreen(){
+        <div class="ai-status-pill">
+          AI Active
+        </div>
+      </header>
 
-    return `
-        <section class="home-screen">
+      <section class="home-priority-card" data-screen="mission">
+        <div>
+          <h2>Guided Mission by Priority</h2>
+          <p>Verify Deli temperature validation with Alex</p>
+        </div>
+        <div class="priority-circle">
+          1
+        </div>
+      </section>
 
-            <div class="header">
-                <div>
-                    <h1>F.R.I.E.N.D.</h1>
-                    <p>Store #129 • Division 620 • District 2</p>
-                </div>
+      <section class="home-summary-grid">
+        <div class="mini-card">
+          <span>Health</span>
+          <strong>${executive.storeHealth}</strong>
+        </div>
 
-                <div class="health">
-                    95%
-                </div>
-            </div>
+        <div class="mini-card">
+          <span>Missions</span>
+          <strong>${executive.missionCompletion}</strong>
+        </div>
 
-            <section class="panel mission-panel">
-                <div class="panel-title">
-                    Priority Mission
-                </div>
+        <div class="mini-card">
+          <span>Alerts</span>
+          <strong>${executive.alerts}</strong>
+        </div>
 
-                <div class="action">
-                    <span>
-                        Support Bakery labor optimization while protecting Food Safety and Customer Experience.
-                    </span>
-                    <span class="badge high">
-                        High
-                    </span>
-                </div>
+        <div class="mini-card">
+          <span>Maximo</span>
+          <strong>${executive.maximo}</strong>
+        </div>
+      </section>
 
-                <div class="action">
-                    <span>
-                        Review Maximo work orders and alert exceptions before evening close.
-                    </span>
-                    <span class="badge medium">
-                        Today
-                    </span>
-                </div>
-            </section>
+      <section class="home-grid premium-grid">
+        <button class="home-tile" data-screen="executive">Executive</button>
+        <button class="home-tile" data-screen="analytics">Analytics</button>
+        <button class="home-tile" data-screen="scorecard">Store Scorecard</button>
+        <button class="home-tile" data-screen="leader">Leader</button>
+        <button class="home-tile" data-screen="mission">Guided Mission</button>
+        <button class="home-tile" data-screen="maximo">Maximo</button>
+        <button class="home-tile" data-screen="ai">AI Assistant</button>
+        <button class="home-tile" data-screen="alerts">Alerts</button>
+      </section>
+    </section>
+  `;
+}
 
-            <section class="grid">
-
-                ${homeTile("Store Scorecard", "95%", "Store health", "scorecard", "up")}
-                ${homeTile("Composite Scorecard", "Details", "Drill-down view", "composite", "up")}
-                ${homeTile("Temperature", "96%", "Logs complete", "temperature", "up")}
-                ${homeTile("Production", "84%", "Needs support", "production", "down")}
-                ${homeTile("Inventory", "96%", "On-hand accuracy", "inventory", "up")}
-                ${homeTile("Replenishment", "91%", "Improving", "replenishment", "up")}
-                ${homeTile("Shrink", "Medium", "Deli waste focus", "shrink", "warn")}
-                ${homeTile("Food Safety", "98%", "Compliant", "food-safety", "up")}
-                ${homeTile("Labor", "+3.29%", "Watch labor cost", "labor", "down")}
-                ${homeTile("Ordering", "93%", "Order accuracy", "ordering", "up")}
-                ${homeTile("Safety", "145", "Days injury free", "safety", "up")}
-                ${homeTile("Fresh Start", "14", "Assignments due", "fresh-start", "down")}
-                ${homeTile("Maximo", "5", "Open work orders", "maximo", "down")}
-                ${homeTile("Executive AI", "Ready", "Recommendations", "ai", "up")}
-                ${homeTile("Voice", "On", "Assistant ready", "voice", "up")}
-
-            </section>
-
-        </section>
-    `;
-};
-
-function homeTile(title, value, subtext, route, status){
-
-    return `
-        <button class="card home-tile" data-home-route="${route}">
-            <div class="label">${title}</div>
-            <div class="value">${value}</div>
-            <div class="trend ${status}">${subtext}</div>
-        </button>
-    `;
+export function afterRender() {
+  console.log("Premium Home Loaded");
 }
