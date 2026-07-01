@@ -8,33 +8,44 @@ export function render() {
 
         <div>
           <h1>Leader Dashboard</h1>
-          <p>Department Leader • Store ${appData.store.number} • District ${appData.store.district}</p>
+          <p>Department Leader support • Store ${appData.store.number}</p>
         </div>
       </header>
+
+      <section class="executive-hero-card">
+        <div>
+          <h2>Leader Guidance</h2>
+          <p>Mission-based coaching, associate support, and execution follow-up.</p>
+        </div>
+
+        <div class="executive-score">
+          91%
+        </div>
+      </section>
 
       <section class="dashboard-grid">
         <div class="metric-card">
           <h2>Team Execution</h2>
           <div class="metric-value">91%</div>
-          <p>Department completion status</p>
+          <p>Department completion</p>
         </div>
 
         <div class="metric-card">
           <h2>Guided Missions</h2>
           <div class="metric-value">3</div>
-          <p>Open leadership actions</p>
+          <p>Open actions</p>
         </div>
 
         <div class="metric-card">
           <h2>Associate Support</h2>
           <div class="metric-value">88%</div>
-          <p>Training and readiness</p>
+          <p>Readiness status</p>
         </div>
 
         <div class="metric-card">
           <h2>Risk Level</h2>
           <div class="metric-value">Low</div>
-          <p>Current department risk</p>
+          <p>Department risk</p>
         </div>
       </section>
 
@@ -48,6 +59,7 @@ export function render() {
               Owner: ${mission.owner}<br>
               Leader: ${mission.leader}
             </div>
+
             <div class="mission-status">${mission.status}</div>
           </div>
         `).join("")}
