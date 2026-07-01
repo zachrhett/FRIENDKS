@@ -1,11 +1,75 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
- --ks-blue:#0054A6;
- --ks-red:#D71920;
- --bg:#eef3f8;
- --card:#ffffff;
- --text:#1f2937;
+:root{
+
+/* =====================================================
+   FRIEND ENTERPRISE DESIGN SYSTEM
+===================================================== */
+
+/* Primary */
+
+--primary:#0057B8;
+--primary-dark:#003C8F;
+--primary-light:#EAF4FF;
+
+/* Secondary */
+
+--secondary:#0F78E5;
+
+/* Accent */
+
+--success:#1FA34A;
+--warning:#F5A623;
+--critical:#D62839;
+
+--purple:#5A3FD6;
+--teal:#11B4C7;
+
+/* Background */
+
+--background:#F4F7FC;
+--surface:#FFFFFF;
+
+/* Text */
+
+--text:#071F4D;
+--muted:#72839A;
+
+/* Borders */
+
+--border:#E4EBF4;
+
+/* Radius */
+
+--radius-xs:10px;
+--radius-sm:14px;
+--radius:18px;
+--radius-lg:24px;
+--radius-xl:30px;
+
+/* Shadows */
+
+--shadow-xs:
+0 2px 6px rgba(7,31,77,.04);
+
+--shadow-sm:
+0 6px 16px rgba(7,31,77,.08);
+
+--shadow:
+0 12px 30px rgba(7,31,77,.12);
+
+--shadow-lg:
+0 24px 60px rgba(7,31,77,.18);
+
+/* Animation */
+
+--transition-fast:.18s;
+
+--transition:.28s;
+
+--transition-slow:.45s;
+
 }
 body{
  background:var(--bg);
