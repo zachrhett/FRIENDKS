@@ -1,72 +1,116 @@
 import { appData } from "../../data/app-data.js";
 
 export function render() {
-  const executive = appData.metrics.executive;
 
-  return `
-    <section class="screen home-screen">
-      <header class="home-hero">
-        <div class="brand-row">
-          <div class="ks-logo-badge">
-            <img src="./images/king-soopers-logo.png" alt="King Soopers Logo" />
-          </div>
+const m = appData.metrics.executive;
 
-          <div>
-            <h1>F.R.I.E.N.D.</h1>
-            <p>Store ${appData.store.number} • District ${appData.store.district} • Division ${appData.store.division}</p>
-          </div>
-        </div>
+return `
 
-        <div class="ai-status-pill">
-          AI Active • Store Systems Connected
-        </div>
-      </header>
+<section class="home-screen">
 
-      <section class="home-priority-card" data-screen="mission">
-        <div>
-          <h2>Guided Mission by Priority</h2>
-          <p>Verify Deli temperature validation with Alex</p>
-        </div>
+<header class="home-hero">
 
-        <div class="priority-circle">1</div>
-      </section>
+<div class="brand-row">
 
-      <section class="home-summary-grid">
-        <div class="mini-card">
-          <span>Health</span>
-          <strong>${executive.storeHealth}</strong>
-        </div>
+<img
+class="ks-logo"
+src="./images/king-soopers-logo.png"
+alt="King Soopers">
 
-        <div class="mini-card">
-          <span>Missions</span>
-          <strong>${executive.missionCompletion}</strong>
-        </div>
+<div>
 
-        <div class="mini-card">
-          <span>Alerts</span>
-          <strong>${executive.alerts}</strong>
-        </div>
+<h1>F.R.I.E.N.D.</h1>
 
-        <div class="mini-card">
-          <span>Maximo</span>
-          <strong>${executive.maximo}</strong>
-        </div>
-      </section>
+<p>
 
-      <section class="home-grid premium-grid">
-        <button class="home-tile" data-screen="executive">Executive</button>
-        <button class="home-tile" data-screen="analytics">Analytics</button>
-        <button class="home-tile" data-screen="scorecard">Store Scorecard</button>
-        <button class="home-tile" data-screen="leader">Leader</button>
-        <button class="home-tile" data-screen="mission">Guided Mission</button>
-        <button class="home-tile" data-screen="maximo">Maximo</button>
-        <button class="home-tile" data-screen="ai">AI Assistant</button>
-        <button class="home-tile" data-screen="alerts">Alerts</button>
-      </section>
-    </section>
-  `;
-}
+Store ${appData.store.number}
 
-export function afterRender() {
-  console.log("Home Loaded");
+•
+
+District ${appData.store.district}
+
+•
+
+Division ${appData.store.division}
+
+</p>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="dashboard-grid">
+
+<button class="module-card" data-screen="executive">
+
+Executive
+
+<div>${m.storeHealth}</div>
+
+</button>
+
+<button class="module-card" data-screen="analytics">
+
+Analytics
+
+<div>Live</div>
+
+</button>
+
+<button class="module-card" data-screen="scorecard">
+
+Store Scorecard
+
+<div>94.2</div>
+
+</button>
+
+<button class="module-card" data-screen="leader">
+
+Leader
+
+<div>91%</div>
+
+</button>
+
+<button class="module-card" data-screen="mission">
+
+Guided Mission
+
+<div>Alex</div>
+
+</button>
+
+<button class="module-card" data-screen="maximo">
+
+Maximo
+
+<div>5</div>
+
+</button>
+
+<button class="module-card" data-screen="ai">
+
+AI Assistant
+
+<div>Ready</div>
+
+</button>
+
+<button class="module-card" data-screen="alerts">
+
+Alerts
+
+<div>7</div>
+
+</button>
+
+</div>
+
+</section>
+
+`;
+
 }
