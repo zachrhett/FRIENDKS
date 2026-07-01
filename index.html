@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>F.R.I.E.N.D. System</title>
+
+<style>
+:root{
+  --blue:#0057B8;
+  --blue2:#0F78E5;
+  --navy:#071F4D;
+  --red:#C8102E;
+  --green:#159447;
+  --yellow:#F59E0B;
+  --purple:#4C1D95;
+  --teal:#0F8B8D;
+  --orange:#F97316;
+  --bg:#F4F7FB;
+  --card:#FFFFFF;
+  --text:#061536;
+  --muted:#627084;
+  --line:#DFE7F1;
+  --shadow:0 10px 24px rgba(8,25,55,.14);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#081320;color:var(--text)}
+button{font-family:inherit}
+#app{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  background:radial-gradient(circle at top,#1d4ed8 0%,#0b1b3d 45%,#050914 100%);
+}
+.tc52-frame{
+  width:min(100%,440px);
+  height:min(96vh,900px);
+  background:#111827;
+  border-radius:42px;
+  padding:14px;
+  box-shadow:0 40px 90px rgba(0,0,0,.55), inset 0 0 0 2px #3d4656;
+}
+.tc52-top{
+  height:30px;
+  color:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:90px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.speaker{width:96px;height:10px;border-radius:999px;background:#252d3a;box-shadow:inset 0 0 0 1px #4b5563}
+.tc52-screen{
+  height:calc(100% - 30px);
+  overflow:hidden;
+  background:var(--bg);
+  border-radius:30px;
+  position:relative;
+}
+.screen{
+  height:100%;
+  overflow-y:auto;
+  padding:12px;
+  padding-bottom:84px;
+}
+.topbar{
+  background:#fff;
+  border-radius:22px;
+  padding:12px;
+  display:grid;
+  grid-template-columns:72px 1fr 86px;
+  gap:10px;
+  align-items:center;
+  box-shadow:var(--shadow);
+  margin-bottom:12px;
+}
+.ks-logo{
+  height:48px;width:70px;object-fit:contain;border-radius:8px;background:#fff;
+}
+.ks-fallback{
+  height:48px;width:70px;background:#e01824;color:#fff;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-weight:900;font-size:13px;line-height:1;
+}
+.brand h1{margin:0;text-align:center;font-size:34px;letter-spacing:.16em;color:#061536}
+.brand p{margin:2px 0 0;text-align:center;color:var(--red);font-size:12px;font-weight:900;letter-spacing:.28em}
+.top-icons{display:flex;gap:10px;align-items:center;justify-content:flex-end}
+.icon-wrap{position:relative;text-align:center;font-size:10px;font-weight:800;color:#061536}
+.icon{font-size:25px}
+.badge-dot{position:absolute;top:-8px;right:-7px;background:var(--red);color:#fff;border-radius:50%;min-width:22px;height:22px;font-size:12px;font-weight:900;display:grid;place-items:center}
+.hero{
+  background:linear-gradient(135deg,#062861,#0047BA);
+  color:white;border-radius:18px;padding:16px 14px 12px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.hero-grid{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center}
+.bot{
+  width:118px;height:150px;border-radius:22px;background:linear-gradient(160deg,#fff,#dbeafe);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);
+}
+.bot-face{width:76px;height:50px;border-radius:24px;background:#080f22;color:#38bdf8;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:8px}
+.bot-shirt{background:#fff;color:#e01824;border-radius:10px;padding:8px 7px;font-weight:900;font-size:13px;border:2px solid #e5e7eb}
+.hero h2{font-size:27px;line-height:1.05;margin:0 0 6px}
+.hero-sub{font-size:14px;margin:0 0 10px;opacity:.94}
+.insight{
+  display:grid;grid-template-columns:34px 1fr 18px;gap:8px;align-items:center;
+  border:1px solid rgba(255,255,255,.26);border-radius:14px;padding:9px;margin-top:7px;
+  background:rgba(255,255,255,.08);cursor:pointer;
+}
+.insight-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:18px;font-weight:900}
+.orange{background:var(--orange)}.red{background:var(--red)}.blue{background:var(--blue)}.green{background:var(--green)}
+.insight-text{font-size:13px;font-weight:800;line-height:1.25}
+.chev{font-size:26px;font-weight:900}
+.micbar{
+  margin-top:12px;background:#0965dc;border-radius:14px;padding:10px 12px;
+  display:grid;grid-template-columns:54px 1fr 70px;gap:10px;align-items:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+.mic{
+  width:50px;height:50px;border:none;border-radius:50%;background:#fff;color:#071F4D;
+  display:grid;place-items:center;font-size:26px;box-shadow:0 0 0 4px rgba(255,255,255,.18),0 0 18px #d946ef;cursor:pointer;
+}
+.micbar strong{font-size:15px}
+.wave{height:28px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.9) 0 3px,transparent 3px 9px);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);opacity:.9}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.kpi{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px;
+  box-shadow:var(--shadow);min-height:100px;position:relative;overflow:hidden;
+}
+.kpi-title{font-size:12px;font-weight:900;color:#061536}
+.info{font-size:11px;color:#93a0b2}
+.kpi-value{font-size:32px;font-weight:900;margin-top:9px;line-height:1;color:var(--green)}
+.kpi.redv .kpi-value{color:var(--red)} .kpi.bluev .kpi-value{color:#0047BA} .kpi.tealv .kpi-value{color:var(--teal)}
+.kpi-sub{font-size:11px;margin-top:8px;color:#061536}
+.kpi-sub span{color:var(--green);font-weight:900}
+.kpi-icon{
+  position:absolute;right:12px;bottom:16px;width:48px;height:48px;border-radius:50%;
+  background:#e8f7ee;display:grid;place-items:center;font-size:26px;
+}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:14px 4px 8px;font-weight:900;font-size:16px}
+.viewall{font-size:12px;color:#0047BA;font-weight:900}
+.module-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.module{
+  min-height:82px;border:1px solid var(--line);background:#fff;border-radius:13px;
+  box-shadow:0 6px 16px rgba(8,25,55,.08);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:7px;color:#061536;font-size:11px;font-weight:900;cursor:pointer;
+}
+.module span{font-size:31px}
+.nav{
+  position:absolute;left:0;right:0;bottom:0;height:70px;background:#fff;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1.35fr 1fr 1.15fr 1fr;box-shadow:0 -8px 22px rgba(0,0,0,.08);
+}
+.nav button{border:none;background:transparent;color:#061536;font-size:12px;font-weight:900;cursor:pointer;position:relative}
+.nav button.active{color:#0047BA;background:#f8fbff}
+.nav button.active:before{content:"";position:absolute;top:0;left:18%;right:18%;height:4px;background:var(--red);border-radius:0 0 8px 8px}
+.nav-icon{display:block;font-size:25px;margin-bottom:3px}
+.page-header{
+  background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:18px;padding:16px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow);
+}
+.page-header h1{margin:0;font-size:22px}.page-header p{margin:4px 0 0;font-size:11px;font-weight:800;opacity:.92}
+.back{border:none;border-radius:999px;background:#fff;color:#0047BA;padding:9px 12px;font-weight:900;cursor:pointer}
+.score-circle{width:66px;height:66px;border-radius:50%;background:#fff;color:#0047BA;display:grid;place-items:center;font-size:20px;font-weight:900}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;box-shadow:var(--shadow)}
+.panel-title{font-size:16px;font-weight:900;margin-bottom:10px;color:#061536}
+.action{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid #eef2f7;font-size:12px;font-weight:800;line-height:1.25}
+.action:first-of-type{border-top:none}
+.pill{border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;white-space:nowrap;background:#fff1f2;color:var(--red)}
+.pill.medium{background:#fffbeb;color:#9A6B00}.pill.low{background:#ecfdf5;color:var(--green)}
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;box-shadow:var(--shadow)}
+.metric .label{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase}
+.metric .value{font-size:26px;font-weight:900;margin-top:5px;color:#0047BA}
+.metric .note{font-size:11px;color:var(--muted);font-weight:800;margin-top:5px}
+
+.command-panel{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.command-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:var(--shadow);
+}
+.command-card h3{margin:0 0 8px;font-size:14px;color:#061536}
+.command-line{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:8px 0;
+  border-top:1px solid #eef2f7;
+  font-size:11px;
+  font-weight:900;
+}
+.command-line:first-of-type{border-top:none}
+.command-line b{color:#0047BA}
+.command-line .risk{color:var(--red)}
+.command-line .ok{color:var(--green)}
+.dept-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.dept-pill{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:8px 6px;
+  box-shadow:0 5px 14px rgba(8,25,55,.07);
+  text-align:center;
+}
+.dept-pill strong{display:block;font-size:11px;color:#061536}
+.dept-pill span{display:block;margin-top:4px;font-size:13px;font-weight:900;color:#0047BA}
+.dept-pill.risk span{color:var(--red)}
+.dept-pill.warn span{color:#9A6B00}
+.priority-banner{
+  margin-top:12px;
+  background:linear-gradient(135deg,#fff,#eef5ff);
+  border:1px solid rgba(0,87,184,.16);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:var(--shadow);
+}
+.priority-banner h3{margin:0 0 6px;color:#0047BA;font-size:16px}
+.priority-banner p{margin:0;color:#061536;font-size:12px;font-weight:800;line-height:1.35}
+@media(max-width:380px){
+  .command-panel{grid-template-columns:1fr}
+  .dept-strip{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:460px){
+  #app{padding:0}.tc52-frame{border-radius:0;width:100%;height:100vh;padding:0}.tc52-top{display:none}.tc52-screen{height:100%;border-radius:0}
+  .brand h1{font-size:28px}.topbar{grid-template-columns:62px 1fr 76px}.hero-grid{grid-template-columns:100px 1fr}.bot{width:100px;height:130px}
+  .kpi-grid{gap:8px}.kpi-value{font-size:27px}.module-grid{grid-template-columns:repeat(5,1fr);gap:7px}.module{min-height:74px}
+}
+</style>
+</head>
+
+<body>
+<div id="app">
+  <div class="tc52-frame">
+    <div class="tc52-top"><div></div><div class="speaker"></div><div>TC52</div></div>
+    <div class="tc52-screen">
+      <main id="screen" class="screen"></main>
+      <nav class="nav">
+        <button data-route="ai"><span class="nav-icon">🤖</span>F.R.I.E.N.D.</button>
+        <button data-route="alerts"><span class="nav-icon">🔔</span>Alerts</button>
+        <button data-route="scorecard" class="active"><span class="nav-icon">🛒</span>Store Scorecard</button>
+        <button data-route="maximo"><span class="nav-icon">🔧</span>Maximo</button>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+const DATA = {
+  store:{number:"129", district:"2", division:"620", leader:"Zach"},
+  kpis:[
+    ["Store Scorecard","94.2","↑ 2.1 vs yesterday","📊","green"],
+    ["Open Alerts","8","3 Critical","🛡️","redv"],
+    ["Maximo Work Orders","7","2 Overdue","🧰","bluev"],
+    ["Temperature Compliance","96%","↑ 3% vs yesterday","🌡️","green"],
+    ["Sales vs Plan","$128.7K","↑ 5.6% vs plan","💲","bluev"],
+    ["Labor Health","92%","↑ 4% vs last week","👥","tealv"]
+  ],
+  modules:[
+    ["Production","👨‍🍳","production"],["Temperature","🌡️","guided"],["Inventory","📦","analytics"],["Ordering","🛒","ordering"],["Fresh Start","✨","fresh"],
+    ["Safety","🛡️","safety"],["Labor","👥","leader"],["Sales","📊","analytics"],["Shrink","📉","shrink"],["Food Safety","✅","foodsafety"]
+  ],
+  departments:[
+    ["Deli","84%","risk"],["Bakery","88%","warn"],["Meat","95%","ok"],["Seafood","92%","ok"],
+    ["Produce","94%","ok"],["Grocery","91%","ok"],["Dairy","90%","warn"],["Murray’s","86%","warn"]
+  ]
+};
+
+const screen = document.getElementById("screen");
+
+function logo(){
+  return `<img class="ks-logo" src="images/king-soopers-logo.png" alt="King Soopers" onerror="this.outerHTML='<div class=&quot;ks-fallback&quot;>KING<br>Soopers</div>'">`;
+}
+
+function topbar(){
+  return `
+    <section class="topbar">
+      ${logo()}
+      <div class="brand">
+        <h1>F.R.I.E.N.D.</h1>
+        <p>ENTERPRISE</p>
+      </div>
+      <div class="top-icons">
+        <div class="icon-wrap"><span class="badge-dot">8</span><div class="icon">🔔</div><div>Alerts</div></div>
+        <div class="icon-wrap"><div class="icon">👤</div><div>Zach</div></div>
+      </div>
+    </section>
+  `;
+}
+
+function home(){
+  return `
+    ${topbar()}
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="bot">
+          <div class="bot-face">◔ ◕</div>
+          <div class="bot-shirt">KING<br>Soopers</div>
+        </div>
+        <div>
+          <h2>Good morning, Zach.</h2>
+          <p class="hero-sub">Store 129 is active. F.R.I.E.N.D. is monitoring people, execution, risk, and readiness.</p>
+          <div class="insight" data-route="production"><div class="insight-icon orange">↑</div><div class="insight-text">Deli production is trending above target. Jamie needs a production review.</div><div class="chev">›</div></div>
+          <div class="insight" data-route="guided"><div class="insight-icon red">🌡</div><div class="insight-text">Alex has one temperature validation mission ready. Target 165°F • Actual 171°F.</div><div class="chev">›</div></div>
+          <div class="insight" data-route="maximo"><div class="insight-icon blue">🔧</div><div class="insight-text">7 Maximo work orders remain open. 2 need leadership follow-up.</div><div class="chev">›</div></div>
+        </div>
+      </div>
+      <div class="micbar">
+        <button class="mic" data-route="ai">🎙</button>
+        <strong>Ask F.R.I.E.N.D.: “What should I focus on next?”</strong>
+        <div class="wave"></div>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      ${DATA.kpis.map(k=>`
+        <button class="kpi ${k[4]}" data-route="${k[0].includes("Scorecard")?"scorecard":k[0].includes("Alert")?"alerts":k[0].includes("Maximo")?"maximo":k[0].includes("Temperature")?"guided":"analytics"}">
+          <div class="kpi-title">${k[0]} <span class="info">ⓘ</span></div>
+          <div class="kpi-value">${k[1]}</div>
+          <div class="kpi-sub"><span>${k[2].split(" ")[0]}</span> ${k[2].split(" ").slice(1).join(" ")}</div>
+          <div class="kpi-icon">${k[3]}</div>
+        </button>
+      `).join("")}
+    </section>
+
+    <section class="priority-banner" data-route="guided">
+      <h3>Priority Guided Mission</h3>
+      <p>Support Alex with Deli temperature compliance. Jamie is notified. Joey’s Store Leader Dashboard will update when completed.</p>
+    </section>
+
+    <section class="command-panel">
+      <div class="command-card">
+        <h3>Leadership Focus</h3>
+        <div class="command-line"><span>Store Health</span><b>94.2</b></div>
+        <div class="command-line"><span>Department Execution</span><b>91%</b></div>
+        <div class="command-line"><span>Associate Readiness</span><b>88%</b></div>
+        <div class="command-line"><span>Customer Impact</span><b>95%</b></div>
+      </div>
+      <div class="command-card">
+        <h3>Risk Signals</h3>
+        <div class="command-line"><span>Deli Production</span><span class="risk">High</span></div>
+        <div class="command-line"><span>Bakery Labor</span><span class="risk">Review</span></div>
+        <div class="command-line"><span>Food Safety</span><span class="ok">96%</span></div>
+        <div class="command-line"><span>Fresh Start</span><span class="risk">14 Due</span></div>
+      </div>
+    </section>
+
+    <div class="section-title"><span>Department Health</span><span class="viewall">Live Store View</span></div>
+    <section class="dept-strip">
+      ${DATA.departments.map(d=>`<button class="dept-pill ${d[2]}" data-route="${d[0]==="Deli"?"production":d[0]==="Bakery"?"leader":"scorecard"}"><strong>${d[0]}</strong><span>${d[1]}</span></button>`).join("")}
+    </section>
+
+    <div class="section-title"><span>Operational Modules</span><span class="viewall">View All Modules ›</span></div>
+    <section class="module-grid">
+      ${DATA.modules.map(m=>`<button class="module" data-route="${m[2]}"><span>${m[1]}</span>${m[0]}</button>`).join("")}
+    </section>
+  `;
+}
+
+function pageHeader(title,subtitle,value="95%"){
+  return `<section class="page-header"><button class="back" data-route="home">← Home</button><div><h1>${title}</h1><p>${subtitle}</p></div><div class="score-circle">${value}</div></section>`;
+}
+function metric(label,value,note){return `<div class="metric"><div class="label">${label}</div><div class="value">${value}</div><div class="note">${note}</div></div>`}
+function action(text,badge,level="medium"){return `<div class="action"><span>${text}</span><span class="pill ${level}">${badge}</span></div>`}
+
+const pages = {
+  home,
+  executive(){return `${pageHeader("Executive Dashboard","Division 620 • District 2 • Store 129","94.2")}
+    <section class="metric-grid">
+      ${metric("Store Health","94.2","Strong operating position")}
+      ${metric("Open Alerts","8","3 critical requiring attention")}
+      ${metric("Maximo","7","2 overdue work orders")}
+      ${metric("Labor Health","92%","Up 4% vs last week")}
+      ${metric("Temperature","96%","1 overdue validation")}
+      ${metric("Sales vs Plan","$128.7K","Up 5.6% vs plan")}
+    </section>
+    <section class="panel"><div class="panel-title">Executive Recommendations</div>
+      ${action("Deli production is trending above target. Review production planning with Jamie.","High","high")}
+      ${action("Close overdue Maximo work orders before evening close.","Today","medium")}
+      ${action("Temperature compliance remains strong after Alex mission completion.","Stable","low")}
+    </section>`},
+  analytics(){return `${pageHeader("Analytics","Performance trends and operational insight","Live")}
+    <section class="metric-grid">
+      ${metric("Sales vs Plan","$128.7K","↑ 5.6% vs plan")}
+      ${metric("Shrink Risk","Medium","Deli production driving risk")}
+      ${metric("Labor Efficiency","101.6%","Store efficiency")}
+      ${metric("Food Safety","96%","Temperature compliance")}
+    </section>
+    <section class="panel"><div class="panel-title">Analytics Insights</div>
+      ${action("Deli production exceeded forecast for two consecutive days.","Watch","medium")}
+      ${action("Bakery labor recovery plan needs leader follow-up.","High","high")}
+      ${action("Temperature validation risk reduced after guided workflow.","Improving","low")}
+    </section>`},
+  scorecard(){return `${pageHeader("Store Scorecard","Store health, accountability, operational readiness","94.2")}
+    <section class="metric-grid">
+      ${metric("Store Health","94.2","Overall operating health")}
+      ${metric("Department Execution","91%","Mission follow-through")}
+      ${metric("Associate Readiness","88%","Training and guided mission readiness")}
+      ${metric("Customer Impact","95%","Customer-facing health")}
+      ${metric("Open Alerts","8","3 critical")}
+      ${metric("Maximo","7","2 overdue")}
+    </section>
+    <section class="panel"><div class="panel-title">Store Leader Focus</div>
+      ${action("Review Deli production and waste trend with Jamie.","High","high")}
+      ${action("Confirm Maximo work order recovery plan.","Today","medium")}
+      ${action("Validate temperature compliance before close.","On Track","low")}
+    </section>`},
+  leader(){return `${pageHeader("Leader Dashboard","Department leader coaching and execution","91%")}
+    <section class="metric-grid">
+      ${metric("Team Execution","91%","Department completion status")}
+      ${metric("Guided Missions","3","Open leadership actions")}
+      ${metric("Associate Support","88%","Training readiness")}
+      ${metric("Risk Level","Low","Current department risk")}
+    </section>
+    <section class="panel"><div class="panel-title">Leader Guided Actions</div>
+      ${action("Connect with Bakery Leader on labor recovery.","High","high")}
+      ${action("Review Deli production and waste exceptions.","Today","medium")}
+      ${action("Confirm Fresh Start completion across team.","Open","low")}
+    </section>`},
+  guided(){return `${pageHeader("Guided Mission","Associate workflow • Alex • Temperature","100%")}
+    <section class="panel"><div class="panel-title">Temperature Mission Flow</div>
+      ${action("Welcome Alex. Fresh Start complete. Move to next mission.","Ready","low")}
+      ${action("Sanitize probe thermometer before validation.","Done","low")}
+      ${action("Target 165°F • Actual 171°F.","171°F","low")}
+      ${action("Record location and submit validation.","Logged","low")}
+    </section>
+    <section class="panel"><div class="panel-title">Mission Complete</div>
+      ${action("Jamie notified. Joey’s Store Leader Dashboard updated.","Complete","low")}
+      ${action("Compliance 100% • Time 3:42 • On track.","Success","low")}
+    </section>`},
+  maximo(){return `${pageHeader("Maximo","Maintenance and facility execution","7")}
+    <section class="metric-grid">
+      ${metric("Open Work Orders","7","2 overdue")}
+      ${metric("Priority Items","2","Leadership follow-up")}
+      ${metric("Completed Today","4","Closed actions")}
+      ${metric("Risk Level","Low","Facility impact")}
+    </section>
+    <section class="panel"><div class="panel-title">Work Orders</div>
+      ${action("Bakery oven inspection.","Open","medium")}
+      ${action("Cooler door seal review.","Priority","high")}
+      ${action("Baler safety check.","Due","medium")}
+    </section>`},
+  ai(){return `${pageHeader("F.R.I.E.N.D. AI","Guidance engine and voice support","AI")}
+    <section class="panel"><div class="panel-title">Good morning, Zach.</div>
+      ${action("Deli production is trending above target and may increase shrink exposure.","Insight","high")}
+      ${action("Recommend reviewing Jamie’s production plan before noon.","Recommended","medium")}
+      ${action("Alex completed the guided temperature mission successfully.","Complete","low")}
+      ${action("7 Maximo work orders remain open; 2 are overdue.","Action","high")}
+    </section>`},
+  alerts(){return `${pageHeader("Alerts","Operational exceptions requiring attention","8")}
+    <section class="panel"><div class="panel-title">Active Alerts</div>
+      ${action("Temperature validation required in Deli.","Critical","high")}
+      ${action("Review Maximo overdue work orders.","Open","high")}
+      ${action("Confirm Bakery labor recovery plan.","Today","medium")}
+      ${action("Validate scorecard readiness before close.","Open","low")}
+    </section>`},
+  production(){return `${pageHeader("Production","Department production and shrink risk","84%")}
+    <section class="panel"><div class="panel-title">Production Focus</div>
+      ${action("Deli production trending above target.","High","high")}
+      ${action("Murray’s production review needed.","Medium","medium")}
+      ${action("Seafood case presentation check.","Ready","low")}
+    </section>`},
+  ordering(){return `${pageHeader("Ordering","CAO, open orders, vendor gaps","93%")}<section class="metric-grid">${metric("Order Accuracy","93%","Up vs yesterday")}${metric("Open Orders","5","Needs review")}${metric("CAO Dept Review","5","Open")}${metric("Vendor Gaps","3","Red")}</section>`},
+  fresh(){return `${pageHeader("Fresh Start","Training, messaging, completion","Ready")}<section class="panel"><div class="panel-title">Fresh Start</div>${action("14 due assignments.","Due","high")}${action("Development compliance requires follow-up.","3 Due","high")}${action("4th of July appreciation lunch communication.","Open","medium")}</section>`},
+  safety(){return `${pageHeader("Safety","Compliance and prevention","145")}<section class="metric-grid">${metric("Days Without Injury","145","Strong")}${metric("Training Due","16","Needs follow-up")}${metric("Risk Level","Low","Vs LY")}${metric("Shoes for Crews","92%","Compliance")}</section>`},
+  shrink(){return `${pageHeader("Shrink","Shrink risk, drivers, recovery","Medium")}<section class="panel"><div class="panel-title">Shrink Missions</div>${action("Review overproduction with Deli Leader Jamie.","Overdue","high")}${action("Address ESW action items.","Today","medium")}${action("Complete cooler/freezer audits.","Open","low")}</section>`},
+  foodsafety(){return `${pageHeader("Food Safety","FAST, audits, logs, temperature","96%")}<section class="metric-grid">${metric("Temp Logs","96%","Up vs yesterday")}${metric("Audits Due","3","Yellow")}${metric("Risk Level","Low","Green")}${metric("FAST","No Issues","Green")}</section>`}
+};
+
+function navigate(route){
+  const page = pages[route] || pages.home;
+  screen.innerHTML = page();
+  document.querySelectorAll("[data-route]").forEach(el=>{
+    if(el.tagName === "BUTTON" && el.closest(".nav")){
+      el.classList.toggle("active", el.dataset.route === route);
+    }
+    el.onclick = () => navigate(el.dataset.route);
+  });
+}
+navigate("home");
+</script>
+</body>
+</html>
