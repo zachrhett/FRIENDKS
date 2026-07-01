@@ -8,64 +8,65 @@ export function render() {
 
         <div>
           <h1>Guided Mission</h1>
-          <p>Associate Temperature Workflow • Store ${appData.store.number}</p>
+          <p>Associate workflow • Alex • Store ${appData.store.number}</p>
         </div>
       </header>
 
+      <section class="executive-hero-card">
+        <div>
+          <h2>Temperature Mission</h2>
+          <p>Target 165°F • Actual 171°F • Probe thermometer verified.</p>
+        </div>
+
+        <div class="executive-score">
+          100%
+        </div>
+      </section>
+
       <section class="mission-panel">
-        <h2>Welcome Alex</h2>
+        <h2>Mission Flow</h2>
 
         <div class="mission-card">
           <div>
             <strong>Fresh Start Complete</strong><br>
-            Please move to your next guided mission.
+            Alex is ready for the next guided mission.
           </div>
           <div class="mission-status">Ready</div>
         </div>
 
         <div class="mission-card">
           <div>
-            <strong>Temperature Mission</strong><br>
-            Target temperature: 165°F<br>
-            Actual temperature: 171°F
+            <strong>Step 1: Sanitize Probe</strong><br>
+            Probe thermometer sanitized before use.
           </div>
-          <div class="mission-status">On Track</div>
+          <div class="mission-status">Done</div>
         </div>
 
         <div class="mission-card">
           <div>
-            <strong>Step 1</strong><br>
-            Sanitize probe thermometer.
-          </div>
-          <div class="mission-status">Complete</div>
-        </div>
-
-        <div class="mission-card">
-          <div>
-            <strong>Step 2</strong><br>
-            Take temperature using probe.
+            <strong>Step 2: Take Temperature</strong><br>
+            Target: 165°F • Actual: 171°F.
           </div>
           <div class="mission-status">171°F</div>
         </div>
 
         <div class="mission-card">
           <div>
-            <strong>Step 3</strong><br>
-            Record location and submit validation.
+            <strong>Step 3: Record Location</strong><br>
+            Temperature recorded and dashboard updated.
           </div>
-          <div class="mission-status">Submitted</div>
+          <div class="mission-status">Logged</div>
         </div>
+      </section>
 
-        <div class="mission-card">
-          <div>
-            <strong>Mission Complete</strong><br>
-            Great work Alex. Jamie has been notified and Joey’s Store Leader Dashboard has been updated.
-            <br><br>
-            Compliance: 100%<br>
-            Time: 3:42 — on track
-          </div>
-          <div class="mission-status">100%</div>
-        </div>
+      <section class="screen-card">
+        <h2>Mission Complete</h2>
+        <p>
+          Great work Alex. Jamie has been notified and Joey’s Store Leader Dashboard has been updated.
+        </p>
+        <p>
+          Compliance: 100% • Time: 3:42 • Status: On Track
+        </p>
       </section>
     </section>
   `;
