@@ -7,7 +7,10 @@ export function render() {
     <section class="screen home-screen">
       <header class="home-hero">
         <div class="brand-row">
-          <div class="ks-logo-badge">KS</div>
+          <div class="ks-logo-badge">
+            <img src="./images/king-soopers-logo.png" alt="King Soopers Logo" />
+          </div>
+
           <div>
             <h1>F.R.I.E.N.D.</h1>
             <p>Store ${appData.store.number} • District ${appData.store.district} • Division ${appData.store.division}</p>
@@ -15,7 +18,7 @@ export function render() {
         </div>
 
         <div class="ai-status-pill">
-          AI Active
+          AI Active • Store Systems Connected
         </div>
       </header>
 
@@ -24,9 +27,8 @@ export function render() {
           <h2>Guided Mission by Priority</h2>
           <p>Verify Deli temperature validation with Alex</p>
         </div>
-        <div class="priority-circle">
-          1
-        </div>
+
+        <div class="priority-circle">1</div>
       </section>
 
       <section class="home-summary-grid">
@@ -66,5 +68,5 @@ export function render() {
 }
 
 export function afterRender() {
-  console.log("Premium Home Loaded");
+  console.log("Home Loaded");
 }
